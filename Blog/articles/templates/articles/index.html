@@ -1,0 +1,77 @@
+{% extends 'articles/base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<meta name="description" content="">
+{% endblock %}
+
+{% block title %}
+<title>Blog</title>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'articles/css/index.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'articles/sidebar.html' %}
+<div id="index1">
+  <div class="container">
+    {% for article in articles %}
+    <div class="row articleRow">
+
+
+      <div style="background-image:url({{article.image.url}}); min-height:245px;" class="col-12 col-md-4 articleImageDiv">
+        <a href="{% url 'article' article.slug %}">
+          <div class="articleImageDivInner">
+
+          </div>
+        </a>
+      </div>
+
+
+
+      <div class="col-12 col-md-8">
+        <div class="articleInfo">
+          <a href="{% url 'article' article.slug %}">
+            <h4 class="articleTitle">{{article.title}}</h4>
+            <h6 class="articleTitle text-muted">{{article.subtitle}}</h6>
+            <span class="text-muted articleSubtitle"><i class="far fa-calendar-alt"></i> {{article.created}}</span><br>
+          </a>
+
+
+
+          <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
+
+            <div class="tags">
+              <div>
+                {% for tag in article.tags.all %}
+                <button type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
+                {% endfor %}
+              </div>
+            </div>
+
+            <a href="{% url 'article' article.slug %}">
+              <button type="button" class="btn btn-outline-dark readArticle">Read article</button>
+            </a>
+
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block footer %}
+{% include 'articles/footer.html' %}
+{% endblock %}

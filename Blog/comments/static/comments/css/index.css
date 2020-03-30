@@ -1,0 +1,9 @@
+#index1{
+  min-height: calc(100vh - 52px);
+  padding-top: 52px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,23 @@
+#Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#Site-content {
+  flex: 1;
+}
+
+body{
+  font-family: 'Didact Gothic', sans-serif;
+}
+
+a{
+  text-decoration: none !important;
+  outline: none !important;
+
+}
+
+a:hover{
+  color:inherit;
+}
