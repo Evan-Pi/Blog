@@ -16,12 +16,13 @@ $(document).ready(function() {
 
 
   $(window).scroll(function() {
-    if ($(window).scrollTop() < 172) {
-      $('#pageUp').hide();
-    } else {
-      $('#pageUp').fadeIn(600);
+    if ($(window).scrollTop() < $(window).height()) {
+      $('#pageUp').css({'opacity': '0'});
+    }else {
+      $('#pageUp').css({'opacity': '1',});
     }
   });
+
 
   $('#pageUp').click(function() {
     $('html, body').animate({

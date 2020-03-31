@@ -16,60 +16,110 @@
 
 {% block main %}
 {% include 'articles/sidebar.html' %}
+<!--
+<div id="curtain">
+  <img src="{% static 'articles/material/general/curtain.gif' %}" alt="">
+</div>
+-->
+
 <div id="index1">
-  <div class="container">
-    {% for article in articles %}
-    <div class="row articleRow">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <div class="container">
+          {% for article in articles %}
+          <div class="row articleRow">
 
 
-      <div style="background-image:url({{article.image.url}}); min-height:245px;" class="col-12 col-md-4 articleImageDiv">
-        <a href="{% url 'article' article.slug %}">
-          <div class="articleImageDivInner">
+            <div style="background-image:url({{article.image.url}}); min-height:245px;" class="col-12 col-lg-4 articleImageDiv">
+              <a href="{% url 'article' article.slug %}">
+                <div class="articleImageDivInner">
 
-          </div>
-        </a>
-      </div>
-
-
-
-      <div class="col-12 col-md-8">
-        <div class="articleInfo">
-          <a href="{% url 'article' article.slug %}">
-            <h4 class="articleTitle">{{article.title}}</h4>
-            <h6 class="articleTitle text-muted">{{article.subtitle}}</h6>
-            <span class="text-muted articleSubtitle"><i class="far fa-calendar-alt"></i> {{article.created}}</span><br>
-          </a>
-
-
-
-          <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
-
-            <div class="tags">
-              <div>
-                {% for tag in article.tags.all %}
-                <button type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
-                {% endfor %}
-              </div>
+                </div>
+              </a>
             </div>
 
-            <a href="{% url 'article' article.slug %}">
-              <button type="button" class="btn btn-outline-dark readArticle">Read article</button>
-            </a>
+
+
+            <div class="col-12 col-lg-8">
+              <div class="articleInfo">
+                <a href="{% url 'article' article.slug %}">
+                  <h4 class="articleTitle">{{article.title}}</h4>
+                  <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
+                  <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.created}}</h6><br>
+                </a>
 
 
 
+                <span>Author : {{article.author}}</span>
+
+
+                <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
+
+                  <div class="tags">
+                    <div>
+                      {% for tag in article.tags.all %}
+                      <button type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <a href="{% url 'article' article.slug %}">
+                    <button type="button" class="btn btn-outline-dark readArticle">Read article <br><i class="fas fa-book book"></i> <i style="display:none;" class="fas fa-book-open book-open"></i></button>
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
           </div>
-
+          {% endfor %}
+        </div>
+      </div>
+      <div id="filters-col" class="d-none d-lg-block col-lg-4">
+        <div id="filters">
+          <h3>#filters</h3>
         </div>
       </div>
     </div>
-    {% endfor %}
   </div>
+
+
 </div>
 {% endblock %}
 
 {% block scripts %}
+<script type="text/javascript">
+  $('.readArticle').mouseenter(function() {
+    $(this).children('.book').hide()
+    $(this).children('.book-open').show();
+  });
 
+  $('.readArticle').mouseleave(function() {
+    $(this).children('.book').show();
+    $(this).children('.book-open').hide();
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#filters").width($("#filters-col").width());
+
+    function adjustWidth() {
+      var parentwidth = $("#filters-col").width();
+      $("#filters").width(parentwidth);
+    }
+    $(window).resize(
+      function() {
+        adjustWidth();
+      })
+
+
+    $('#curtain').delay(1000).fadeOut();
+
+  });
+</script>
 {% endblock %}
 
 {% block footer %}
