@@ -15,18 +15,17 @@
 {% endblock %}
 
 {% block main %}
-{% include 'articles/sidebar.html' %}
+{% include 'articles/navigation.html' %}
 
 
 <div id="articleImageDiv">
   <div class="container">
     <h1 class="articleTitle d-none d-md-block">{{article.title}}</h1>
     <h4 class="articleTitle d-md-none">{{article.title}}</h4>
-    {% if article.subtitle != '' %}
-    <hr style="border:none; border-top:solid; border-color:white; border-width:1px;">
+
     <h5 class="articleSubtitle d-none d-md-block">{{article.subtitle}}</h5>
     <h6 class="articleSubtitle d-md-none">{{article.subtitle}}</h6>
-    {% endif %}
+
   </div>
   <div id="articleImage" style="background-image:url({{article.image.url}}); filter:blur(5px);">
   </div>
@@ -37,12 +36,6 @@
     {{article.article|safe}}
   </div>
 </div>
-
-<!--
-<div id="comments">
-  <i class="far fa-comments"></i>
-</div>
--->
 {% endblock %}
 
 {% block scripts %}
@@ -50,7 +43,7 @@
   $('img').addClass('img-fluid');
 </script>
 
-<script src="{% static 'articles/js/article_special_sidebar.js' %}"></script>
+<script src="{% static 'articles/js/article_special_navigation.js' %}"></script>
 {% endblock %}
 
 {% block footer %}

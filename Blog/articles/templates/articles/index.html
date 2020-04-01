@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block main %}
-{% include 'articles/sidebar.html' %}
+{% include 'articles/navigation.html' %}
 <!--
 <div id="curtain">
   <img src="{% static 'articles/material/general/curtain.gif' %}" alt="">
@@ -60,7 +60,7 @@
                   <div class="tags">
                     <div>
                       {% for tag in article.tags.all %}
-                      <button type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
+                      <button  type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
                       {% endfor %}
                     </div>
                   </div>

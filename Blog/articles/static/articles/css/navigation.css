@@ -198,13 +198,14 @@
 }
 
 #pageUp {
-  height:50px;
-  width: 50px;
-  border-radius: 100%;
+  height:52px;
+  width: 52px;
+
+
 
   position: fixed;
-  bottom: 4px;
-  right: 7px;
+  bottom: 52px;
+  right: 0px;
 
   box-shadow: 0px 0px 4px silver;
   background: rgba(255,255,255,0.95);
@@ -229,4 +230,55 @@
 #mobile_logo {
   color: #44b78b;
   font-size: 32px;
+}
+
+#mobile-navigation-tools-trigger{
+  height: 52px;
+  width: 52px;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+
+  background: white;
+  box-shadow: 0px 0px 4px silver;
+  z-index: 500;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mobile-navigation-tools-close, #mobile-navigation-tools-login, #mobile-navigation-tools-search{
+  height: 52px;
+  width: 52px;
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+#mobile-navigation-tools{
+  height: 0px;
+  width: 100%;
+
+  position: fixed;
+  bottom: 0;
+
+  background: white;
+  z-index: 500;
+
+  box-shadow: 0px 0px 4px silver;
+
+  visibility: hidden;
+
+  display: flex;
+  justify-content: space-between;
 }

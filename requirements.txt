@@ -5,3 +5,4 @@ django-filter
 Unidecode
 unicodedata2
 django-taggit
+django-currentuser
