@@ -47,6 +47,12 @@
     <script src="{% static 'articles/core/popper/popper.min.js' %}"></script>
     <script src="{% static 'articles/core/bootstrap/js/bootstrap.min.js' %}"></script>
 
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#curtain').delay(1000).fadeOut();
+      });
+    </script>
+
     <!--Navigation-->
     <script src="{% static 'articles/js/navigation.js' %}"></script>
     {% block scripts %}

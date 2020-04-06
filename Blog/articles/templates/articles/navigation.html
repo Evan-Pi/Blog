@@ -11,7 +11,10 @@
     <div id="navbarLinks">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}" id="sidebarHome"><span>Homepage</span></a>
+          <a class="nav-link" href="{% url 'index' %}" id="navbarHome"><span>Homepage</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'articles' %}" id="navbarArticles"><span>Articles</span></a>
         </li>
       </ul>
     </div>
@@ -43,7 +46,10 @@
         <ul>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'index' %}">
-              <h3 id="sidebarHomeMobile"><span>Homepage</span></h3>
+              <h3 id="sidebarHome"><span>Homepage</span></h3>
+            </a>
+            <a class="nav-link" href="{% url 'articles' %}">
+              <h3 id="sidebarArticles"><span>Articles</span></h3>
             </a>
         </ul>
       </div>
@@ -56,24 +62,30 @@
   </div>
 </div>
 
-<div id="mobile-navigation-tools-trigger" class="">
-  <i class="fas fa-cog"></i>
+<div id="nav-tools-trigger">
+  <i class="fas fa-tools"></i>
 </div>
 
 <div id="pageUp">
 <i class="fas fa-chevron-up"></i>
 </div>
 
-<div id="mobile-navigation-tools">
-  <div id="mobile-navigation-tools-close" class="">
+<div id="nav-tools">
+  <div id="nav-tools-close">
     <i class="fas fa-times"></i>
   </div>
 
-  <div id="mobile-navigation-tools-search" class="">
+  <div id="nav-tools-search">
     <i class="fas fa-search"></i>
+    <form id="search-articles-form" action="{% url 'ajaxArticles' %}">
+      {% csrf_token %}
+      <!--input with id = "nav-tools-searchInput" -->
+      {{articles_Filter.form.title}}
+      <button style="visibility:hidden; display:none;" id="searchButton" type="submit"></button>
+    </form>
   </div>
 
-  <div id="mobile-navigation-tools-login" class="">
+  <div id="nav-tools-login">
     <i class="fas fa-sign-in-alt"></i>
   </div>
 </div>

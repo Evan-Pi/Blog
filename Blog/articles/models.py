@@ -21,6 +21,7 @@ class Articles(models.Model):
     slug = models.SlugField(editable=False,max_length=256)
     subtitle = models.CharField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
+
     article = RichTextUploadingField()
 
     tags = TaggableManager()
@@ -54,7 +55,7 @@ class Comments(models.Model):
     approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.text
+        return f"{self.author} | {self.text[:60]}" + "..."
 
 class SubComments(models.Model):
     '''This class creates subcomments for comments'''
@@ -71,4 +72,4 @@ class SubComments(models.Model):
     approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.text
+        return f"{self.author} | {self.text[:60]}" + "..."

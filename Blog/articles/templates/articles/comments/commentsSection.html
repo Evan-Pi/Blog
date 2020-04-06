@@ -1,0 +1,59 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% for comment in comments %}
+<div class="media">
+
+  {% if comment.author_image != '' %}
+  <img src="{{comment.author_image.url}}" class="mr-3" alt="...">
+  {% elif comment.author == 'Unknown' %}
+  <div class="mr-3 visitorCommentImageDiv">
+    <span><i class="fas fa-question"></i></span>
+  </div>
+  {% else %}
+  <div class="mr-3 visitorCommentImageDiv">
+    <span>{{comment.author|first|capfirst}}</span>
+  </div>
+  {% endif %}
+
+  <div class="media-body">
+
+    <h5 class="mt-0">{{comment.author}} <span style="font-size:14px;" class="text-muted"><i class="far fa-calendar-alt"></i> {{comment.created_date}}</span></h5>
+    <span>{{comment.text}}</span><br>
+
+
+    {% for subcomment in subcomments %}
+    {% if subcomment.comment == comment %}
+    <div class="media mt-3">
+
+      {% if subcomment.author_image != '' %}
+      <img src="{{comment.author_image.url}}" class="mr-3" alt="...">
+      {% elif subcomment.author == 'Unknown' %}
+      <div class="mr-3 visitorCommentImageDiv">
+        <span><i class="fas fa-question"></i></span>
+      </div>
+      {% else %}
+      <div class="mr-3 visitorCommentImageDiv">
+        <span>{{subcomment.author|first|capfirst}}</span>
+      </div>
+      {% endif %}
+
+      <div class="media-body">
+        <h5 class="mt-0">{{subcomment.author}} <span style="font-size:14px;" class="text-muted"><i class="far fa-calendar-alt"></i> {{subcomment.created_date}}</span></h5>
+        <span>{{subcomment.text}}</span><br>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <!-- Button trigger subcomments modal -->
+    <div class="text-right" style="width:100%;">
+      <button type="button" class="btn btn-sm customButton1 selectComment" value="{{comment.id}}" data-toggle="modal" data-target="#subcommentsModal">
+        <i class="fas fa-pen-nib"></i> Respond
+      </button>
+    </div>
+
+
+  </div>
+</div>
+{% endfor %}

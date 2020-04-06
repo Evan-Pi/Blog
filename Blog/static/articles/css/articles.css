@@ -1,0 +1,149 @@
+#articles1 {
+  min-height: calc(100vh - 75px - 52px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top:15px;
+}
+
+.articleRow {
+  box-shadow: 0px 0px 10px #eaeaea;
+  margin-bottom: 15px;
+  transition: 0.4s;
+}
+
+.articleRow:hover {
+  box-shadow: 0px 0px 10px #cdcdcd;
+}
+
+.articleInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.articleImageDiv {
+  padding-left: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 992px) {
+  .articleImageDiv {
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+  }
+  .articleRow{
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+  }
+
+}
+
+.articleImageDivInner{
+  width: 100%;
+  height: 100%;
+}
+
+.readArticle {
+  height: 100%;
+  min-height: 100px;
+  border:none;
+  box-shadow: 3px 3px 4px #eaeaea inset;
+
+  border-radius: 0;
+  margin-right: -15px;
+  color: #6c757d;
+  transition: 0.6s;
+}
+
+.readArticle:hover {
+  color: white;
+  box-shadow: 3px 3px 4px #2e7b5e inset;
+}
+
+.readArticle:focus {
+  background: #308162 !important;
+  border-color:#308162 !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+.readArticle:active ,.book:active, .book-open:active {
+  transition:0s !important;
+}
+
+.readArticle:hover{
+  background: #44b78b;
+  border-color: #44b78b;
+}
+
+.articleTitle {
+  margin-top: 7px;
+}
+
+.articleTitle{
+  color:black;
+}
+
+@media only screen and (max-width: 768px) {
+  .articleTitle {
+    font-size: 21px;
+  }
+
+  .articleImageDiv {
+    padding-right: 0;
+  }
+}
+
+.tags {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.tags button {
+  border: none;
+  border-radius: 0;
+  box-shadow: 1px 1px 2px silver;
+  color: #6c757d;
+}
+
+.tags button:hover {
+  background: #ebebeb;
+}
+
+#filters{
+  position: fixed;
+  bottom:52px;
+
+  min-height:120px;
+
+  box-shadow: 0px 0px 10px #eaeaea;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: box-shadow 0.4s;
+
+  background: white
+}
+
+#filters:hover{
+  box-shadow: 0px 0px 10px silver;
+}
+
+#navbarArticles,#sidebarArticles{
+  display: none;
+}

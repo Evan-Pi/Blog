@@ -13,11 +13,14 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/article.css' %}">
+
+<link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css' %}" rel="stylesheet">
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
 
 {% block main %}
 {% include 'articles/navigation.html' %}
-
 
 <div id="articleImageDiv">
   <div class="container">
@@ -38,105 +41,18 @@
   </div>
 </div>
 
-<div id="comments" class="container">
-
-  <h3 style="margin-bottom:25px;"><i class="far fa-comments"></i> Discusion</h3>
-  {% for comment in comments %}
-
-  <div class="media">
-
-    {% if comment.author_image != '' %}
-    <img src="{{comment.author_image.url}}" class="mr-3" alt="...">
-    {% else %}
-    <div id="visitorCommentImageDiv" class="mr-3">
-      <span>{{comment.author|first|capfirst}}</span>
-    </div>
-    {% endif %}
-
-    <div class="media-body">
-
-      <h5 class="mt-0">{{comment.author}} <span style="font-size:14px;" class="text-muted"><i class="far fa-calendar-alt"></i> {{comment.created_date}}</span></h5>
-      <span>{{comment}}</span><br>
-
-
-      {% for subcomment in subcomments %}
-      {% if subcomment.comment == comment %}
-      <div class="media mt-3">
-
-        {% if subcomment.author_image != '' %}
-        <img src="{{comment.author_image.url}}" class="mr-3" alt="...">
-        {% else %}
-        <div id="visitorCommentImageDiv" class="mr-3">
-          <span>{{subcomment.author|first|capfirst}}</span>
-        </div>
-        {% endif %}
-
-        <div class="media-body">
-          <h5 class="mt-0">{{subcomment.author}} <span style="font-size:14px;" class="text-muted"><i class="far fa-calendar-alt"></i> {{subcomment.created_date}}</span></h5>
-          <span>{{subcomment}}</span><br>
-        </div>
-      </div>
-      {% endif %}
-      {% endfor %}
-      <div class="text-right" style="width:100%;">
-        <button id="writeComment" type="button" class="btn btn-sm">
-          <i class="fas fa-pen-nib"></i> Respond
-        </button>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-
-
-  <!-- Button trigger modal -->
-  <button id="writeComment" type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter">
-    <i class="fas fa-pen-nib"></i> Write a comment
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Comment</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="." method="POST">
-        <div class="modal-body">
-
-            {% csrf_token %}
-            <div style="display:none;">
-              {{comment_form.article|as_crispy_field}}
-            </div>
-            {{comment_form.author|as_crispy_field}}
-            {{comment_form.text|as_crispy_field}}
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Commit comment</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-</div>
-
 <!--WRITE A COMMENT-->
-
-
-
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-  $('img').addClass('img-fluid');
-</script>
-
 <script src="{% static 'articles/js/article_special_navigation.js' %}"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#article1 img').addClass('img-fluid');
+    $( "pre code" ).parent().css( "background-color", "#282B2E" );
+  });
+</script>
 {% endblock %}
 
 {% block footer %}

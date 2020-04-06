@@ -1,0 +1,154 @@
+{% extends 'articles/base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<meta name="description" content="">
+{% endblock %}
+
+{% block title %}
+<title>Blog</title>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'articles/navigation.html' %}
+
+<div id="articles1">
+
+  <div class="container-fluid">
+    <div id="articlesContainer" class="row">
+
+
+      {% for article in articles %}
+      <div  class="col-12 col-xl-6">
+
+        <div class="container">
+
+          <div class="row articleRow">
+
+
+            <div style="background-image:url({{article.image.url}}); min-height:245px;" class="col-12 col-lg-4 articleImageDiv">
+              <a href="{% url 'article' article.slug %}">
+                <div class="articleImageDivInner">
+
+                </div>
+              </a>
+            </div>
+
+
+
+            <div class="col-12 col-lg-8">
+              <div class="articleInfo">
+                <a href="{% url 'article' article.slug %}">
+                  <h4 class="articleTitle">{{article.title}}</h4>
+                  <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
+                  <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.created}}</h6><br>
+                </a>
+
+
+
+                <span>Author : {{article.author}}</span>
+
+
+                <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
+
+                  <div class="tags">
+                    <div>
+                      {% for tag in article.tags.all %}
+                      <button type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <a href="{% url 'article' article.slug %}">
+                    <button type="button" class="btn btn-outline-dark readArticle">Read article <br><i class="fas fa-book book"></i> <i style="display:none;" class="fas fa-book-open book-open"></i></button>
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      {% endfor %}
+
+      <!--
+      <div id="filters-col" class="d-none d-lg-block col-lg-4">
+        <div id="filters">
+          <h3>#filters</h3>
+        </div>
+      </div>
+      -->
+
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  $('.readArticle').mouseenter(function() {
+    $(this).children('.book').hide()
+    $(this).children('.book-open').show();
+  });
+
+  $('.readArticle').mouseleave(function() {
+    $(this).children('.book').show();
+    $(this).children('.book-open').hide();
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#filters").width($("#filters-col").width());
+
+    function adjustWidth() {
+      var parentwidth = $("#filters-col").width();
+      $("#filters").width(parentwidth);
+    }
+    $(window).resize(
+      function() {
+        adjustWidth();
+      });
+  });
+</script>
+
+<script language="JavaScript">
+  $("#nav-tools-searchInput").keyup(function() {
+    $("#searchButton").click();
+  });
+  $("#search-articles-form").submit(function(e) {
+    // prevent from normal form behaviour
+    e.preventDefault();
+    // serialize the form data
+    var serializedData = $(this).serialize();
+
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'ajaxArticles' %}",
+      data: serializedData,
+      success: function(data) {
+        //reset the form after successful submit
+        $("#articlesContainer").html(data);
+      },
+      error: function(response) {
+        console.log(response)
+      }
+    });
+  });
+</script>
+{% endblock %}
+
+{% block footer %}
+{% include 'articles/footer.html' %}
+{% endblock %}

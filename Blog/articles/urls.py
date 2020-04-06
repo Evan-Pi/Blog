@@ -7,6 +7,11 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<str:slug>/', views.article, name='article'),
+    path('articles/', views.articles, name='articles'),
+    path('articles/<str:slug>/', views.article, name='article'),
+
+    path('ajaxArticles', views.ajaxArticles, name='ajaxArticles'),
+
+    #path('ajaxComments/<str:slug>/', views.ajaxComments, name='ajaxComments'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
