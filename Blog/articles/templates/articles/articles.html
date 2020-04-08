@@ -12,6 +12,12 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
+
+<style media="screen">
+  #navbarArticles,#sidebarArticles{
+    display: none;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
@@ -24,7 +30,7 @@
 
 
       {% for article in articles %}
-      <div  class="col-12 col-xl-6">
+      <div class="col-12 col-xl-6">
 
         <div class="container">
 
@@ -43,15 +49,15 @@
 
             <div class="col-12 col-lg-8">
               <div class="articleInfo">
-                <a href="{% url 'article' article.slug %}">
-                  <h4 class="articleTitle">{{article.title}}</h4>
-                  <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
-                  <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.created}}</h6><br>
-                </a>
 
-
-
-                <span>Author : {{article.author}}</span>
+                <div class="title-Subtitle-Publised-Author">
+                  <a href="{% url 'article' article.slug %}">
+                    <h4 class="articleTitle">{{article.title}}</h4>
+                    <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
+                    <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.created}}</h6><br>
+                  </a>
+                  <span>Author : {{article.author}}</span>
+                </div>
 
 
                 <div style="display:flex; flex:1; justify-content:space-between; width:100%;">

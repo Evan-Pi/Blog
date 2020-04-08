@@ -9,6 +9,11 @@
   position: relative;
 }
 
+#article1 img{
+  max-width: 100%;
+  height: auto !important;
+}
+
 #articleImage {
   position: absolute;
   height: 66vh;
@@ -20,14 +25,14 @@
   margin-top: -20px;
 }
 
-.articleTitle {
+#articleImageDiv .articleTitle {
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 2px black;
   margin: 0;
 }
 
-.articleSubtitle {
+#articleImageDiv .articleSubtitle {
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 2px black;
@@ -75,4 +80,26 @@
 
 #mobile_logo, #navbarTrigger {
   color: white;
+}
+
+#pageUp {
+  bottom: 48px;
+}
+#nav-tools-trigger {
+  bottom: 48px;
+}
+#nav-tools {
+  bottom: 48px;
+}
+
+@media screen and (min-width:800px) {
+  #pageUp {
+    bottom: 0px;
+  }
+  #nav-tools-trigger {
+    bottom: 0px;
+  }
+  #nav-tools {
+    bottom: 0px;
+  }
 }

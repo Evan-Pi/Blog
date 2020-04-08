@@ -7,3 +7,5 @@ unicodedata2
 django-taggit
 django-currentuser
 django-crispy-forms
+sorl-thumbnail
+django-social-share

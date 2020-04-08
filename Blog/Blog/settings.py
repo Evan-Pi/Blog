@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'taggit',
     'crispy_forms',
+    'sorl.thumbnail',
+    'django_social_share',
     'articles',
 ]
 

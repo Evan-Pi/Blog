@@ -8,6 +8,8 @@ import unicodedata
 
 from django_currentuser.middleware import (get_current_user, get_current_authenticated_user)
 from django_currentuser.db.models import CurrentUserField
+
+from django.urls import reverse
 # Create your models here.
 
 class Articles(models.Model):
@@ -36,6 +38,9 @@ class Articles(models.Model):
         self.slug = slugify(unidecode(self.title))
         self.author = get_current_user().username
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('article', args=[self.slug])
 
     def __str__(self):
         return self.title

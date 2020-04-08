@@ -1,3 +1,4 @@
+{% if articles.count != 0 %}
 {% for article in articles %}
 <div class="col-12 col-xl-6">
 
@@ -18,15 +19,15 @@
 
       <div class="col-12 col-lg-8">
         <div class="articleInfo">
-          <a href="{% url 'article' article.slug %}">
-            <h4 class="articleTitle">{{article.title}}</h4>
-            <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
-            <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.created}}</h6><br>
-          </a>
 
-
-
-          <span>Author : {{article.author}}</span>
+          <div class="title-Subtitle-Publised-Author">
+            <a href="{% url 'article' article.slug %}">
+              <h4 class="articleTitle">{{article.title}}</h4>
+              <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
+              <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.created}}</h6><br>
+            </a>
+            <span>Author : {{article.author}}</span>
+          </div>
 
 
           <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
@@ -34,7 +35,7 @@
             <div class="tags">
               <div>
                 {% for tag in article.tags.all %}
-                <button  type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
+                <button type="button" class="btn btn-light btn-sm">#{{ tag }}</button>
                 {% endfor %}
               </div>
             </div>
@@ -54,3 +55,9 @@
 
 </div>
 {% endfor %}
+
+{% else %}
+<div id="no-articles-returned" style="width:100%; height:100%; min-height: calc(100vh - 52px); display:flex; flex-direction:column; justify-content:center; align-items:center;">
+  <h3>No articles for this particular search...</h3>
+</div>
+{% endif %}

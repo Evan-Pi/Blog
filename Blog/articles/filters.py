@@ -5,7 +5,7 @@ from . models import Articles
 
 class ArticlesFilter(django_filters.FilterSet):
 
-    title = CharFilter(field_name='title', lookup_expr='icontains', widget=forms.TextInput(attrs={'placeholder':'Search in title','id':'nav-tools-searchInput'}))
+    title = CharFilter(field_name='title', lookup_expr='icontains', widget=forms.TextInput(attrs={'placeholder':'Search articles','id':'nav-tools-searchInput'}))
 
     class Meta:
         model = Articles

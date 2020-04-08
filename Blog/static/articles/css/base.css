@@ -37,3 +37,16 @@ a:hover{
   z-index:10000;
   background: white;
 }
+
+#search-articles-results{
+  position: fixed;
+  top: 0;
+  background: white;
+  padding-top:15px;
+  display: none;
+  z-index: 100000;
+
+  height: calc(100vh - 52px);
+  overflow-y: scroll;
+  width: 100%;
+}

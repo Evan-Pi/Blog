@@ -2,9 +2,12 @@
 
 {% load static %}
 {% load crispy_forms_tags %}
+{% load thumbnail %}
 
 {% block meta %}
-<meta name="description" content="">
+<meta property="og:image" content="{{article.image.url}}" />
+<meta name="description" content="{{article.subtitle}}">
+<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5e8cc79c5d9bf5001283b977&product=sticky-share-buttons"></script>
 {% endblock %}
 
 {% block title %}
@@ -12,15 +15,24 @@
 {% endblock %}
 
 {% block links %}
+<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
 <link rel="stylesheet" href="{% static 'articles/css/article.css' %}">
 
 <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css' %}" rel="stylesheet">
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
 {% endblock %}
 
 {% block main %}
 {% include 'articles/navigation.html' %}
+
+<div id="search-articles-results-wrapper" class="container-fluid">
+  <div class="row" id="search-articles-results">
+
+  </div>
+</div>
 
 <div id="articleImageDiv">
   <div class="container">
@@ -49,8 +61,53 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#article1 img').addClass('img-fluid');
-    $( "pre code" ).parent().css( "background-color", "#282B2E" );
+    $("pre code").parent().css("background-color", "#282B2E");
+  });
+</script>
+
+<script type="text/javascript">
+  $('#nav-tools-search').click(function() {
+    $('#search-articles-results').css({'display':'flex'});
+    var initialSerializedData = $("#search-articles-form").serialize();
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'ajaxArticles' %}",
+      data: initialSerializedData,
+      success: function(data) {
+        //reset the form after successful submit
+        $("#search-articles-results").html(data);
+      },
+      error: function(response) {
+        console.log(response)
+      }
+    });
+  });
+
+  $('#nav-tools-close').click(function() {
+    $('#search-articles-results').fadeOut();
+  });
+
+  $("#nav-tools-searchInput").keyup(function() {
+    $("#searchButton").click();
+  });
+  $("#search-articles-form").submit(function(e) {
+    // prevent from normal form behaviour
+    e.preventDefault();
+    // serialize the form data
+    var serializedData = $(this).serialize();
+
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'ajaxArticles' %}",
+      data: serializedData,
+      success: function(data) {
+        //reset the form after successful submit
+        $("#search-articles-results").html(data);
+      },
+      error: function(response) {
+        console.log(response)
+      }
+    });
   });
 </script>
 {% endblock %}

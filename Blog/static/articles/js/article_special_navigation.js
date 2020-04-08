@@ -14,4 +14,26 @@ $(document).ready(function(){
         $('.nav-link').children('span').css({'color':'white'});
       }
     });
+
+
+
+
+    $('#nav-tools-trigger').click(function() {
+
+      if ( $(window).width() > 800) {
+        $('#pageUp').css({'bottom':'52px'});
+      }else{
+        $('#pageUp').css({'bottom':'100px'});
+      }
+
+    });
+
+    $('#nav-tools-close').click(function() {
+      if ( $(window).width() > 800) {
+        $('#pageUp').css({'bottom':'0px'});
+      }else{
+        $('#pageUp').css({'bottom':'48px'});
+      }
+    });
+
 });
