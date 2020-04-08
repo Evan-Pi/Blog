@@ -17,12 +17,7 @@
 
 {% block main %}
 {% include 'articles/navigation.html' %}
-
-<div id="search-articles-results-wrapper" class="container-fluid">
-  <div class="row" id="search-articles-results">
-
-  </div>
-</div>
+{% include 'articles/search_articles_results.html' %}
 
 <div style="background-image:url({% static 'articles/material/index/homepage_wallpaper.jpg' %});" id="index1">
 
@@ -32,48 +27,55 @@
 
 {% block scripts %}
 <script type="text/javascript">
-  $('#nav-tools-search').click(function() {
-    $('#search-articles-results').css({'display':'flex'});
-    var initialSerializedData = $("#search-articles-form").serialize();
-    $.ajax({
-      type: 'POST',
-      url: "{% url 'ajaxArticles' %}",
-      data: initialSerializedData,
-      success: function(data) {
-        //reset the form after successful submit
-        $("#search-articles-results").html(data);
-      },
-      error: function(response) {
-        console.log(response)
-      }
+  $(document).ready(function() {
+
+    $('#search-articles-form')[0].reset();
+
+    $('#nav-tools-search').click(function() {
+      $('#search-articles-results').css({'display':'flex'});
+      var initialSerializedData = $("#search-articles-form").serialize();
+      $.ajax({
+        type: 'POST',
+        url: "{% url 'ajaxArticles' %}",
+        data: initialSerializedData,
+        success: function(data) {
+          //reset the form after successful submit
+          $("#search-articles-results").html(data);
+        },
+        error: function(response) {
+          console.log(response);
+        }
+      });
     });
-  });
 
-  $('#nav-tools-close').click(function() {
-    $('#search-articles-results').fadeOut();
-  });
-
-  $("#nav-tools-searchInput").keyup(function() {
-    $("#searchButton").click();
-  });
-  $("#search-articles-form").submit(function(e) {
-    // prevent from normal form behaviour
-    e.preventDefault();
-    // serialize the form data
-    var serializedData = $(this).serialize();
-
-    $.ajax({
-      type: 'POST',
-      url: "{% url 'ajaxArticles' %}",
-      data: serializedData,
-      success: function(data) {
-        //reset the form after successful submit
-        $("#search-articles-results").html(data);
-      },
-      error: function(response) {
-        console.log(response)
-      }
+    $('#nav-tools-close').click(function() {
+      $('#search-articles-results').fadeOut();
+      $('#search-articles-form')[0].reset();
     });
+
+    $("#nav-tools-searchInput").keyup(function() {
+      $("#searchButton").click();
+    });
+    $("#search-articles-form").submit(function(e) {
+      // prevent from normal form behaviour
+      e.preventDefault();
+      // serialize the form data
+      var serializedData = $(this).serialize();
+
+      $.ajax({
+        type: 'POST',
+        url: "{% url 'ajaxArticles' %}",
+        data: serializedData,
+        success: function(data) {
+          //reset the form after successful submit
+          $("#search-articles-results").html(data);
+        },
+        error: function(response) {
+          console.log(response);
+        }
+      });
+    });
+
   });
 </script>
 {% endblock %}

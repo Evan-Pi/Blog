@@ -43,6 +43,7 @@ a:hover{
   top: 0;
   background: white;
   padding-top:15px;
+  padding-bottom:67px;
   display: none;
   z-index: 100000;
 

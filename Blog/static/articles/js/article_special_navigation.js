@@ -15,15 +15,19 @@ $(document).ready(function(){
       }
     });
 
-
+    $('#nav-tools-search').click(function() {
+      $('#nav-tools').css({'bottom':'0px'});
+    });
 
 
     $('#nav-tools-trigger').click(function() {
 
       if ( $(window).width() > 800) {
         $('#pageUp').css({'bottom':'52px'});
+        $('#nav-tools').css({'bottom':'0px'});
       }else{
         $('#pageUp').css({'bottom':'100px'});
+        $('#nav-tools').css({'bottom':'48px'});
       }
 
     });

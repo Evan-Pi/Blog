@@ -31,19 +31,25 @@ $(document).ready(function() {
   });
 
   $('#nav-tools-close').click(function() {
+    $('#search-articles-form').css({'visibility': 'hidden'}).animate({'width':'0%'},500);
     $('#nav-tools').animate({'height':'0%'},500);
     $('#nav-tools-close, #nav-tools-login ,#nav-tools-search').fadeOut(200);
-    $('#nav-tools-trigger').delay(500).fadeIn(500);
 
-    $('#search-articles-form').css({'visibility': 'hidden'}).delay(500).animate({'width':'0%'});
+
+
+    $('#nav-tools-trigger').fadeIn(500);
     $('#nav-tools-searchInput').css({'visibility': 'hidden'});
     $('#pageUp').css({'bottom':'0px'});
+
+    //$('html').css({'margin': '0',  'height': '100%',  'overflow': 'auto'});
   });
 
 
   $('#nav-tools-search').click(function() {
-    $('#search-articles-form').css({'visibility': 'visible'}).animate({'width':'100%'});
+    $('#search-articles-form').css({'visibility': 'visible'}).animate({'width':'100%'},500);
     $('#nav-tools-searchInput').css({'visibility': 'visible'}).focus();
+
+    //$('html').css({'margin': '0',  'height': '100%',  'overflow': 'hidden'});
   });
 
 
