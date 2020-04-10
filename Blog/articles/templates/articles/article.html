@@ -8,7 +8,6 @@
 <meta property="og:image" content="{{article.image.url}}" />
 <meta name="description" content="{{article.subtitle}}">
 <script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5e8cc79c5d9bf5001283b977&product=sticky-share-buttons"></script>
-<link href="https://fonts.googleapis.com/css2?family=Stalemate&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block title %}
@@ -62,8 +61,12 @@
 </div>
 
 
+<div class="container-fluid text-right">
+  <span class="author" >Author : {{article.author}}</span>
+</div>
 
 <div id="article1">
+
   <div class="container">
     {{article.article|safe}}
   </div>

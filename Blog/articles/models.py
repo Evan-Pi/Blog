@@ -21,7 +21,7 @@ class Articles(models.Model):
 
     title = models.CharField(max_length=256)
     slug = models.SlugField(editable=False,max_length=256)
-    subtitle = models.CharField(max_length=256, blank=True)
+    subtitle = models.TextField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
 
     article = RichTextUploadingField()
