@@ -27,7 +27,7 @@ $(document).ready(function(){
         $('#nav-tools').css({'bottom':'0px'});
       }else{
         $('#pageUp').css({'bottom':'100px'});
-        $('#nav-tools').css({'bottom':'48px'});
+        $('#nav-tools').css({'bottom':'52px'});
       }
 
     });
@@ -36,8 +36,16 @@ $(document).ready(function(){
       if ( $(window).width() > 800) {
         $('#pageUp').css({'bottom':'0px'});
       }else{
-        $('#pageUp').css({'bottom':'48px'});
+        $('#pageUp').css({'bottom':'52px'});
       }
     });
+
+    $(window).scroll(function() {
+      if ($(window).scrollTop() > $('#articleImageDiv').height() - 75) {
+        $('#social-share-desktop').css({'position': 'fixed','top': '75px',});
+      }else{
+        $('#social-share-desktop').css({'position': 'absolute','top': 'calc(66vh - 50px)',});
+      }
+      });
 
 });

@@ -8,6 +8,7 @@
 <meta property="og:image" content="{{article.image.url}}" />
 <meta name="description" content="{{article.subtitle}}">
 <script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5e8cc79c5d9bf5001283b977&product=sticky-share-buttons"></script>
+<link href="https://fonts.googleapis.com/css2?family=Stalemate&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block title %}
@@ -38,15 +39,66 @@
     <h6 class="articleSubtitle d-md-none">{{article.subtitle}}</h6>
 
   </div>
-  <div id="articleImage" style="background-image:url({{article.image.url}}); filter:blur(5px);">
+  {% thumbnail article.image "800x800" quality=61 as im %}
+  <div id="articleImage" style="background-image:url({{im.url}}); filter:blur(5px);">
   </div>
+  {% endthumbnail %}
 </div>
+
+<div id="social-share-desktop">
+  <div data-network="facebook" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-f"></i></div>
+  <div data-network="messenger" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
+  <div data-network="twitter" class="btn btn-dark st-custom-button"><i class="fab fa-twitter"></i></div>
+  <div data-network="linkedin" class="btn btn-dark st-custom-button"><i class="fab fa-linkedin-in"></i></div>
+  <div data-network="pinterest" class="btn btn-dark st-custom-button"><i class="fab fa-pinterest-p"></i></div>
+</div>
+
+<div id="social-share-mobile">
+  <div data-network="facebook" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-f"></i></div>
+  <div data-network="messenger" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
+  <div data-network="twitter" class="btn btn-dark st-custom-button"><i class="fab fa-twitter"></i></div>
+  <div data-network="linkedin" class="btn btn-dark st-custom-button"><i class="fab fa-linkedin-in"></i></div>
+  <div data-network="pinterest" class="btn btn-dark st-custom-button"><i class="fab fa-pinterest-p"></i></div>
+</div>
+
+
 
 <div id="article1">
   <div class="container">
     {{article.article|safe}}
   </div>
 </div>
+
+<div id="comments">
+
+  <div style="margin-top:10vh; margin-bottom:10vh; display:flex; justify-content:center;">
+    <div>
+      <h2 style="font-family: 'Stalemate', cursive; margin:0; font-weight:bold; color:silver;">End of article <i class="fas fa-feather-alt"></i></h2>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_config = function () {
+    this.page.url = '{{request.build_absolute_uri}}';
+    this.page.identifier = '{{article.slug}}{{article.id}}';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pythonas.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  </div>
+</div>
+
+
 
 <!--WRITE A COMMENT-->
 {% endblock %}
@@ -116,4 +168,7 @@
 
 {% block footer %}
 {% include 'articles/footer.html' %}
+<div id="social-share-mobile-footer-save">
+
+</div>
 {% endblock %}

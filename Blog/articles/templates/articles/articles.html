@@ -1,6 +1,7 @@
 {% extends 'articles/base.html' %}
 
 {% load static %}
+{% load thumbnail %}
 
 {% block meta %}
 <meta name="description" content="">
@@ -32,22 +33,23 @@
       {% for article in articles %}
       <div class="col-12 col-xl-6">
 
-        <div class="container">
+        <div class="container-fluid">
 
           <div class="row articleRow">
 
-
-            <div style="background-image:url({{article.image.url}}); min-height:245px;" class="col-12 col-lg-4 articleImageDiv">
+            {% thumbnail article.image "500x500" quality=91 as im %}
+            <div style="background-image:url({{im.url}}); min-height:245px;" class="col-12 col-sm-5 col-lg-4 articleImageDiv">
               <a href="{% url 'article' article.slug %}">
                 <div class="articleImageDivInner">
 
                 </div>
               </a>
             </div>
+            {% endthumbnail %}
 
 
 
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-sm-7 col-lg-8">
               <div class="articleInfo">
 
                 <div class="title-Subtitle-Publised-Author">
@@ -85,14 +87,6 @@
 
       </div>
       {% endfor %}
-
-      <!--
-      <div id="filters-col" class="d-none d-lg-block col-lg-4">
-        <div id="filters">
-          <h3>#filters</h3>
-        </div>
-      </div>
-      -->
 
     </div>
   </div>
