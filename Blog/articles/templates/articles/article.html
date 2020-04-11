@@ -29,6 +29,10 @@
 {% include 'articles/navigation.html' %}
 {% include 'articles/search_articles_results.html' %}
 
+<div id="scroll-article-bar" style="position:fixed; top:0; left:0; width:0%; height:4px; background:#44b78b; z-index:802;">
+
+</div>
+
 <div id="articleImageDiv">
   <div class="container">
     <h1 class="articleTitle d-none d-md-block">{{article.title}}</h1>
@@ -61,7 +65,7 @@
 </div>
 
 
-<div class="container-fluid text-right">
+<div id="author-container" class="container-fluid text-right">
   <span class="author" >Author : {{article.author}}</span>
 </div>
 
@@ -74,7 +78,7 @@
 
 <div id="comments">
 
-  <div style="margin-top:10vh; margin-bottom:10vh; display:flex; justify-content:center;">
+  <div id="end-of-article" style="padding-top:10vh; padding-bottom:10vh; display:flex; justify-content:center;">
     <div>
       <h2 style="font-family: 'Stalemate', cursive; margin:0; font-weight:bold; color:silver;">End of article <i class="fas fa-feather-alt"></i></h2>
 
@@ -112,6 +116,13 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $("pre code").parent().css("background-color", "#282B2E");
+
+    $(window).scroll(function() {
+      var article_height = $('#articleImageDiv').height() + $('#author-container').height() + $('#article1').height() + $('#end-of-article').outerHeight();
+      var percentage_covered = ($(window).scrollTop() / (article_height-$(window).height()))*100 + '%';
+      console.log(percentage_covered);
+      $("#scroll-article-bar").css("width", percentage_covered);
+    });
   });
 </script>
 

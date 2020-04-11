@@ -44,14 +44,7 @@
   background: white;
   z-index: 1000;
   padding-top: 15px;
-}
-
-@media screen and (min-width:800px) {
-  #article1 .container {
-    padding-left: 42px;
-    padding-right: 42px;
-
-  }
+  margin-top: 15px;
 }
 
 .navbar, #navbarWrapper {
@@ -118,7 +111,7 @@
 #social-share-desktop {
   position: absolute;
   top: calc(66vh - 50px);
-  left: 0;
+  right: 0;
 }
 
 @media screen and (max-width:799px) {
