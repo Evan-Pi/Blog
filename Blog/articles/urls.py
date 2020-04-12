@@ -8,9 +8,11 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('articles/', views.articles, name='articles'),
+    path('articles/category/<str:slug>/', views.articlesCategory, name='articlesCategory'),
     path('articles/<str:slug>/', views.article, name='article'),
 
     path('ajaxArticles', views.ajaxArticles, name='ajaxArticles'),
+    path('ajaxCategoryArticles/<str:slug>/', views.ajaxCategoryArticles, name='ajaxCategoryArticles'),
 
     #path('ajaxComments/<str:slug>/', views.ajaxComments, name='ajaxComments'),
 

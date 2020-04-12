@@ -80,7 +80,7 @@
     <form id="search-articles-form" action="{% url 'ajaxArticles' %}">
       {% csrf_token %}
       <!--input with id = "nav-tools-searchInput" -->
-      {{articles_Filter.form.title}}
+      {{articles_Filter.form.search}}
       <button style="visibility:hidden; display:none;" id="searchButton" type="submit"></button>
     </form>
   </div>

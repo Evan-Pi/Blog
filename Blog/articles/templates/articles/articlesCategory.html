@@ -8,55 +8,15 @@
 {% endblock %}
 
 {% block title %}
-<title>Blog</title>
+<title>Blog - {{category.title}}</title>
 {% endblock %}
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
-
-<style media="screen">
-  #navbarArticles,
-  #sidebarArticles {
-    display: none;
-  }
-</style>
 {% endblock %}
 
 {% block main %}
 {% include 'articles/navigation.html' %}
-
-<!--CATEGORIES-->
-<div id="categories-container" style="padding-top:15px; padding-bottom:15px; background:#f9f9f9;" class="container-fluid text-center">
-  <div class="row">
-    {% for category in categories %}
-    <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3">
-
-
-      <div class="card category-card">
-        <a href="{% url 'articlesCategory' category.slug %}">
-          <div class="row no-gutters">
-            {% thumbnail category.image "200x200" quality=91 as im %}
-            <div style="background-image:url({{im.url}});" class="col-4 category-image-div">
-
-            </div>
-            {% endthumbnail %}
-            <div class="col-8">
-              <div class="card-body">
-                <span class="category-title" style="margin:0;">{{category.title}}</span>
-                <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-
-
-    </div>
-    {% endfor %}
-  </div>
-
-</div>
 
 <!--ARTICLES-->
 <div id="articles1">
@@ -145,7 +105,7 @@
 
       $.ajax({
         type: 'POST',
-        url: "{% url 'ajaxArticles' %}",
+        url: "{% url 'ajaxCategoryArticles' category.slug %}",
         data: serializedData,
         success: function(data) {
           //reset the form after successful submit
@@ -162,7 +122,7 @@
       var initialSerializedData = $("#search-articles-form").serialize();
       $.ajax({
         type: 'POST',
-        url: "{% url 'ajaxArticles' %}",
+        url: "{% url 'ajaxCategoryArticles' category.slug %}",
         data: initialSerializedData,
         success: function(data) {
           //reset the form after successful submit

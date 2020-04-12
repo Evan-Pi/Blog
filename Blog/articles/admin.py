@@ -1,7 +1,6 @@
 from django.contrib import admin
-from . models import Articles, Comments, SubComments
+from . models import Articles, ArticlesCategories
 
 # Register your models here.
 admin.site.register(Articles)
-admin.site.register(Comments)
-admin.site.register(SubComments)
+admin.site.register(ArticlesCategories)
