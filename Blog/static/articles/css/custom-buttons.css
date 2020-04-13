@@ -1,0 +1,24 @@
+
+.customButton1 {
+  border: none;
+  box-shadow: 0px 0px 4px silver;
+  border-radius: 0;
+  color: #44b78b;
+  background: white;
+  transition: 0.4s;
+}
+
+.customButton1:active, .book:active, .book-open:active {
+  transition: 0s !important;
+}
+
+.customButton1:hover {
+  background: #44b78b;
+  border-color: #44b78b;
+  color: white;
+
+}
+
+.customButton1:focus {
+  box-shadow: 3px 3px 4px #eaeaea;
+}

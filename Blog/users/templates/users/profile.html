@@ -1,0 +1,54 @@
+{% extends 'articles/base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<meta name="description" content="">
+{% endblock %}
+
+{% block title %}
+<title>Profile</title>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/custom-buttons.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'articles/navigation.html' %}
+<div id="profile">
+  {% if user.is_authenticated %}
+
+
+  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;" class="text-center">
+    <h3>{{user.username}}</h3>
+    <i style="color:#dcdcdc;" class="fas fa-user-astronaut fa-4x"></i>
+  </div>
+
+
+  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;" class="text-center">
+    <a href="{% url 'password_change' %}">
+      <button class="btn btn-block customButton1">Change password</button>
+    </a>
+    <a href="{% url 'logout' %}">
+      <div id="nav-tools-login">
+        <i class="fas fa-sign-out-alt"></i>
+        Log out
+      </div>
+    </a>
+  </div>
+
+  {% else %}
+  <p><a href="{% url 'login' %}"><span style="color:#44b78b;">Log in</span></a> to see your profile.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block footer %}
+{% include 'articles/footer.html' %}
+{% endblock %}

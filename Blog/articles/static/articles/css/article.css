@@ -162,3 +162,8 @@
     height: 52px;
   }
 }
+
+.navbar .user-nav-link:hover:after {
+  width: 0%;
+  background: transparent;
+}

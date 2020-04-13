@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sorl.thumbnail',
     'articles',
+    'users',
 ]
 
 
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'Blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'users/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,6 +157,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+# SMTP configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "pythonas.mail@gmail.com"
+EMAIL_HOST_PASSWORD = "#ep7776!smtp"
+
+'''
+# SMTP configuration for development
+# command to initiate development smtp server : python -m smtpd -n -c DebuggingServer localhost:1025
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '1025'
+'''
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -163,3 +179,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'login'

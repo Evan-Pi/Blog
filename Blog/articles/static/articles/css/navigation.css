@@ -11,12 +11,13 @@
 }
 
 #navbarLinks {
-  width: 90%;
+  width: 100%;
 }
 
 .navbar-nav {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .navbar-brand {
@@ -249,6 +250,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: black;
 }
 
 #nav-tools-search {
@@ -295,4 +297,31 @@
   visibility: hidden;
   display: flex;
   justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.userImageDiv {
+  background: #44b78b;
+  height: 32px;
+  width: 32px;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userImageDiv:hover {
+  box-shadow: 0px 0px 2px silver;
+}
+
+.userImageDiv span {
+  color: white;
+  font-weight: bold;
+}
+
+.navbar .user-nav-link:hover:after {
+  width: 0%;
+  background: transparent;
 }

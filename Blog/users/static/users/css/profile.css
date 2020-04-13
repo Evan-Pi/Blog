@@ -1,0 +1,11 @@
+#profile{
+  min-height: calc(100vh - 76px - 52px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#nav-tools-trigger{
+  display: none;
+}

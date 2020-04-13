@@ -16,6 +16,21 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'articles' %}" id="navbarArticles"><span>Articles</span></a>
         </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'profile' %}" class="nav-link user-nav-link">
+            <div class="userImageDiv">
+              <span>{{user.username|upper|first}}</span>
+            </div>
+          </a>
+        </li>
+        {% else %}
+        <div style="width:30px;">
+
+        </div>
+        {% endif %}
+
       </ul>
     </div>
   </nav>
@@ -45,6 +60,15 @@
       <div style="" class="col-12 my-auto text-center">
         <ul id="sidebarLinks">
           <li class="nav-item">
+            {% if user.is_authenticated %}
+              <div style="width:100%; display:flex; justify-content:center;">
+                <a href="{% url 'profile' %}" class="nav-link user-nav-link">
+                  <div class="userImageDiv">
+                    <span>{{user.username|upper|first}}</span>
+                  </div>
+                </a>
+              </div>
+            {% endif %} 
             <a class="nav-link" href="{% url 'index' %}">
               <h3 id="sidebarHome"><span>Homepage</span></h3>
             </a>
@@ -64,16 +88,19 @@
 
 <div id="nav-tools-trigger">
   <i class="fas fa-tools"></i>
+  Tools
 </div>
 
 <div id="pageUp">
-<i class="fas fa-chevron-up"></i>
+  <i class="fas fa-chevron-up"></i>
 </div>
 
 <div id="nav-tools">
   <div id="nav-tools-close">
     <i class="fas fa-times"></i>
+    Close
   </div>
+
 
   <div id="nav-tools-search">
     <i class="fas fa-search"></i>
@@ -82,10 +109,24 @@
       <!--input with id = "nav-tools-searchInput" -->
       {{articles_Filter.form.search}}
       <button style="visibility:hidden; display:none;" id="searchButton" type="submit"></button>
-    </form>
+    </form><br>
   </div>
 
-  <div id="nav-tools-login">
-    <i class="fas fa-sign-in-alt"></i>
-  </div>
+  {% if user.is_authenticated %}
+  <a href="{% url 'logout' %}">
+    <div id="nav-tools-login">
+      <i class="fas fa-sign-out-alt"></i>
+      Log out
+    </div>
+  </a>
+
+  {% else %}
+  <a href="{% url 'login' %}">
+    <div id="nav-tools-login">
+      <i class="fas fa-sign-in-alt"></i>
+      Log in
+    </div>
+  </a>
+  {% endif %}
+
 </div>
