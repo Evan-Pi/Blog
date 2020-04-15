@@ -17,8 +17,11 @@
 {% endblock %}
 
 {% block main %}
-{% include 'articles/navigation.html' %}
 <div id="signup">
+  
+  <a href="{% url 'index' %}">
+    <i style="color:#44b78b;" class="fas fa-brain fa-3x"></i>
+  </a>
 
   <form method="post">
     {% csrf_token %}
