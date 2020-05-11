@@ -1,10 +1,9 @@
 #signup {
-  min-height: calc(100vh - 76px - 52px);
+  min-height:100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15px;
 }
 
 #nav-tools-trigger {
@@ -26,4 +25,47 @@
 input:focus{
   box-shadow: none !important;
   border-color: #44b78b !important;
+}
+
+
+
+#signupImage {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 !important;
+
+  height: 100vh;
+}
+
+#signupImageInner {
+  width: 100%;
+  height: 100%;
+  background: rgba(68, 183, 139, 0.75);
+}
+
+@media screen and (max-width:991px) {
+  #signupImage  {
+    height: 45vh;
+  }
+}
+
+
+#signupFormContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 50vh;
+}
+
+.asteriskField {
+    display: none;
+}
+
+label{
+  display: none;
 }

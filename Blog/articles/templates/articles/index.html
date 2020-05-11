@@ -38,7 +38,7 @@
     $('#search-articles-form')[0].reset();
 
     $('#nav-tools-search').click(function() {
-      $('#search-articles-results').css({'display':'flex'});
+
       var initialSerializedData = $("#search-articles-form").serialize();
       $.ajax({
         type: 'POST',
@@ -54,14 +54,6 @@
       });
     });
 
-    $('#nav-tools-close').click(function() {
-      $('#search-articles-results').fadeOut();
-      $('#search-articles-form')[0].reset();
-    });
-
-    $("#nav-tools-searchInput").keyup(function() {
-      $("#searchButton").click();
-    });
     $("#search-articles-form").submit(function(e) {
       // prevent from normal form behaviour
       e.preventDefault();

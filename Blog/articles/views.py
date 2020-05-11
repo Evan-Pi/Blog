@@ -12,6 +12,10 @@ def index(request):
     context = {'articles_Filter':articles_Filter}
     return render(request, 'articles/index.html', context)
 
+def privacy(request):
+
+    return render(request, 'articles/privacy.html')
+
 def articles(request):
     categories = ArticlesCategories.objects.all()
     current_datetime = localtime(now())

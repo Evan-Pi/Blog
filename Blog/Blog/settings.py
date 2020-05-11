@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,9 +43,13 @@ INSTALLED_APPS = [
     'taggit',
     'crispy_forms',
     'sorl.thumbnail',
+    'captcha',
     'articles',
     'users',
 ]
+
+RECAPTCHA_PUBLIC_KEY = '6LfmIuwUAAAAADyG3u6nKWlnaNw2xGUFbVx_sXFQ'
+RECAPTCHA_PRIVATE_KEY = '6LfmIuwUAAAAAArBOj5KZj_vRvJ_3muPP_luMp41'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

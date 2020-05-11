@@ -233,11 +233,11 @@
   bottom: 0;
   left: 0;
   background: white;
-  box-shadow: 0px 0px 4px silver;
+  box-shadow: 0px 0px 2px silver;
   z-index: 500;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   cursor: pointer;
 }
@@ -287,14 +287,14 @@
 }
 
 #nav-tools {
-  height: 0px;
+  height: 52px;
   width: 100%;
   position: fixed;
   bottom: 0;
   background: white;
   z-index: 102000;
   box-shadow: 0px 0px 4px silver;
-  visibility: hidden;
+  visibility: visible;
   display: flex;
   justify-content: space-between;
   padding-left: 15px;

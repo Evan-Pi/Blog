@@ -16,8 +16,11 @@
 {% endblock %}
 
 {% block main %}
-{% include 'articles/navigation.html' %}
 <div id="signup">
+
+  <a href="{% url 'index' %}">
+    <i style="color:#44b78b; margin-bottom:15px;" class="fas fa-brain fa-3x"></i>
+  </a>
 
   <div style="max-width:590px; margin-bottom:30px;">
     <h4 class="d-none d-md-block">Account created successfully!</h4>
@@ -34,5 +37,5 @@
 {% endblock %}
 
 {% block footer %}
-{% include 'articles/footer.html' %}
+
 {% endblock %}

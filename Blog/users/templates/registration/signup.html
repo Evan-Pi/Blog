@@ -18,24 +18,48 @@
 
 {% block main %}
 <div id="signup">
-  
-  <a href="{% url 'index' %}">
-    <i style="color:#44b78b;" class="fas fa-brain fa-3x"></i>
-  </a>
 
-  <form method="post">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-block customButton1">Sign Up</button>
-  </form>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div id="signupImage" style="background-image:url({% static 'articles/material/index/homepage_wallpaper.jpg' %});" class="col-12 col-lg-6">
+        <div id="signupImageInner">
+
+        </div>
+      </div>
+
+      <div id="signupFormContainer" class="col-12 col-lg-6 my-auto">
+        <a href="{% url 'index' %}">
+          <i style="color:#44b78b; margin-bottom:15px;" class="fas fa-brain fa-3x"></i>
+        </a>
+        <form method="post">
+          {% csrf_token %}
+          {{form|crispy}}
+          <button type="submit" class="btn btn-block customButton1">Sign Up</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
 
 </div>
 {% endblock %}
 
 {% block scripts %}
-
+<script type="text/javascript">
+  $("#id_username").attr("placeholder", "Username");
+  $("#id_email").attr("placeholder", "Email");
+  $("#id_password1").attr("placeholder", "Password");
+  $("#id_password2").attr("placeholder", "Password confirmation");
+</script>
 {% endblock %}
 
 {% block footer %}
-{% include 'articles/footer.html' %}
+
 {% endblock %}
