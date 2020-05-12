@@ -3,6 +3,7 @@ from django.urls import reverse
 from . models import Articles, ArticlesCategories
 from . filters import ArticlesFilter
 from django.utils.timezone import localtime, now
+from django.db.models import Count
 
 import unicodedata
 # Create your views here.
@@ -16,8 +17,9 @@ def privacy(request):
 
     return render(request, 'articles/privacy.html')
 
+
 def articles(request):
-    categories = ArticlesCategories.objects.all()
+    categories = ArticlesCategories.objects.all().annotate(articles_count=Count('articles'))
     current_datetime = localtime(now())
     articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')
     articles_Filter = ArticlesFilter(request.GET, queryset=articles)

@@ -21,7 +21,7 @@ class ArticlesCategories(models.Model):
 
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(editable=False,max_length=100,default='')
-    image = models.ImageField(upload_to = "Articles_Categories_Images", default='')
+    image = models.ImageField(upload_to = "Articles_Categories_Images", default='', blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))

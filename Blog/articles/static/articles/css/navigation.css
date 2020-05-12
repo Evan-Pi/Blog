@@ -145,7 +145,7 @@
 #sidebar {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 270000;
   background: white;
   border-radius: 2px;
   top: 8vh;
