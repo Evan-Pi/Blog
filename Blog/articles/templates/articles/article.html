@@ -25,7 +25,9 @@
 </script>
 {% endblock %}
 
+
 {% block main %}
+
 {% include 'articles/navigation.html' %}
 {% include 'articles/search_articles_results.html' %}
 
@@ -49,25 +51,27 @@
 </div>
 
 <div id="social-share-desktop">
-  <div data-network="facebook" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-f"></i></div>
-  <div data-network="messenger" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
-  <div data-network="twitter" class="btn btn-dark st-custom-button"><i class="fab fa-twitter"></i></div>
-  <div data-network="linkedin" class="btn btn-dark st-custom-button"><i class="fab fa-linkedin-in"></i></div>
-  <div data-network="pinterest" class="btn btn-dark st-custom-button"><i class="fab fa-pinterest-p"></i></div>
+  <div data-network="facebook" class="btn btn-light st-custom-button"><i class="fab fa-facebook-f"></i></div>
+  <div data-network="messenger" class="btn btn-light st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
+  <div data-network="twitter" class="btn btn-light st-custom-button"><i class="fab fa-twitter"></i></div>
+  <div data-network="linkedin" class="btn btn-light st-custom-button"><i class="fab fa-linkedin-in"></i></div>
+  <div data-network="pinterest" class="btn btn-light st-custom-button"><i class="fab fa-pinterest-p"></i></div>
 </div>
 
 <div id="social-share-mobile">
-  <div data-network="facebook" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-f"></i></div>
-  <div data-network="messenger" class="btn btn-dark st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
-  <div data-network="twitter" class="btn btn-dark st-custom-button"><i class="fab fa-twitter"></i></div>
-  <div data-network="linkedin" class="btn btn-dark st-custom-button"><i class="fab fa-linkedin-in"></i></div>
-  <div data-network="pinterest" class="btn btn-dark st-custom-button"><i class="fab fa-pinterest-p"></i></div>
+  <div data-network="facebook" class="btn btn-light st-custom-button"><i class="fab fa-facebook-f"></i></div>
+  <div data-network="messenger" class="btn btn-light st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
+  <div data-network="twitter" class="btn btn-light st-custom-button"><i class="fab fa-twitter"></i></div>
+  <div data-network="linkedin" class="btn btn-light st-custom-button"><i class="fab fa-linkedin-in"></i></div>
+  <div data-network="pinterest" class="btn btn-light st-custom-button"><i class="fab fa-pinterest-p"></i></div>
 </div>
 
 
-<div id="author-container" class="container-fluid text-right">
-  <span class="author" >Author : {{article.author}}</span>
-</div>
+<!--
+  <div id="author-container" class="container-fluid text-right">
+    <span class="author" >Author : {{article.author}}</span>
+  </div>
+-->
 
 <div id="article1">
 
@@ -105,9 +109,15 @@
   </div>
 </div>
 
+{% if article.author == request.user.username %}
+<a href="{{article.get_admin_url}}">
+  <div id="edit-article">
+    <i class="fas fa-feather"></i>
+  </div>
+</a>
+{% endif %}
 
 
-<!--WRITE A COMMENT-->
 {% endblock %}
 
 {% block scripts %}
@@ -118,7 +128,7 @@
     $("pre code").parent().css("background-color", "#282B2E");
 
     $(window).scroll(function() {
-      var article_height = $('#articleImageDiv').height() + $('#author-container').height() + $('#article1').height() + $('#end-of-article').outerHeight();
+      var article_height = $('#articleImageDiv').height() /*+ $('#author-container').height()*/ + $('#article1').height() + $('#end-of-article').outerHeight();
       var percentage_covered = ($(window).scrollTop() / (article_height-$(window).height()))*100 + '%';
       console.log(percentage_covered);
       $("#scroll-article-bar").css("width", percentage_covered);

@@ -1,7 +1,7 @@
 Django==2.1.*
 django-ckeditor
 Pillow
-django-filter
+django-filter==2.2.0
 Unidecode
 unicodedata2
 django-taggit
@@ -10,3 +10,4 @@ django-crispy-forms
 sorl-thumbnail
 django-recaptcha
 django-cookie-law
+django-admin-interface

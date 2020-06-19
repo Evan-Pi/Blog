@@ -15,6 +15,9 @@ urlpatterns = [
     path('ajaxArticles', views.ajaxArticles, name='ajaxArticles'),
     path('ajaxCategoryArticles/<str:slug>/', views.ajaxCategoryArticles, name='ajaxCategoryArticles'),
 
+    path('authorsArticlesPreview', views.authorsArticlesPreview, name='authorsArticlesPreview'),
+    path('ajaxAuthorsArticlesPreview', views.ajaxAuthorsArticlesPreview, name='ajaxAuthorsArticlesPreview'),
+
     #path('ajaxComments/<str:slug>/', views.ajaxComments, name='ajaxComments'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

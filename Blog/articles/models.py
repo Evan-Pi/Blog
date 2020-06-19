@@ -10,6 +10,7 @@ from django_currentuser.middleware import (get_current_user, get_current_authent
 from django_currentuser.db.models import CurrentUserField
 
 from django.urls import reverse
+from django.contrib.contenttypes.models import ContentType
 # Create your models here.
 
 class ArticlesCategories(models.Model):
@@ -38,7 +39,7 @@ class Articles(models.Model):
         verbose_name_plural = 'Articles'
 
     category = models.ForeignKey(ArticlesCategories, on_delete=models.SET_NULL, null=True, blank=True)
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=256,unique=True)
     search = models.CharField(default='',editable=False,max_length=512)
     slug = models.SlugField(editable=False,max_length=256)
     subtitle = models.TextField(max_length=256, blank=True)
@@ -46,7 +47,7 @@ class Articles(models.Model):
 
     article = RichTextUploadingField()
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -62,6 +63,10 @@ class Articles(models.Model):
 
     def get_absolute_url(self):
         return reverse('article', args=[self.slug])
+
+    def get_admin_url(self):
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        return reverse("admin:%s_%s_change" % (content_type.app_label, content_type.model), args=(self.id,))
 
     def __str__(self):
         return self.title

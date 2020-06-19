@@ -31,12 +31,20 @@
 
 
     <a href="{% url 'password_change' %}">
-      <button class="btn customButton1"><i class="fas fa-key"></i> Change password</button>
+      <button style="margin-top:4px;" class="btn customButton1"><i class="fas fa-key"></i> Change password</button>
     </a>
 
     <a href="{% url 'logout' %}">
-      <button class="btn customButton1"><i class="fas fa-sign-out-alt"></i> Log out</button>
+      <button style="margin-top:4px;" class="btn customButton1"><i class="fas fa-sign-out-alt"></i> Log out</button>
     </a>
+
+    {% if user.is_staff %}
+    <a href="{% url 'admin:index' %}">
+      <button style="margin-top:4px;" class="btn customButton1"><i class="fa fa-cogs"></i> Admin panel</button>
+    </a>
+    {% endif %}
+
+    
 
   </div>
 

@@ -133,7 +133,7 @@
 
 /*SIDEBAR*/
 #sidebarWrapper {
-  z-index: 900;
+  z-index: 250000;
   display: none;
   position: fixed;
   top: 0;
@@ -145,7 +145,7 @@
 #sidebar {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 270000;
   background: white;
   border-radius: 2px;
   top: 8vh;
@@ -228,7 +228,7 @@
 
 #nav-tools-trigger {
   height: 52px;
-  width: 52px;
+  min-width: 52px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -287,18 +287,25 @@
 }
 
 #nav-tools {
-  height: 52px;
+  height: 0px;
   width: 100%;
   position: fixed;
   bottom: 0;
   background: white;
   z-index: 102000;
   box-shadow: 0px 0px 4px silver;
-  visibility: visible;
+  visibility: hidden;
   display: flex;
   justify-content: space-between;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+@media screen and (max-width : 767px) {
+  #nav-tools {
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+  }
 }
 
 .userImageDiv {
