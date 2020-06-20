@@ -39,7 +39,7 @@
   {% endblock %}
 </head>
 
-{% if user.is_superuser %}
+{% if user.is_superuser or user.is_staff %}
 <body id="Site">
   <main id="Site-content">
 
