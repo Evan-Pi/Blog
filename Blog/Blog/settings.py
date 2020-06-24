@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sorl.thumbnail',
     'captcha',
-    'articles',
-    'users',
+    'articles.apps.ArticlesConfig',
+    'users.apps.UsersConfig',
 
     'admin_interface',
     'colorfield',

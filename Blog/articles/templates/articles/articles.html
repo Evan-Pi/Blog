@@ -14,14 +14,6 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
-
-<style media="screen">
-  #navbarArticles,
-  #sidebarArticles {
-    display: none;
-  }
-</style>
-</script>
 {% endblock %}
 
 {% block main %}
@@ -53,14 +45,19 @@
 
 
 <div style="display: flex; justify-content: flex-end; align-items: center; padding-top:15px;" class="container-fluid">
+  <a href="{% url 'articles' %}">
+    <div id="restore-default-articles" style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <i style="color: #44b78b;" class="fas fa-redo"></i>
+    </div>
+  </a>
   <form id="articles-search-form" action="{% url 'articles' %}" method="POST">
+    
     <!--input with id = "nav-tools-searchInput" -->
     {% csrf_token %}
     {{articles_Filter.form.search}}
     <button id="articles-search-submit" class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
   </form>
 </div>
-
 
 <!--ARTICLES-->
 <div id="articles1">

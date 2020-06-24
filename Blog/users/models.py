@@ -2,8 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save 
 from django.dispatch import receiver
+
+from articles.models import Articles
 
 class Account(AbstractUser):
 
@@ -27,6 +29,8 @@ class Profile(models.Model):
 
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     profile_image = models.ImageField(upload_to = "Users_Profile_Images", blank=True, default='')
+
+    #viewed_articles = models.ManyToManyField(Articles)
 
     def __str__(self):
         return f'{self.user.username}'

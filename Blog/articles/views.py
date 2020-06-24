@@ -33,13 +33,13 @@ def articles(request):
         mut = request.POST.copy()
         mut['search'] = ''.join(c for c in unicodedata.normalize('NFD', mut['search'].lower()) if unicodedata.category(c) != 'Mn')
         articles_Filter = ArticlesFilter(mut, queryset=articles)
-        print(articles_Filter)
+        
         articles = articles_Filter.qs
     else:
         articles_Filter = ArticlesFilter()
 
     #Pagination of articles
-    paginator = Paginator(articles, 1)
+    paginator = Paginator(articles, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -69,7 +69,7 @@ def articlesCategory(request, slug):
         articles_Filter = ArticlesFilter()
  
     #Pagination of articles
-    paginator = Paginator(articles, 1)
+    paginator = Paginator(articles, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -93,7 +93,7 @@ def authorsArticlesPreview(request):
     number_of_articles = len(articles)
 
     #Pagination of articles
-    paginator = Paginator(articles, 1)
+    paginator = Paginator(articles, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

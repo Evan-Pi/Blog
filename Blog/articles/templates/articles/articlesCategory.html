@@ -24,6 +24,11 @@
 </div>
 
 <div style="display: flex; justify-content: flex-end; align-items: center; padding-top:15px;" class="container-fluid">
+  <a href="{% url 'articlesCategory' category.slug %}">
+    <div style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <i style="color: #44b78b;" class="fas fa-redo"></i>
+    </div>
+  </a>
   <form id="articles-search-form" action="{% url 'articlesCategory' category.slug %}" method="POST">
     <!--input with id = "nav-tools-searchInput" -->
     {% csrf_token %}

@@ -1,5 +1,7 @@
 from django.apps import AppConfig
 
-
-class DdpAppConfig(AppConfig):
+class ArticlesConfig(AppConfig):
     name = 'articles'
+
+    
+
