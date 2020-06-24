@@ -12,12 +12,10 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/index.css' %}">
-<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
 {% endblock %}
 
 {% block main %}
 {% include 'articles/navigation.html' %}
-{% include 'articles/search_articles_results.html' %}
 
 <div style="background-image:url({% static 'articles/material/index/homepage_wallpaper.jpg' %});" id="index1">
   <div id="index1Inner">
@@ -32,50 +30,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-  $(document).ready(function() {
 
-    $('#search-articles-form')[0].reset();
-
-    $('#nav-tools-search').click(function() {
-
-      var initialSerializedData = $("#search-articles-form").serialize();
-      $.ajax({
-        type: 'POST',
-        url: "{% url 'ajaxArticles' %}",
-        data: initialSerializedData,
-        success: function(data) {
-          //reset the form after successful submit
-          $("#search-articles-results").html(data);
-        },
-        error: function(response) {
-          console.log(response);
-        }
-      });
-    });
-
-    $("#search-articles-form").submit(function(e) {
-      // prevent from normal form behaviour
-      e.preventDefault();
-      // serialize the form data
-      var serializedData = $(this).serialize();
-
-      $.ajax({
-        type: 'POST',
-        url: "{% url 'ajaxArticles' %}",
-        data: serializedData,
-        success: function(data) {
-          //reset the form after successful submit
-          $("#search-articles-results").html(data);
-        },
-        error: function(response) {
-          console.log(response);
-        }
-      });
-    });
-
-  });
-</script>
 {% endblock %}
 
 {% block footer %}

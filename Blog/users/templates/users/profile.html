@@ -1,6 +1,7 @@
 {% extends 'articles/base.html' %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block meta %}
 <meta name="description" content="">
@@ -18,9 +19,19 @@
 {% block main %}
 {% include 'articles/navigation.html' %}
 <div id="profile">
-  {% if user.is_authenticated %}
-
   <div class="container">
+
+    {% if user.profile.profile_image != '' %}
+    <div id="profileImageDiv" style="background-image: url({{profile.profile_image.url}});">
+
+    </div>
+    {% endif %}
+
+    <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;" onchange="submitOnLoad()">
+      {% csrf_token %}
+      {{form.as_p}}
+    </form>
+
     <h6><i class="far fa-user"></i> {{user.username}}</h6>
     <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
     {% if request.user.is_superuser %}
@@ -48,15 +59,15 @@
 
   </div>
 
-
-  {% else %}
-  <p><a href="{% url 'login' %}"><span style="color:#44b78b;">Log in</span></a> to see your profile.</p>
-  {% endif %}
 </div>
 {% endblock %}
 
 {% block scripts %}
-
+<script>
+  function submitOnLoad(){
+  $("#profile_image_form").submit();
+  }
+</script>
 {% endblock %}
 
 {% block footer %}

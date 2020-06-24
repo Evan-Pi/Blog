@@ -1,8 +1,9 @@
 from django.contrib import admin
 from . models import Articles, ArticlesCategories
 
-admin.site.site_header = 'My Site Admin Panel'
-admin.site.site_title = 'My Site Title'
+#admin.site.site_header = 'My Site Admin Panel'
+#admin.site.site_title = 'My Site Title'
+
 
 
 class ArticlesAdmin(admin.ModelAdmin):

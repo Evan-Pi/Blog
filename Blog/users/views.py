@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from . forms import UserCreationFormExtended
 from django.contrib.auth.models import Group
+from . forms import UserProfileImage
+from . models import Account, Profile
+
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def signup(request):
@@ -9,8 +13,8 @@ def signup(request):
         form = UserCreationFormExtended(request.POST)
         if form.is_valid():
             user = form.save()
-            visitors = Group.objects.get(name='Visitors')
-            visitors.user_set.add(user)
+            members, created = Group.objects.get_or_create(name='Members')
+            members.user_set.add(user)
             return redirect('signup_success')
     else:
         form = UserCreationFormExtended()
@@ -21,5 +25,21 @@ def signup(request):
 def signup_success(request):
     return render(request, 'registration/signup_success.html')
 
+
+@login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    username = request.user.username
+    profile = Profile.objects.get(user__username=username)
+
+    if request.method == "POST": 
+        form = UserProfileImage(request.POST, request.FILES, instance=request.user.profile) 
+        if form.is_valid(): 
+            form.save() 
+            return redirect('profile')
+        
+    else: 
+        form = UserProfileImage(instance=request.user.profile)
+        
+
+    context = {'form':form, 'profile':profile}
+    return render(request, 'users/profile.html', context)

@@ -87,7 +87,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
   min-height: 50px;
-  background: rgba(255, 255, 255, 0.95);
+  background: #fff;
   z-index: 500;
   display: flex;
   flex-direction: column;
@@ -226,87 +226,22 @@
   font-size: 32px;
 }
 
-#nav-tools-trigger {
-  height: 52px;
-  min-width: 52px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background: white;
-  box-shadow: 0px 0px 2px silver;
-  z-index: 500;
+.nav-tools-login{
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  cursor: pointer;
-}
-
-#nav-tools-close, #nav-tools-login, #nav-tools-search {
-  height: 52px;
-  width: 52px;
-  display: flex;
-  flex-direction: column;
+  
   justify-content: center;
   align-items: center;
   cursor: pointer;
   color: black;
+
+  margin-left:15px;
+  margin-right:15px;
 }
 
-#nav-tools-search {
-  width: 500px;
-  display: flex;
-  flex-direction: row;
+.nav-tools-login i{
+  margin-left:4px;
 }
 
-#nav-tools-searchInput{
-  width: 100%;
-  visibility: hidden;
-  border: none;
-  border-bottom: solid;
-}
-
-#search-articles-form{
-  width: 0%;
-}
-
-#nav-tools-searchInput:focus{
-  outline: none !important;
-}
-
-@media screen and (max-width : 576px) {
-  #nav-tools-search{
-    width: 210px;
-  }
-}
-
-@media screen and (min-width: 577px) and (max-width: 768px) {
-  #nav-tools-search{
-    width: 280px;
-  }
-}
-
-#nav-tools {
-  height: 0px;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  background: white;
-  z-index: 102000;
-  box-shadow: 0px 0px 4px silver;
-  visibility: hidden;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-@media screen and (max-width : 767px) {
-  #nav-tools {
-    padding-left: 7.5px;
-    padding-right: 7.5px;
-  }
-}
 
 .userImageDiv {
   background: #44b78b;
@@ -317,6 +252,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .userImageDiv:hover {
@@ -332,3 +271,9 @@
   width: 0%;
   background: transparent;
 }
+
+.navbar .log-in-out-nav-link:hover:after {
+  width: 0%;
+  background: transparent !important;
+}
+

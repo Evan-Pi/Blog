@@ -15,7 +15,6 @@
 {% endblock %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
 <link rel="stylesheet" href="{% static 'articles/css/article.css' %}">
 
 <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css' %}" rel="stylesheet">
@@ -24,7 +23,6 @@
   hljs.initHighlightingOnLoad();
 </script>
 {% endblock %}
-
 
 {% block main %}
 
@@ -37,9 +35,10 @@
   <a href="{% url 'index' %}"><p style="color: #44b78b;">Back to home</p></a>
 
 </div>
+
 {% else %}
+
 {% include 'articles/navigation.html' %}
-{% include 'articles/search_articles_results.html' %}
 <div id="scroll-article-bar" style="position:fixed; top:0; left:0; width:0%; height:4px; background:#44b78b; z-index:802;">
 
 </div>
@@ -54,7 +53,7 @@
 
   </div>
   {% thumbnail article.image "800x800" quality=61 as im %}
-  <div id="articleImage" style="background-image:url({{im.url}}); filter:blur(5px);">
+  <div id="articleImage" style="background-image:url({{im.url}}); filter:blur(10px);">
   </div>
   {% endthumbnail %}
 </div>
@@ -74,15 +73,17 @@
   <div data-network="linkedin" class="btn btn-light st-custom-button"><i class="fab fa-linkedin-in"></i></div>
   <div data-network="pinterest" class="btn btn-light st-custom-button"><i class="fab fa-pinterest-p"></i></div>
 </div>
-<!--
-  <div id="author-container" class="container-fluid text-right">
-    <span class="author" >Author : {{article.author}}</span>
-  </div>
--->
+
 <div id="article1">
 
   <div class="container">
-    {{article.article|safe}}
+    <div class="text-right">
+      <button id="text-size-increase" class="btn btn-light"><i style="font-size: 12px;" class="fas fa-font"></i><sup><i style="font-size:10px;" class="fas fa-plus"></i></sup></button>
+      <button id="text-size-decrease" class="btn btn-light"><i style="font-size: 12px;" class="fas fa-font"></i><sup><i style="font-size:10px;" class="fas fa-minus"></i></sup></button>
+    </div>
+    <div id="article-div">
+      {{article.article|safe}}
+    </div>
   </div>
 </div>
 
@@ -129,63 +130,39 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'articles/js/article_special_navigation.js' %}"></script>
+<script src="{% static 'articles/js/article_special.js' %}"></script>
 
 <script type="text/javascript">
   $(document).ready(function() {
     $("pre code").parent().css("background-color", "#282B2E");
 
     $(window).scroll(function() {
-      var article_height = $('#articleImageDiv').height() /*+ $('#author-container').height()*/ + $('#article1').height() + $('#end-of-article').outerHeight();
+      var article_height = $('#articleImageDiv').height() + $('.navHBlock').height() + $('#article1').height() + $('#end-of-article').outerHeight();
       var percentage_covered = ($(window).scrollTop() / (article_height-$(window).height()))*100 + '%';
-      console.log(percentage_covered);
       $("#scroll-article-bar").css("width", percentage_covered);
     });
   });
 </script>
 
 <script type="text/javascript">
-  $(document).ready(function() {
 
-    $('#search-articles-form')[0].reset();
-
-    $('#nav-tools-search').click(function() {
-      var initialSerializedData = $("#search-articles-form").serialize();
-      $.ajax({
-        type: 'POST',
-        url: "{% url 'ajaxArticles' %}",
-        data: initialSerializedData,
-        success: function(data) {
-          //reset the form after successful submit
-          $("#search-articles-results").html(data);
-        },
-        error: function(response) {
-          console.log(response);
-        }
+    $("#text-size-increase").click(function() {
+      text_array = ['p','h1','h2','h3','h4','h5','h6']
+      $.each( text_array, function( index, value ){
+        var fontSize = parseFloat($('#article-div ' + value).css("font-size"));
+        fontSize = fontSize + 1 + "px";
+        $('#article-div ' + value).css({'font-size':fontSize});
       });
     });
 
-    $("#search-articles-form").submit(function(e) {
-      // prevent from normal form behaviour
-      e.preventDefault();
-      // serialize the form data
-      var serializedData = $(this).serialize();
-
-      $.ajax({
-        type: 'POST',
-        url: "{% url 'ajaxArticles' %}",
-        data: serializedData,
-        success: function(data) {
-          //reset the form after successful submit
-          $("#search-articles-results").html(data);
-        },
-        error: function(response) {
-          console.log(response);
-        }
+    $("#text-size-decrease").click(function() {
+      text_array = ['p','h1','h2','h3','h4','h5','h6']
+      $.each( text_array, function( index, value ){
+        var fontSize = parseFloat($('#article-div ' + value).css("font-size"));
+        fontSize = fontSize - 1 + "px";
+        $('#article-div ' + value).css({'font-size':fontSize});
       });
     });
-
-  });
 </script>
 {% endblock %}
 

@@ -17,19 +17,54 @@
           <a class="nav-link" href="{% url 'articles' %}" id="navbarArticles"><span>Articles</span></a>
         </li>
 
+        
+
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a href="{% url 'profile' %}" class="nav-link user-nav-link">
+            {% if user.profile.profile_image != '' %}
+            <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
+            </div>
+            {% else %}
             <div class="userImageDiv">
               <span>{{user.username|upper|first}}</span>
             </div>
+            {% endif %}
           </a>
         </li>
+
         {% else %}
         <div style="width:30px;">
 
         </div>
         {% endif %}
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
+            <div class="nav-tools-login">
+              
+              <span style="font-size:14px;">Log out</span>
+              <i style="color:#4d4d4d;" class="fas fa-sign-out-alt"></i>
+            </div>
+          </a>
+        </li>
+        
+
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
+            <div class="nav-tools-login">
+              
+              <span style="font-size:14px;">Log in</span>
+              <i style="color:#4d4d4d;" class="fas fa-sign-in-alt"></i>
+            </div>
+          </a>
+        </li>
+        
+        {% endif %}
+
+        
 
       </ul>
     </div>
@@ -62,11 +97,18 @@
           <li class="nav-item">
             {% if user.is_authenticated %}
             <div style="width:100%; display:flex; justify-content:center;">
-              <a href="{% url 'profile' %}" class="nav-link user-nav-link">
+
+              <a href="{% url 'profile' %}">
+                {% if user.profile.profile_image != '' %}
+                <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
+                </div>
+                {% else %}
                 <div class="userImageDiv">
                   <span>{{user.username|upper|first}}</span>
                 </div>
+                {% endif %}
               </a>
+              
             </div>
             {% endif %}
             <a class="nav-link" href="{% url 'index' %}">
@@ -80,56 +122,41 @@
 
       <div class="col-12 my-auto text-center">
         <i style="color:#44b78b;" id="closeSidebar" class="fas fa-times fa-2x"></i>
+
+        {% if user.is_authenticated %}
+  
+          <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
+            <div style="margin-top:30px;" class="nav-tools-login">
+              
+              <span style="font-size:14px;">Log out</span>
+              <i style="color:#4d4d4d;" class="fas fa-sign-out-alt"></i>
+            </div>
+          </a>
+   
+        
+
+        {% else %}
+       
+          <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
+            <div style="margin-top:30px;" class="nav-tools-login">
+              
+              <span style="font-size:14px;">Log in</span>
+              <i style="color:#4d4d4d;" class="fas fa-sign-in-alt"></i>
+            </div>
+          </a>
+       
+        
+        {% endif %}
       </div>
 
-    </div>
-  </div>
-</div>
+      
 
-<div id="nav-tools-trigger">
-  <div style="width:100%;" class="text-center">
-    <i style="font-size:15px; color:#4d4d4d;" class="fas fa-bars"></i>
+    </div>
   </div>
 </div>
 
 <div id="pageUp">
   <i class="fas fa-chevron-up"></i>
-</div>
-
-<div id="nav-tools">
-  <div id="nav-tools-close">
-    <i style="color:#4d4d4d;" class="fas fa-times"></i>
-    <span style="font-size:14px;">Close</span>
-  </div>
-
-
-  <div id="nav-tools-search">
-    <i style="color:#4d4d4d;" class="fas fa-search"></i><br>
-    <form id="search-articles-form" action="{% url 'ajaxArticles' %}">
-      {% csrf_token %}
-      <!--input with id = "nav-tools-searchInput" -->
-      {{articles_Filter.form.search}}
-      <button style="visibility:hidden; display:none;" id="searchButton" type="submit"></button>
-    </form><br>
-  </div>
-
-  {% if user.is_authenticated %}
-  <a href="{% url 'logout' %}">
-    <div id="nav-tools-login">
-      <i style="color:#4d4d4d;" class="fas fa-sign-out-alt"></i>
-      <span style="font-size:14px;">Log out</span>
-    </div>
-  </a>
-
-  {% else %}
-  <a href="{% url 'login' %}">
-    <div id="nav-tools-login">
-      <i style="color:#4d4d4d;" class="fas fa-sign-in-alt"></i>
-      <span style="font-size:14px;">Log in</span>
-    </div>
-  </a>
-  {% endif %}
-
 </div>
 
 {% if user.is_staff %}
