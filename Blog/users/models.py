@@ -27,10 +27,13 @@ class Profile(models.Model):
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
 
+    def viewed_articles_list(self):
+        return [article.title for article in self.viewed_articles.all()]
+
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     profile_image = models.ImageField(upload_to = "Users_Profile_Images", blank=True, default='')
 
-    #viewed_articles = models.ManyToManyField(Articles)
+    viewed_articles = models.ManyToManyField(Articles, through='ArticlesViews')
 
     def __str__(self):
         return f'{self.user.username}'
@@ -47,6 +50,16 @@ class Profile(models.Model):
         else:
             pass
 
+
+
+class ArticlesViews(models.Model):
+    class Meta:
+        verbose_name = 'Article view'
+        verbose_name_plural = 'Articles views'
+
+    article = models.ForeignKey(Articles, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
 @receiver(post_save, sender=Account)
 def create_profile(sender, instance, created, **kwargs):

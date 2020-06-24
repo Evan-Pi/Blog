@@ -46,12 +46,21 @@ def articles(request):
     context = {'categories':categories,'articles':articles,'page_obj':page_obj,'articles_Filter':articles_Filter}
     return render(request, 'articles/articles.html', context)
 
-
+from users.models import Account, Profile, ArticlesViews
 def article(request, slug):
     article = Articles.objects.get(slug=slug)
     articles_Filter = ArticlesFilter()
     current_datetime = localtime(now())
 
+    username = request.user.username
+    if username != 'AnonymousUser':
+        user = Account.objects.get(username=username)
+        profile = Profile.objects.get(user=user)
+        ArticlesViews.objects.create(article=article, profile=profile)
+
+
+        
+        
     context = {'article':article, 'articles_Filter':articles_Filter, 'current_datetime':current_datetime}
     return render(request, 'articles/article.html', context)
 

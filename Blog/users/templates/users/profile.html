@@ -18,48 +18,64 @@
 
 {% block main %}
 {% include 'articles/navigation.html' %}
-<div id="profile">
-  <div class="container">
 
-    {% if user.profile.profile_image != '' %}
-    <div id="profileImageDiv" style="background-image: url({{profile.profile_image.url}});">
+  <div id="profile">
 
+
+    <div class="container" style="margin-bottom: 15px;">
+      {% if user.profile.profile_image != '' %}
+      <div id="profileImageDiv" style="background-image: url({{profile.profile_image.url}});">
+      </div>
+      {% endif %}
+      <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;" onchange="submitOnLoad()">
+        {% csrf_token %}
+        {{form.profile_image}}
+      </form>
+      <h6><i class="far fa-user"></i> {{user.username}}</h6>
+      <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
+      {% if request.user.is_superuser %}
+      <h6>Status : Author</h6>
+      {% else %}
+      <h6>Status : Member</h6>
+      {% endif %}
+      <a href="{% url 'password_change' %}">
+        <button style="margin-top:4px;" class="btn btn-light"><i class="fas fa-key"></i> Change password</button>
+      </a>
+      <a href="{% url 'logout' %}">
+        <button style="margin-top:4px;" class="btn btn-light"><i class="fas fa-sign-out-alt"></i> Log out</button>
+      </a>
+      {% if user.is_staff %}
+      <a href="{% url 'admin:index' %}">
+        <button style="margin-top:4px;" class="btn btn-light"><i class="fa fa-cogs"></i> Admin panel</button>
+      </a>
+      {% endif %}
     </div>
-    {% endif %}
-
-    <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;" onchange="submitOnLoad()">
-      {% csrf_token %}
-      {{form.as_p}}
-    </form>
-
-    <h6><i class="far fa-user"></i> {{user.username}}</h6>
-    <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
-    {% if request.user.is_superuser %}
-    <h6>Status : Author</h6>
-    {% else %}
-    <h6>Status : Member</h6>
-    {% endif %}
 
 
-    <a href="{% url 'password_change' %}">
-      <button style="margin-top:4px;" class="btn customButton1"><i class="fas fa-key"></i> Change password</button>
-    </a>
-
-    <a href="{% url 'logout' %}">
-      <button style="margin-top:4px;" class="btn customButton1"><i class="fas fa-sign-out-alt"></i> Log out</button>
-    </a>
-
-    {% if user.is_staff %}
-    <a href="{% url 'admin:index' %}">
-      <button style="margin-top:4px;" class="btn customButton1"><i class="fa fa-cogs"></i> Admin panel</button>
-    </a>
-    {% endif %}
-
-    
-
-  </div>
+    <div class="container">
+    <div class="row">
+      {% for view in viewed_articles %}
+          <div class="col-12 col-sm-6 col-lg-4">
+            <a href="{% url 'article' view.article.slug %}">
+              <div style="margin-top:15px;" class="card viewed-article-card">
+                <div id="viewed-articles-image-div" style="background-image: url({{view.article.image.url}});">
+                </div>
+                <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
+                  <h6 style="color: black;">{{view.article.title}}</h6>
+                  <div class="text-muted text-right" style="width: 100%;">
+                    <small>Last read : {{view.created}}</small>
+                  </div>
+                </div>
+                
+              </div>
+            </a>
+          </div>
+          {% endfor %} 
+    </div>
+    </div>
 
 </div>
+ 
 {% endblock %}
 
 {% block scripts %}

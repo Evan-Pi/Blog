@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import UserCreationFormExtended, UserChangeFormExtended
-from .models import Account, Profile
+from .models import Account, Profile, ArticlesViews
 
 class CustomUserAdmin(UserAdmin):
     add_form = UserCreationFormExtended
@@ -19,9 +19,16 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('username', 'email', 'password1', 'password2', 'captcha'),
         }),
     )
+
+class ArticlesViewsAdmin(admin.ModelAdmin):
+
+    model = ArticlesViews
+    list_display = [ 'profile', 'article', 'created', ]
+
     
 
 
 admin.site.register(Account, CustomUserAdmin)
 admin.site.register(Profile)
+admin.site.register(ArticlesViews,ArticlesViewsAdmin)
 
