@@ -11,6 +11,8 @@ from django_currentuser.db.models import CurrentUserField
 
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
+
+from hitcount.models import HitCount, HitCountMixin
 # Create your models here.
 
 class ArticlesCategories(models.Model):
@@ -31,7 +33,7 @@ class ArticlesCategories(models.Model):
     def __str__(self):
         return self.title
 
-class Articles(models.Model):
+class Articles(models.Model, HitCountMixin):
     '''Articles creation'''
 
     class Meta:
@@ -39,14 +41,13 @@ class Articles(models.Model):
         verbose_name_plural = 'Articles'
 
     category = models.ForeignKey(ArticlesCategories, on_delete=models.SET_NULL, null=True, blank=True)
-    title = models.CharField(max_length=256,unique=True)
+    title = models.TextField(max_length=256,unique=True)
     search = models.CharField(default='',editable=False,max_length=512)
     slug = models.SlugField(editable=False,max_length=256)
     subtitle = models.TextField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
 
     article = RichTextUploadingField()
-
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
@@ -58,7 +59,7 @@ class Articles(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))
         self.author = get_current_user().username
-        self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower() ) if unicodedata.category(c) != 'Mn')
+        self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower() + self.author.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

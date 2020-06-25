@@ -4,6 +4,8 @@
 {% load crispy_forms_tags %}
 {% load thumbnail %}
 
+{% load hitcount_tags %}
+
 {% block meta %}
 <meta property="og:image" content="{{article.image.url}}" />
 <meta name="description" content="{{article.subtitle}}">
@@ -77,10 +79,17 @@
 <div id="article1">
 
   <div class="container">
-    <div class="text-right">
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <span>Views <i class="far fa-eye"></i> : <span style="color:#44b78b;">{% get_hit_count for article %}</span></span>
+        <span style="margin-left:12px;">Comments <i class="far fa-comments"></i> : <a style="color:#44b78b;" href="{% url 'article' article.slug %}#disqus_thread"></a></span>
+      </div>
+      <div>
       <button id="text-size-increase" class="btn btn-light"><i style="font-size: 12px;" class="fas fa-font"></i><sup><i style="font-size:10px;" class="fas fa-plus"></i></sup></button>
       <button id="text-size-decrease" class="btn btn-light"><i style="font-size: 12px;" class="fas fa-font"></i><sup><i style="font-size:10px;" class="fas fa-minus"></i></sup></button>
+      </div>
     </div>
+    <hr>
     <div id="article-div">
       {{article.article|safe}}
     </div>
@@ -164,6 +173,7 @@
       });
     });
 </script>
+
 {% endblock %}
 
 {% block footer %}

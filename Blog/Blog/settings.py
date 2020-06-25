@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
+    'hitcount',
     'taggit',
     'taggit_serializer',
     'crispy_forms',
@@ -72,6 +73,9 @@ RECAPTCHA_PRIVATE_KEY = '6LfmIuwUAAAAAArBOj5KZj_vRvJ_3muPP_luMp41'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Hitcount configuration
+HITCOUNT_KEEP_HIT_ACTIVE = { 'days': 1 }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

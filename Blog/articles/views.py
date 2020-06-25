@@ -6,12 +6,12 @@ from django.utils.timezone import localtime, now
 from django.db.models import Q, Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from users.models import Account, Profile, ArticlesViews
+
 import unicodedata
 from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
-
-
 def index(request):
     articles_Filter = ArticlesFilter()
 
@@ -46,23 +46,48 @@ def articles(request):
     context = {'categories':categories,'articles':articles,'page_obj':page_obj,'articles_Filter':articles_Filter}
     return render(request, 'articles/articles.html', context)
 
-from users.models import Account, Profile, ArticlesViews
+'''
 def article(request, slug):
     article = Articles.objects.get(slug=slug)
-    articles_Filter = ArticlesFilter()
     current_datetime = localtime(now())
-
+    
     username = request.user.username
-    if username != 'AnonymousUser':
+    if username != 'AnonymousUser' and username != '':
         user = Account.objects.get(username=username)
         profile = Profile.objects.get(user=user)
         ArticlesViews.objects.create(article=article, profile=profile)
 
-
-        
-        
-    context = {'article':article, 'articles_Filter':articles_Filter, 'current_datetime':current_datetime}
+    context = {'article':article, 'current_datetime':current_datetime}
     return render(request, 'articles/article.html', context)
+'''
+
+from hitcount.views import HitCountDetailView
+
+class Article(HitCountDetailView):
+    model = Articles # your model goes here
+    count_hit = True # set to True if you want it to try and count the hit
+    template_name = 'articles/article.html'
+
+    
+    def get_object(self):
+        obj = super().get_object()
+        if self.request.user.is_authenticated:
+            username = self.request.user.username
+            user = Account.objects.get(username=username)
+            profile = Profile.objects.get(user=user)
+            ArticlesViews.objects.create(article=obj, profile=profile)
+        return obj
+            
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        article = Articles.objects.get(slug=self.kwargs['slug'])
+        context['article'] = article
+        return context
+
+    
+
+           
 
 def articlesCategory(request, slug):
     category = ArticlesCategories.objects.get(slug=slug)

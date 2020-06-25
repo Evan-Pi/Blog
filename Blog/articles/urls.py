@@ -10,7 +10,7 @@ urlpatterns = [
     path('privacy', views.privacy, name='privacy'),
     path('articles/', views.articles, name='articles'),
     path('articles/category/<str:slug>/', views.articlesCategory, name='articlesCategory'),
-    path('articles/<str:slug>/', views.article, name='article'),
+    path('articles/<str:slug>/', views.Article.as_view(), name='article'),
     path('authorsArticlesPreview', views.authorsArticlesPreview, name='authorsArticlesPreview'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

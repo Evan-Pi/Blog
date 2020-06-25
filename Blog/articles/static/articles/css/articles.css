@@ -280,6 +280,10 @@
   border-bottom-right-radius: 0px;
 }
 
+#articles-search-input::placeholder{
+  font-size: 12.2px;
+}
+
 #articles-search-input:focus{
   border-color: #44b78b;
   box-shadow: none;

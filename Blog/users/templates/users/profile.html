@@ -2,6 +2,9 @@
 
 {% load static %}
 {% load crispy_forms_tags %}
+{% load thumbnail %}
+
+
 
 {% block meta %}
 <meta name="description" content="">
@@ -23,18 +26,12 @@
 
 
     <div class="container" style="margin-bottom: 15px;">
-      {% if user.profile.profile_image != '' %}
-      <div id="profileImageDiv" style="background-image: url({{profile.profile_image.url}});">
-      </div>
-      {% endif %}
-      <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;" onchange="submitOnLoad()">
-        {% csrf_token %}
-        {{form.profile_image}}
-      </form>
       <h6><i class="far fa-user"></i> {{user.username}}</h6>
       <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
       {% if request.user.is_superuser %}
-      <h6>Status : Author</h6>
+      <h6>Status : Superuser</h6>
+      {% elif request.user.is_staff %}
+      <h6>Status : Staff</h6>
       {% else %}
       <h6>Status : Member</h6>
       {% endif %}
@@ -49,30 +46,51 @@
         <button style="margin-top:4px;" class="btn btn-light"><i class="fa fa-cogs"></i> Admin panel</button>
       </a>
       {% endif %}
+
+      <div id="profileImageDiv">
+        {% if user.profile.profile_image != '' %}
+        <div id="profileImage" style="background-image: url({{profile.profile_image.url}});">
+        </div>
+        {% else %}
+        <div class="userImageDiv">
+          <span>{{user.username|upper|first}}</span>
+        </div>
+        {% endif %}
+        <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;" onchange="submitOnLoad()">
+          {% csrf_token %}
+          {{form.profile_image}}
+        </form>
+      </div>
     </div>
 
 
     <div class="container">
+      <h4>Last read articles...</h4>
     <div class="row">
-      {% for view in viewed_articles %}
-          <div class="col-12 col-sm-6 col-lg-4">
+        {% for view in viewed_articles %} 
+          <div class="col-12 col-sm-6 col-xl-3">
             <a href="{% url 'article' view.article.slug %}">
               <div style="margin-top:15px;" class="card viewed-article-card">
-                <div id="viewed-articles-image-div" style="background-image: url({{view.article.image.url}});">
+                {% thumbnail view.article.image "500x500" quality=91 as im %}
+                <div class="viewed-article-image-div" style="background-image: url({{im.url}});">
                 </div>
+                {% endthumbnail %}
                 <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
-                  <h6 style="color: black;">{{view.article.title}}</h6>
-                  <div class="text-muted text-right" style="width: 100%;">
+                  <div class="fade-div">
+                    <small class="viewed-article-title" style="color: black;">{{view.article.title}}</small>
+                    <p class="fade-effect"></p>
+                  </div>
+                  <div class="text-muted text-right article-last-viewed-date" >
                     <small>Last read : {{view.created}}</small>
                   </div>
                 </div>
                 
               </div>
             </a>
-          </div>
-          {% endfor %} 
+          </div> 
+        {% endfor %} 
     </div>
-    </div>
+  </div>
 
 </div>
  

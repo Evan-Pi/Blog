@@ -54,8 +54,8 @@ class Profile(models.Model):
 
 class ArticlesViews(models.Model):
     class Meta:
-        verbose_name = 'Article view'
-        verbose_name_plural = 'Articles views'
+        verbose_name = 'User History - Article view'
+        verbose_name_plural = 'User History - Articles views'
 
     article = models.ForeignKey(Articles, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

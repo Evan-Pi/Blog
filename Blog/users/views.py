@@ -40,7 +40,7 @@ def profile(request):
         if i.article.title in unique_titles:
             viewed_articles.append(i)
             unique_titles.remove(i.article.title)
-    viewed_articles = viewed_articles[:3]
+    viewed_articles = viewed_articles[:4]
 
     if request.method == "POST": 
         form = UserProfileImage(request.POST, request.FILES, instance=request.user.profile) 

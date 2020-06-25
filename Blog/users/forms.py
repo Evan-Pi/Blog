@@ -13,7 +13,8 @@ from .models import Account, Profile
 
 
 class UserProfileImage(forms.ModelForm):
-    profile_image = forms.ImageField(label='Profile image',required=False, error_messages = {'invalid':"Image files only"}, widget=forms.FileInput)
+    profile_image = forms.ImageField(label='Profile image',required=False, error_messages = {'invalid':"Image files only"}, widget=forms.FileInput(attrs={'accept':'.png, .jpg, .jpeg'}))
+    
     class Meta:
         model = Profile
         fields = ['profile_image']

@@ -15,4 +15,5 @@ django-recaptcha
 django-cookie-law
 django-admin-interface
 pandas
+django-hitcount
 

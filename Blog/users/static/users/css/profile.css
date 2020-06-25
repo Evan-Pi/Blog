@@ -9,22 +9,33 @@
   align-items: center;
 }
 
-
 #profileImageDiv{
+  margin-top: 15px;
+}
+
+#profileImage{
   height: 120px;
   width: 120px;
   border-radius: 100%;
   margin-bottom: 15px;
-
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
   box-shadow: 1px 1px 2px silver;
 }
 
+#profileImageDiv .userImageDiv{
+  height: 120px;
+  width: 120px;
+  margin-bottom: 15px;
+}
 
-#viewed-articles-image-div{
+#profileImageDiv .userImageDiv span{
+  font-size:42px;
+}
+
+
+.viewed-article-image-div{
   height: 170px;
   max-height: 170px;
 
@@ -34,6 +45,38 @@
   background-repeat: no-repeat;
 }
 
+.viewed-article-card{
+  transition: 0.4s;
+}
+
+
+.viewed-article-card:hover{
+  box-shadow: 0px 0px 10px silver;
+}
+
 .viewed-article-card .card-body{
-  min-height: 130px;
+  min-height: 142px;
+}
+
+.fade-div {
+  height: 72px;
+  overflow-y: hidden;
+  position: relative;
+}
+
+
+.fade-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 30px 0;
+  background-image: linear-gradient(to bottom, transparent, transparent, transparent, white);
+}
+
+.article-last-viewed-date{
+  width: 100%;
+  margin-top:15px;
 }
