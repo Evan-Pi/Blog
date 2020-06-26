@@ -68,47 +68,49 @@
       {% for article in page_obj %}
       <div class="col-12 col-xl-6 infinite-item">
         <div class="container-fluid">
-          <div class="row articleRow">
-            {% thumbnail article.image "500x500" quality=91 as im %}
-            <div style="background-image:url({{im.url}}); min-height:245px;" class="col-12 col-sm-5 col-lg-4 articleImageDiv">
-              <a href="{% url 'article' article.slug %}">
+
+          <a href="{% url 'article' article.slug %}">
+            <div class="row articleRow">
+              {% thumbnail article.image "500x500" quality=91 as im %}
+              <div style="background-image:url({{im.url}});" class="col-12 col-sm-6 col-xl-5 articleImageDiv">
+                {% if article.subtitle or article.category %}
                 <div class="articleImageDivInner">
-
+                  <span class="article-category">{{article.category.title}}</span>
+                  <span class="article-subtitle">{{article.subtitle}}</span>
                 </div>
-              </a>
-            </div>
-            {% endthumbnail %}
-            <div class="col-12 col-sm-7 col-lg-8">
-              <div class="articleInfo">
-
-                <div class="title-Subtitle-Publised-Author">
-                  <a href="{% url 'article' article.slug %}">
-                    <h4 class="articleTitle">{{article.title}}</h4>
-                    {% if article.subtitle != '' %}
-                    <div class="fade-div">
-                      <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
-                      <p class="fade-effect"></p>
-                    </div>
-                    {% endif %}
-                  </a>
-                  <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.publish_date}}</h6><br>
-                  <span class="author">Author : {{article.author}}</span>
-                </div>
-                <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
-                  <div class="tags">
-                    <div>
-                      {% for tag in article.tags.all %}
-                      <span>#{{ tag }}</span>
-                      {% endfor %}
-                    </div>
+                {% endif %}
+                  
+  
+              </div>
+              {% endthumbnail %}
+              <div class="col-12 col-sm-6 col-xl-7">
+                <div class="articleInfo">
+  
+                  <div class="title-Subtitle-Publised-Author">
+                    
+                      <h4 class="articleTitle">{{article.title}}</h4>
+                      {% if article.subtitle != '' %}
+                      
+                      {% endif %}
+                    
+                    <span class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.publish_date}}</span><br>
+                    <span class="author">Author : {{article.author}}</span>
                   </div>
-                  <a href="{% url 'article' article.slug %}">
-                    <button type="button" class="btn btn-outline-dark readArticle">Read article <br><i class="fas fa-book book"></i> <i style="display:none;" class="fas fa-book-open book-open"></i></button>
-                  </a>
+                  <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
+                    <div class="tags">
+                      <div>
+                        {% for tag in article.tags.all %}
+                        <span>#{{ tag }}</span>
+                        {% endfor %}
+                      </div>
+                    </div>
+  
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
+          
         </div>
       </div>
       {% endfor %}

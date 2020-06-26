@@ -1,6 +1,7 @@
 {% extends 'articles/base.html' %}
 
 {% load static %}
+{% load thumbnail %}
 
 {% block meta %}
 <meta name="description" content="">
@@ -25,6 +26,36 @@
       <h1 class="d-md-none" style="font-size:60px; color:white;">Django Blog</h1>
       <h4 class="d-md-none" style="color:white;">The D is silent...</h4>
   </div>
+</div>
+
+<div id="recent-articles-container" class="container">
+    <div class="row">
+        {% for article in recent_articles %} 
+          <div class="col-12 col-sm-6 col-xl-3">
+            <a href="{% url 'article' article.slug %}">
+              <div style="margin-top:15px;" class="card recent-article-card">
+                {% thumbnail article.image "500x500" quality=91 as im %}
+                <div class="recent-article-image-div" style="background-image: url({{im.url}});">
+                  <div class="recent-article-image-div-inner">
+                    <span class="recent-article-category-title">{{article.category.title}}</span>
+                  </div>
+                </div>
+                {% endthumbnail %}
+                <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
+                  <div class="fade-div">
+                    <small class="recent-article-title" style="color: black;">{{article.title}}</small>
+                    <p class="fade-effect"></p>
+                  </div>
+                  <div class="text-muted text-right article-last-recent-date" >
+                    <small>Published : {{article.publish_date}}</small>
+                  </div>
+                </div>
+                
+              </div>
+            </a>
+          </div> 
+        {% endfor %} 
+    </div>
 </div>
 
 {% endblock %}

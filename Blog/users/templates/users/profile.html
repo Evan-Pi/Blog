@@ -73,6 +73,9 @@
               <div style="margin-top:15px;" class="card viewed-article-card">
                 {% thumbnail view.article.image "500x500" quality=91 as im %}
                 <div class="viewed-article-image-div" style="background-image: url({{im.url}});">
+                  <div class="viewed-article-image-div-inner">
+                    <span class="viewed-article-category-title">{{view.article.category.title}}</span>
+                  </div>
                 </div>
                 {% endthumbnail %}
                 <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">

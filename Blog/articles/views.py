@@ -13,9 +13,10 @@ from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 def index(request):
-    articles_Filter = ArticlesFilter()
+    current_datetime = localtime(now())
+    recent_articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')
 
-    context = {'articles_Filter':articles_Filter}
+    context = {'recent_articles':recent_articles}
     return render(request, 'articles/index.html', context)
 
 def privacy(request):
