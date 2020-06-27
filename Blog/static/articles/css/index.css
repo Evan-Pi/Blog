@@ -73,12 +73,13 @@
 
 #recent-articles-container{
   margin-bottom: 15px;
-  min-height: 75vh;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+
 }
 
 .recent-article-card{
@@ -110,4 +111,10 @@
 .article-last-recent-date{
   width: 100%;
   margin-top:15px;
+}
+
+
+
+#recentArticlesContainer{
+  margin-top: 15px;
 }
