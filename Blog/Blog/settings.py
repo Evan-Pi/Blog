@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h7$8=68p^(dv#vi5*&ffb&tl@5r2v=_c4i1=y3y)tkp^(-1(%9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,18 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    # My apps
-    'rest_framework',
-    'ckeditor',
-    'ckeditor_uploader',
-    'hitcount',
-    'taggit',
-    'taggit_serializer',
-    'crispy_forms',
-    'sorl.thumbnail',
-    'captcha',
-    'articles.apps.ArticlesConfig',
-    'users.apps.UsersConfig',
+    
 
     'admin_interface',
     'colorfield',
@@ -56,6 +45,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # My apps
+    'rest_framework',
+    'ckeditor',
+    'ckeditor_uploader',
+    'hitcount',
+    'taggit',
+    'taggit_serializer',
+    'crispy_forms',
+    'sorl.thumbnail',
+    'captcha',
+    'articles.apps.ArticlesConfig',
+    'users.apps.UsersConfig',
 ]
 
 AUTH_USER_MODEL = 'users.Account'
@@ -160,6 +162,7 @@ CKEDITOR_CONFIGS = {
             'autogrow',
             'codesnippet',
             'embed',
+            'exportpdf',
             # 'devtools',
             'widget',
             'lineutils',

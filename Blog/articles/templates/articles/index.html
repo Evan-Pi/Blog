@@ -13,6 +13,7 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -28,34 +29,80 @@
   </div>
 </div>
 
-<div id="recent-articles-container" class="container">
-    <div class="row">
-        {% for article in recent_articles %} 
-          <div class="col-12 col-sm-6 col-xl-3">
-            <a href="{% url 'article' article.slug %}">
-              <div style="margin-top:15px;" class="card recent-article-card">
-                {% thumbnail article.image "500x500" quality=91 as im %}
-                <div class="recent-article-image-div" style="background-image: url({{im.url}});">
-                  <div class="recent-article-image-div-inner">
-                    <span class="recent-article-category-title">{{article.category.title}}</span>
+<div id="categories-container-wrapper" style="padding-top:15px; padding-bottom:15px; background:#f9f9f9;" class="text-center">
+
+  {% for category in categories %}
+  <div class="categories-container">
+    <a href="{% url 'articlesCategory' category.slug %}">
+      {% thumbnail category.image "200x200" quality=91 as im %}
+      <div style="background-image:url({{im.url}});" class="category-image-div">
+      </div>
+      {% endthumbnail %}
+    </a>
+    <a href="{% url 'articlesCategory' category.slug %}">
+      <div class="category-info">
+        <span class="category-title" style="margin:0;">{{category.title}}</span>
+        <div class="category-count">
+          <span>{{category.articles_count}}</span>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+
+</div>
+
+<div id="recent-articles-container" class="container-fluid">
+  <div id="recentArticlesContainer" class="row">
+    {% for article in recent_articles %}
+
+    <div class="col-12 col-xl-6 infinite-item">
+      <div class="container-fluid">
+        <a href="{% url 'article' article.slug %}">
+          <div class="row articleRow">
+            {% thumbnail article.image "500x500" quality=91 as im %}
+            <div style="background-image:url({{im.url}});" class="col-12 col-sm-5 col-lg-4 articleImageDiv">
+
+                {% if article.subtitle or article.category %}
+                <div class="articleImageDivInner">
+                  <span class="article-category">{{article.category.title}}</span>
+                  <span class="article-subtitle">{{article.subtitle}}</span>
+                </div>
+                {% endif %}
+
+            </div>
+            {% endthumbnail %}
+            <div class="col-12 col-sm-7 col-lg-8">
+              <div class="articleInfo">
+                <div class="title-Subtitle-Publised-Author">
+                    <h4 class="articleTitle">{{article.title}}</h4>
+                    {% if article.subtitle %}
+                      <div style="margin-bottom:7.5px;" class="fade-div d-xl-none">
+                        <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
+                        <p class="fade-effect"></p>
+                      </div>
+                    {% endif %}
+                  <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.publish_date}}</h6><br>
+                  <span class="author">Author : {{article.author}}</span>
+                </div>
+                <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
+                  <div class="tags">
+                    <div>
+                      {% for tag in article.tags.all %}
+                      <span>#{{ tag }}</span>
+                      {% endfor %}
+                    </div>
                   </div>
                 </div>
-                {% endthumbnail %}
-                <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
-                  <div class="fade-div">
-                    <small class="recent-article-title" style="color: black;">{{article.title}}</small>
-                    <p class="fade-effect"></p>
-                  </div>
-                  <div class="text-muted text-right article-last-recent-date" >
-                    <small>Published : {{article.publish_date}}</small>
-                  </div>
-                </div>
-                
               </div>
-            </a>
-          </div> 
-        {% endfor %} 
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
+    {% endfor %}
+
+  </div>
 </div>
 
 {% endblock %}

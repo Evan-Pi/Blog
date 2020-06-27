@@ -47,7 +47,7 @@ class Articles(models.Model, HitCountMixin):
     subtitle = models.TextField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
 
-    article = RichTextUploadingField()
+    article = RichTextUploadingField(external_plugin_resources=[('exportpdf','/static/articles/js/exportpdf/','plugin.js')])
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

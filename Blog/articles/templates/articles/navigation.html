@@ -158,11 +158,3 @@
 <div id="pageUp">
   <i class="fas fa-chevron-up"></i>
 </div>
-
-{% if user.is_staff %}
-  <a href="{% url 'authorsArticlesPreview' %}">
-    <div id="authors-admin">
-      <i class="far fa-copy"></i>
-    </div>
-  </a>
-{% endif %}

@@ -14,9 +14,9 @@
 }
 
 #profileImage{
-  height: 120px;
-  width: 120px;
-  border-radius: 100%;
+  height: 75px;
+  width: 75px;
+  border-radius: 10px;
   margin-bottom: 15px;
   background-position: center;
   background-size: cover;
@@ -25,9 +25,10 @@
 }
 
 #profileImageDiv .userImageDiv{
-  height: 120px;
-  width: 120px;
+  height: 75px;
+  width: 75px;
   margin-bottom: 15px;
+  border-radius: 10px;
 }
 
 #profileImageDiv .userImageDiv span{

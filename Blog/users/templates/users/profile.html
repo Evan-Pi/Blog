@@ -24,28 +24,9 @@
 
   <div id="profile">
 
+    
 
     <div class="container" style="margin-bottom: 15px;">
-      <h6><i class="far fa-user"></i> {{user.username}}</h6>
-      <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
-      {% if request.user.is_superuser %}
-      <h6>Status : Superuser</h6>
-      {% elif request.user.is_staff %}
-      <h6>Status : Staff</h6>
-      {% else %}
-      <h6>Status : Member</h6>
-      {% endif %}
-      <a href="{% url 'password_change' %}">
-        <button style="margin-top:4px;" class="btn btn-light"><i class="fas fa-key"></i> Change password</button>
-      </a>
-      <a href="{% url 'logout' %}">
-        <button style="margin-top:4px;" class="btn btn-light"><i class="fas fa-sign-out-alt"></i> Log out</button>
-      </a>
-      {% if user.is_staff %}
-      <a href="{% url 'admin:index' %}">
-        <button style="margin-top:4px;" class="btn btn-light"><i class="fa fa-cogs"></i> Admin panel</button>
-      </a>
-      {% endif %}
 
       <div id="profileImageDiv">
         {% if user.profile.profile_image != '' %}
@@ -61,11 +42,24 @@
           {{form.profile_image}}
         </form>
       </div>
+
+      <h6><i class="far fa-user"></i> {{user.username}}</h6>
+      <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
+      {% if request.user.is_superuser %}
+      <h6>Status : Superuser</h6>
+      {% elif request.user.is_staff %}
+      <h6>Status : Staff</h6>
+      {% else %}
+      <h6>Status : Member</h6>
+      {% endif %}
+      
+
+      
     </div>
 
 
     <div class="container">
-      <h4>Last read articles...</h4>
+      <h5>Last read articles...</h5>
     <div class="row">
         {% for view in viewed_articles %} 
           <div class="col-12 col-sm-6 col-xl-3">
@@ -93,6 +87,31 @@
           </div> 
         {% endfor %} 
     </div>
+  </div>
+
+  <div class="container">
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'password_change' %}">
+       <small><i class="fas fa-key"></i> Change password</small>
+      </a>
+      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'logout' %}">
+        <small><i class="fas fa-sign-out-alt"></i> Log out</small>
+      </a>
+      {% if user.is_staff %}
+  
+      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'authorsArticlesPreview' %}">
+        <small><i class="fas fa-feather"></i> Author's panel</small>
+      </a>
+  
+      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'admin:index' %}">
+        <small><i class="fa fa-cogs"></i> Admin panel</small>
+      </a>
+      {% endif %}
+    </div>
+
+    
+
   </div>
 
 </div>

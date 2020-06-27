@@ -89,8 +89,12 @@
                   <div class="title-Subtitle-Publised-Author">
                     
                       <h4 class="articleTitle">{{article.title}}</h4>
-                      {% if article.subtitle != '' %}
-                      
+
+                      {% if article.subtitle %}
+                      <div style="margin-bottom:7.5px;" class="fade-div d-xl-none">
+                        <h6 class="articleSubtitle text-muted">{{article.subtitle}}</h6>
+                        <p class="fade-effect"></p>
+                      </div>
                       {% endif %}
                     
                     <span class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.publish_date}}</span><br>
