@@ -26,9 +26,7 @@
   }
 }
 
-#navbarHome, #sidebarHome {
-  display: none;
-}
+
 
 
 .recent-article-image-div{
@@ -72,14 +70,12 @@
 }
 
 #recent-articles-container{
+  margin-top: 30px;
   margin-bottom: 15px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-
 }
 
 .recent-article-card{

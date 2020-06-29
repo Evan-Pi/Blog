@@ -14,7 +14,10 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('admin/', admin.site.urls),
+
     path('', include('articles.urls')),
+    path('', include('courses.urls')),
+
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('users.urls')),

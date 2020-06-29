@@ -30,7 +30,6 @@
 </div>
 
 <div id="categories-container-wrapper" style="padding-top:15px; padding-bottom:15px; background:#f9f9f9;" class="text-center">
-
   {% for category in categories %}
   <div class="categories-container">
     <a href="{% url 'articlesCategory' category.slug %}">
@@ -53,7 +52,7 @@
 </div>
 
 <div id="recent-articles-container" class="container-fluid">
-  <div id="recentArticlesContainer" class="row">
+  <div class="row">
     {% for article in recent_articles %}
 
     <div class="col-12 col-xl-6 infinite-item">

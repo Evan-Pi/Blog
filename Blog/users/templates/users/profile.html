@@ -28,30 +28,46 @@
 
     <div class="container" style="margin-bottom: 15px;">
 
-      <div id="profileImageDiv">
-        {% if user.profile.profile_image != '' %}
-        <div id="profileImage" style="background-image: url({{profile.profile_image.url}});">
+     
+        
+        <div id="profileImageDiv">
+          <div>
+            {% if user.profile.profile_image %}
+            <div id="profileImage" style="background-image: url({{profile.profile_image.url}});">
+              <div id="profileImageInner">
+                <i class="far fa-edit"></i>
+              </div>
+            </div>
+            {% else %}
+            <div id="firstLetterImage">
+              <div id="firstLetterImageInner">
+                <span>{{user.username|upper|first}}</span>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <div style="margin-left:15px;">
+            <h6><i class="far fa-user"></i> {{user.username}}</h6>
+            <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
+            {% if request.user.is_superuser %}
+            <h6>Status : Superuser</h6>
+            {% elif request.user.is_staff %}
+            <h6>Status : Staff</h6>
+            {% else %}
+            <h6>Status : Member</h6>
+            {% endif %}
+          </div>
         </div>
-        {% else %}
-        <div class="userImageDiv">
-          <span>{{user.username|upper|first}}</span>
-        </div>
-        {% endif %}
+
         <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;" onchange="submitOnLoad()">
           {% csrf_token %}
           {{form.profile_image}}
         </form>
-      </div>
 
-      <h6><i class="far fa-user"></i> {{user.username}}</h6>
-      <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
-      {% if request.user.is_superuser %}
-      <h6>Status : Superuser</h6>
-      {% elif request.user.is_staff %}
-      <h6>Status : Staff</h6>
-      {% else %}
-      <h6>Status : Member</h6>
-      {% endif %}
+      
+
+      
       
 
       
@@ -120,9 +136,13 @@
 
 {% block scripts %}
 <script>
+  $('#profileImage, #firstLetterImage').click(function(){
+    $("#id_profile_image").click();
+  });
+
   function submitOnLoad(){
   $("#profile_image_form").submit();
-  }
+  };
 </script>
 {% endblock %}
 

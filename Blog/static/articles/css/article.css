@@ -1,7 +1,7 @@
 #articleImageDiv {
     max-width: 100vw;
     overflow: hidden;
-    height: calc(66vh - 75px);
+    min-height: calc(66vh - 75px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +14,17 @@
     height: auto !important;
 }
 
-#articleImage {
+#articleNoBackground{
+    background-image: linear-gradient(120deg, #f8f9fa 0%, #ebedee 100%); 
+    width: 100%;
+    min-height: calc(66vh - 75px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.articleImage {
     position: absolute;
     height: 66vh;
     width: calc(100vw + 40px);
@@ -25,19 +35,42 @@
     margin-top: -20px;
 }
 
-#articleImageDiv .articleTitle {
+.articleTitle, .articleSubtitle{
     color: white;
     font-weight: bold;
     text-shadow: 1px 1px 2px black;
     margin: 0;
 }
 
-#articleImageDiv .articleSubtitle {
-    color: white;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px black;
-    margin: 0;
+.articleSubtitle{
     margin-top: 15px;
+}
+
+.articleTitleNoBackground, .articleSubtitleNoBackground{
+    text-shadow: none;
+    color: #929292; 
+    margin: 0;
+}
+
+#articleImageNoBackground{
+    padding-top:15px; 
+    padding-bottom:15px;
+}
+
+@media screen and (min-width:799px) {
+    #articleImageNoBackground{
+        width: 320px;
+    }
+}
+
+@media screen and (max-width:799px) {
+    #articleImageNoBackground{
+        width: 100%;
+    }
+}
+
+.articleSubtitleNoBackground{
+    padding-bottom: 15px;
 }
 
 #article1 .container {
@@ -46,12 +79,7 @@
     padding-top: 15px;
 }
 
-@media screen and (min-width:800px) {
-    #article1 .container {
-        padding-left: 42px;
-        padding-right: 42px;
-    }
-}
+
 
 #pageUp {
     bottom: 52px;
@@ -75,7 +103,7 @@
     left: 0;
 }
 
-@media screen and (max-width:799px) {
+@media screen and (max-width:1250px) {
     #social-share-desktop {
         display: none;
     }
@@ -104,13 +132,13 @@
     flex: 1;
 }
 
-@media screen and (min-width:800px) {
+@media screen and (min-width:1251px) {
     #social-share-mobile {
         display: none;
     }
 }
 
-@media screen and (max-width:799px) {
+@media screen and (max-width:1250px) {
     #social-share-mobile-footer-save {
         width: 100%;
         height: 52px;

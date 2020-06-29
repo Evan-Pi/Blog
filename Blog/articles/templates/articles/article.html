@@ -46,6 +46,9 @@
 </div>
 
 <div id="articleImageDiv">
+  
+  {% if article.use_image_as_background_in_article %}
+
   <div class="container">
     <h1 class="articleTitle d-none d-md-block">{{article.title}}</h1>
     <h4 class="articleTitle d-md-none">{{article.title}}</h4>
@@ -54,10 +57,37 @@
     <h6 class="articleSubtitle d-md-none">{{article.subtitle}}</h6>
 
   </div>
-  {% thumbnail article.image "800x800" quality=61 as im %}
-  <div id="articleImage" style="background-image:url({{im.url}}); filter:blur(10px);">
+
+    {% thumbnail article.image "800x800" quality=61 as im %}
+    <div class="articleImage" style="background-image:url({{im.url}}); filter:blur(10px);">
+    </div>
+    {% endthumbnail %}
+  
+  {% else %}
+
+  <div id="articleNoBackground">
+  <div class="container">
+
+    
+
+    <h1 class="articleTitleNoBackground d-none d-md-block">{{article.title}}</h1>
+    <h4 class="articleTitleNoBackground d-md-none">{{article.title}}</h4>
+    {% if article.subtitle %}
+    <hr>
+    {% endif %}
+    <h5 class="articleSubtitleNoBackground d-none d-md-block">{{article.subtitle}}</h5>
+    <h6 class="articleSubtitleNoBackground d-md-none">{{article.subtitle}}</h6>
   </div>
-  {% endthumbnail %}
+
+  
+
+</div>
+
+  
+  </div>
+
+  {% endif %}
+  
 </div>
 
 <div id="social-share-desktop">
@@ -77,7 +107,6 @@
 </div>
 
 <div id="article1">
-
   <div class="container">
     <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
       <div>

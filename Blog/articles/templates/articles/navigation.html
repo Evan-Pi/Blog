@@ -20,52 +20,72 @@
         
 
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a href="{% url 'profile' %}" class="nav-link user-nav-link">
-            {% if user.profile.profile_image != '' %}
-            <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
-            </div>
+
+        <li id="user-image-menu" class="nav-item" style="margin-right:15px; margin-left:30px; position: relative;">
+
+          
+
+          {% if user.profile.profile_image %}
+          <div class="user-nav-link">
+              <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
+              </div>
+              <span style="margin-left: 4px;">{{user.username}}</span>
+          </div>
+
             {% else %}
-            <div class="userImageDiv">
-              <span>{{user.username|upper|first}}</span>
+            <div class="user-nav-link">
+              <div class="firstLetterImageDiv">
+                <span>{{user.username|upper|first}}</span>
+              </div>
+              <span style="margin-left: 4px;">{{user.username}}</span>
             </div>
-            {% endif %}
-          </a>
+          {% endif %}
+
+          
+          <div id="user-image-dropdown-menu">
+
+            
+            
+            <div id="user-image-dropdown-menu-inner">
+              <a style="margin:0;" href="{% url 'profile' %}" class="nav-link log-in-out-nav-link">
+                <div class="nav-tools-login">
+                  <span style="font-size:14px;">Account</span>
+                </div>
+              </a>
+              {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
+                  <div class="nav-tools-login"> 
+                    <span style="font-size:14px;">Log out</span>
+                    <i style="color:#4d4d4d;" class="fas fa-sign-out-alt"></i>
+                  </div>
+                </a>
+              {% else %}
+                <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
+                  <div class="nav-tools-login">
+                    <span style="font-size:14px;">Log in</span>
+                    <i style="color:#4d4d4d;" class="fas fa-sign-in-alt"></i>
+                  </div>
+                </a>
+              {% endif %}
+            </div>
+
+
+          </div>
+
         </li>
 
         {% else %}
-        <div style="width:30px;">
-
-        </div>
-        {% endif %}
-
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
-            <div class="nav-tools-login">
-              
-              <span style="font-size:14px;">Log out</span>
-              <i style="color:#4d4d4d;" class="fas fa-sign-out-alt"></i>
-            </div>
-          </a>
-        </li>
-        
-
-        {% else %}
-        <li class="nav-item">
+        <div style="width:112px;">
           <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
             <div class="nav-tools-login">
-              
               <span style="font-size:14px;">Log in</span>
               <i style="color:#4d4d4d;" class="fas fa-sign-in-alt"></i>
             </div>
           </a>
-        </li>
-        
+
+        </div>
         {% endif %}
-
         
-
       </ul>
     </div>
   </nav>
@@ -95,43 +115,47 @@
       <div style="" class="col-12 my-auto text-center">
         <ul id="sidebarLinks">
           <li class="nav-item">
-            {% if user.is_authenticated %}
-            <div style="width:100%; display:flex; justify-content:center;">
-
-              <a href="{% url 'profile' %}">
-                {% if user.profile.profile_image != '' %}
-                <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
-                </div>
-                {% else %}
-                <div class="userImageDiv">
-                  <span>{{user.username|upper|first}}</span>
-                </div>
-                {% endif %}
-              </a>
-              
-            </div>
-            {% endif %}
             <a class="nav-link" href="{% url 'index' %}">
               <h3 id="sidebarHome"><span>Homepage</span></h3>
             </a>
             <a class="nav-link" href="{% url 'articles' %}">
               <h3 id="sidebarArticles"><span>Articles</span></h3>
             </a>
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'profile' %}">
+              <h3 id="sidebarProfile"><span>Account</span></h3>
+            </a>
+            {% endif %}
         </ul>
       </div>
 
       <div class="col-12 my-auto text-center">
-        <i style="color:#44b78b;" id="closeSidebar" class="fas fa-times fa-2x"></i>
+        
 
         {% if user.is_authenticated %}
-  
+
+
           <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
-            <div style="margin-top:30px;" class="nav-tools-login">
-              
+
+            {% if user.profile.profile_image %}
+            <div class="user-nav-link">
+                <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
+                </div>
+            </div>
+              {% else %}
+              <div class="user-nav-link">
+                <div class="firstLetterImageDiv">
+                  <span>{{user.username|upper|first}}</span>
+                </div>
+              </div>
+            {% endif %}
+
+            <div style="margin-top:7.5px;" class="nav-tools-login">
               <span style="font-size:14px;">Log out</span>
               <i style="color:#4d4d4d;" class="fas fa-sign-out-alt"></i>
             </div>
           </a>
+
    
         
 
@@ -147,6 +171,9 @@
        
         
         {% endif %}
+
+
+        <i style="color:#44b78b; margin-top: 30px;" id="closeSidebar" class="fas fa-times fa-2x"></i>
       </div>
 
       

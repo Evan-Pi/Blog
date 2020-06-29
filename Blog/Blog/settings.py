@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h7$8=68p^(dv#vi5*&ffb&tl@5r2v=_c4i1=y3y)tkp^(-1(%9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,8 +32,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    
 
+    # Need to be before django.contrib.admin
     'admin_interface',
     'colorfield',
 
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'captcha',
     'articles.apps.ArticlesConfig',
+    'courses.apps.CoursesConfig',
     'users.apps.UsersConfig',
 ]
 

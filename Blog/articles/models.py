@@ -13,13 +13,12 @@ from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 
 from hitcount.models import HitCount, HitCountMixin
-# Create your models here.
 
 class ArticlesCategories(models.Model):
     '''Articles categories creation'''
 
     class Meta:
-        verbose_name = 'Articles Category'
+        verbose_name = 'Article Category'
         verbose_name_plural = 'Articles Categories'
 
     title = models.CharField(max_length=100, unique=True)
@@ -46,6 +45,7 @@ class Articles(models.Model, HitCountMixin):
     slug = models.SlugField(editable=False,max_length=256)
     subtitle = models.TextField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
+    use_image_as_background_in_article = models.BooleanField(default=True)
 
     article = RichTextUploadingField(external_plugin_resources=[('exportpdf','/static/articles/js/exportpdf/','plugin.js')])
     tags = TaggableManager(blank=True)
