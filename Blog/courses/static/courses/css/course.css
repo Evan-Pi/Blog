@@ -1,0 +1,198 @@
+#courseImageDiv {
+    max-width: 100vw;
+    overflow: hidden;
+    min-height: calc(66vh - 75px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#course1 img {
+    max-width: 100%;
+    height: auto !important;
+}
+
+#courseNoBackground{
+    background-image: linear-gradient(120deg, #f8f9fa 0%, #ebedee 100%); 
+    width: 100%;
+    min-height: calc(66vh - 75px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.courseImage {
+    position: absolute;
+    height: 66vh;
+    width: calc(100vw + 40px);
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+    margin-left: -10px;
+    margin-top: -20px;
+}
+
+.courseTitle, .courseSubtitle{
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+    margin: 0;
+}
+
+.courseSubtitle{
+    margin-top: 15px;
+}
+
+.courseTitleNoBackground, .courseSubtitleNoBackground{
+    text-shadow: none;
+    color: #929292; 
+    margin: 0;
+}
+
+#courseImageNoBackground{
+    padding-top:15px; 
+    padding-bottom:15px;
+}
+
+@media screen and (min-width:799px) {
+    #courseImageNoBackground{
+        width: 320px;
+    }
+}
+
+@media screen and (max-width:799px) {
+    #courseImageNoBackground{
+        width: 100%;
+    }
+}
+
+.courseSubtitleNoBackground{
+    padding-bottom: 15px;
+}
+
+#course1 .container {
+    background: white;
+    z-index: 1000;
+    padding-top: 15px;
+}
+
+
+
+#pageUp {
+    bottom: 52px;
+}
+
+@media screen and (min-width:800px) {
+    #pageUp {
+        bottom: 0px;
+    }
+    #nav-tools-trigger {
+        bottom: 0px;
+    }
+    #nav-tools {
+        bottom: 0px;
+    }
+}
+
+#social-share-desktop {
+    position: absolute;
+    top: 66vh;
+    left: 0;
+}
+
+@media screen and (max-width:1250px) {
+    #social-share-desktop {
+        display: none;
+    }
+}
+
+.st-custom-button {
+    height: 52px;
+    width: 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 0;
+}
+
+#social-share-mobile {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#social-share-mobile .st-custom-button {
+    display: flex;
+    flex: 1;
+}
+
+@media screen and (min-width:1251px) {
+    #social-share-mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width:1250px) {
+    #social-share-mobile-footer-save {
+        width: 100%;
+        height: 52px;
+    }
+}
+
+.navbar .user-nav-link:hover:after {
+    width: 0%;
+    background: transparent !important;
+}
+
+#edit-course {
+    height: 75px;
+    width: 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    bottom: calc(50vh + 39.5px);
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 4px silver;
+    color: black;
+    z-index: 200000;
+    cursor: pointer;
+}
+
+#all-modules {
+    height: 75px;
+    width: 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    bottom: calc(50vh - 75px + 37.5px);
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 4px silver;
+    color: black;
+    z-index: 200000;
+    cursor: pointer;
+}
+
+
+#suspicious {
+    height: calc(100vh - 52px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+    padding-right: 0px !important;
+}

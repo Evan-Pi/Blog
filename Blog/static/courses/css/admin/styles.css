@@ -1,0 +1,17 @@
+.module h2{
+    display: none;
+}
+
+.vCheckboxLabel{
+    color: #fff;
+    font-weight: bold;
+}
+
+.inline-related h3{
+    background: #44b78b;
+    border: none;
+    color: #fff;
+    font-size: 17px;
+    box-shadow: 3px 3px 4px silver;
+    margin-bottom: 8px;
+} 

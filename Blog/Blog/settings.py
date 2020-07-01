@@ -91,6 +91,8 @@ MIDDLEWARE = [
     'django_currentuser.middleware.ThreadLocalUserMiddleware', # for saving current user(author)
 ]
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 ROOT_URLCONF = 'Blog.urls'
 
 TEMPLATES = [
@@ -155,6 +157,7 @@ CKEDITOR_CONFIGS = {
         'skin': 'moono-lisa',
         'toolbar': 'full',
         'width': '100%',
+        'height': '100px',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
             'uploadimage', # the upload image feature

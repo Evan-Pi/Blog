@@ -4,7 +4,7 @@ from . models import Articles, ArticlesCategories
 from . filters import ArticlesFilter
 from django.utils.timezone import localtime, now
 from django.db.models import Q, Count
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 from users.models import Account, Profile, ArticlesViews
 
@@ -19,7 +19,7 @@ def index(request):
     categories = ArticlesCategories.objects.annotate(articles_count=Count('articles', filter=Q(articles__publish_date__lte=current_datetime)))
     recent_articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')[:4]
 
-    context = {'recent_articles':recent_articles,'categories':categories,}
+    context = {'recent_articles':recent_articles,'categories':categories}
     return render(request, 'articles/index.html', context)
 
 def privacy(request):

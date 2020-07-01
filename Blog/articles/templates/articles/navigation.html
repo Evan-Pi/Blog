@@ -16,6 +16,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'articles' %}" id="navbarArticles"><span>Articles</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'courses' %}" id="navbarCourses"><span>Courses</span></a>
+        </li>
 
         
 
@@ -120,6 +123,9 @@
             </a>
             <a class="nav-link" href="{% url 'articles' %}">
               <h3 id="sidebarArticles"><span>Articles</span></h3>
+            </a>
+            <a class="nav-link" href="{% url 'courses' %}">
+              <h3 id="sidebarCourses"><span>Courses</span></h3>
             </a>
             {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'profile' %}">

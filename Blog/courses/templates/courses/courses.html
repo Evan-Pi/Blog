@@ -1,1 +1,149 @@
-<h1>hi</h1>
+{% extends 'courses/base.html' %}
+
+{% load static %}
+{% load courses %}
+{% load thumbnail %}
+
+{% block meta %}
+<meta name="description" content="">
+{% endblock %}
+
+{% block title %}
+<title>Courses</title>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'courses/css/courses.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'articles/navigation.html' %}
+
+<!--CATEGORIES-->
+<div id="categories-container-wrapper" style="padding-top:15px; padding-bottom:15px; background:#f9f9f9;" class="text-center">
+
+    {% for category in categories %}
+    <div class="categories-container">
+      <a href="#">
+        {% thumbnail category.image "200x200" quality=91 as im %}
+        <div style="background-image:url({{im.url}});" class="category-image-div">
+        </div>
+        {% endthumbnail %}
+      </a>
+      <a href="#">
+        <div class="category-info">
+          <span class="category-title" style="margin:0;">{{category.title}}</span>
+          <div class="category-count">
+            <span>{{category.courses_count}}</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  
+  </div>
+
+  <!--COURSES-->
+  <div id="courses1">
+    <div class="container-fluid">
+      <div id="coursesContainer" class="row infinite-container">
+  
+        {% if courses.count != 0 %}
+        {% for course in page_obj %}
+        <div class="col-12 col-xl-6 infinite-item">
+          <div class="container-fluid">
+  
+            <a href="{% url 'course' course.slug %}">
+              <div class="row courseRow">
+                {% thumbnail course.image "500x500" quality=91 as im %}
+                <div style="background-image:url({{im.url}});" class="col-12 col-sm-6 col-xl-5 courseImageDiv">
+                  {% if course.subtitle or course.category %}
+                  <div class="courseImageDivInner">
+                    <span class="course-category">{{course.category.title}}</span>
+                    <span class="course-subtitle">{{course.subtitle}}</span>
+                  </div>
+                  {% endif %}
+                    
+    
+                </div>
+                {% endthumbnail %}
+                <div class="col-12 col-sm-6 col-xl-7">
+                  <div class="courseInfo">
+    
+                    <div class="title-Subtitle-Publised-Author">
+                      
+                        <h4 class="courseTitle">{{course.title}}</h4>
+  
+                        {% if course.subtitle %}
+                        <div style="margin-bottom:7.5px;" class="fade-div d-xl-none">
+                          <h6 class="courseSubtitle text-muted">{{course.subtitle}}</h6>
+                          <p class="fade-effect"></p>
+                        </div>
+                        {% endif %}
+                      
+                      <span class="text-muted published"><i class="far fa-calendar-alt"></i> {{course.publish_date}}</span><br>
+                      <span class="author">Author : {{course.author}}</span>
+                    </div>
+                    <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
+                      <div class="tags">
+                        <div>
+                          {% for tag in course.tags.all %}
+                          <span>#{{ tag }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            
+          </div>
+        </div>
+        {% endfor %}
+  
+        {% else %}
+          <div class="text-center" id="no-courses-returned" style="width:100%; height:100%; min-height: calc(100vh - 52px); display:flex; flex-direction:column; justify-content:center; align-items:center;">
+            <h3 class="d-none d-md-flex">No courses for this particular search...</h3>
+            <h4 class="d-md-none">No courses for this particular search...</h4>
+            <i style="color:#44b78b;" class="fas fa-heart-broken fa-2x"></i>
+          </div>
+        {% endif %}
+  
+      </div>
+    </div>
+  </div>
+  
+    {% if page_obj.has_next %}
+    <a class="infinite-more-link" href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}"></a>
+    {% endif %}
+    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+      <div class="justify-content-center loading" style="display:none;">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'articles/core/infinite/jquery.waypoints.js' %}"></script>
+<script src="{% static 'articles/core/infinite/infinite.js' %}"></script>
+<script>
+  var infinite = new Waypoint.Infinite({
+    element: $('.infinite-container')[0],
+    onBeforePageLoad: function() {
+      $('.loading').show();
+    },
+    onAfterPageLoad: function($items) {
+      $('.loading').hide();
+    }
+  });
+</script>
+{% endblock %}
+
+{% block footer %}
+{% include 'articles/footer.html' %}
+{% endblock %}

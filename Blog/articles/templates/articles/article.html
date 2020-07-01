@@ -44,32 +44,22 @@
 <div id="scroll-article-bar" style="position:fixed; top:0; left:0; width:0%; height:4px; background:#44b78b; z-index:802;">
 
 </div>
-
 <div id="articleImageDiv">
-  
   {% if article.use_image_as_background_in_article %}
-
   <div class="container">
     <h1 class="articleTitle d-none d-md-block">{{article.title}}</h1>
     <h4 class="articleTitle d-md-none">{{article.title}}</h4>
-
     <h5 class="articleSubtitle d-none d-md-block">{{article.subtitle}}</h5>
     <h6 class="articleSubtitle d-md-none">{{article.subtitle}}</h6>
-
   </div>
-
     {% thumbnail article.image "800x800" quality=61 as im %}
     <div class="articleImage" style="background-image:url({{im.url}}); filter:blur(10px);">
     </div>
     {% endthumbnail %}
-  
   {% else %}
 
   <div id="articleNoBackground">
   <div class="container">
-
-    
-
     <h1 class="articleTitleNoBackground d-none d-md-block">{{article.title}}</h1>
     <h4 class="articleTitleNoBackground d-md-none">{{article.title}}</h4>
     {% if article.subtitle %}
@@ -78,13 +68,8 @@
     <h5 class="articleSubtitleNoBackground d-none d-md-block">{{article.subtitle}}</h5>
     <h6 class="articleSubtitleNoBackground d-md-none">{{article.subtitle}}</h6>
   </div>
-
-  
-
 </div>
-
-  
-  </div>
+</div>
 
   {% endif %}
   
@@ -149,7 +134,6 @@
     })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
   </div>
 </div>
 {% endif %}
@@ -204,7 +188,6 @@
 </script>
 
 {% endblock %}
-
 {% block footer %}
 
 

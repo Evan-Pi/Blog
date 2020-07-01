@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from articles.models import Articles
+from courses.models import Courses
 
 class Account(AbstractUser):
 
@@ -34,6 +35,7 @@ class Profile(models.Model):
     profile_image = models.ImageField(upload_to = "Users_Profile_Images", blank=True, default='')
 
     viewed_articles = models.ManyToManyField(Articles, through='ArticlesViews')
+    viewed_courses = models.ManyToManyField(Courses, through='CoursesViews')
 
     def __str__(self):
         return f'{self.user.username}'
@@ -61,7 +63,19 @@ class ArticlesViews(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
+class CoursesViews(models.Model):
+    class Meta:
+        verbose_name = 'User History - Course view'
+        verbose_name_plural = 'User History - Courses views'
+
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
 @receiver(post_save, sender=Account)
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+
+
