@@ -11,7 +11,7 @@ class ArticlesAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(ArticlesAdmin, self).get_queryset(request)
 
-        if request.user.username not in ['evanpi']:
+        if not request.user.is_superuser:
             filtered_qs = qs.filter(author=request.user)
         else:
             filtered_qs = qs
@@ -19,7 +19,7 @@ class ArticlesAdmin(admin.ModelAdmin):
         return filtered_qs
 
     search_fields = ['title']
-    list_display = ['title','author','created','updated','publish_date']
+    list_display = ['title','image_tag','author','created','updated','publish_date']
 
 class ArticlesCategoriesAdmin(admin.ModelAdmin):
     search_fields = ['title']

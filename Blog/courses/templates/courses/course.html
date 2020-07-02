@@ -4,22 +4,20 @@
 {% load crispy_forms_tags %}
 {% load thumbnail %}
 {% load courses %}
-
 {% load hitcount_tags %}
 
 {% block meta %}
 <meta property="og:image" content="{{course.image.url}}" />
-<meta name="description" content="{{course.subtitle}}">
+<meta name="description" content="{{course.description}}">
 <script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5e8cc79c5d9bf5001283b977&product=sticky-share-buttons"></script>
 {% endblock %}
 
 {% block title %}
-<title>{{course.title}}</title>
+<title>{{course.title}} - {{page_obj.object_list.0.title}}</title>
 {% endblock %}
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'courses/css/course.css' %}">
-
 <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/obsidian.css' %}" rel="stylesheet">
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
 <script>
@@ -27,67 +25,89 @@
 </script>
 {% endblock %}
 
+
+
 {% block main %}
-
-
-
 {% if course.publish_date > current_datetime and course.author != request.user.username %}
 <div id="suspicious">
   <i style="color: #44b78b;" class="fas fa-question fa-4x"></i>
   <p>Not quite sure what you are looking for...</p>
   <a href="{% url 'index' %}"><p style="color: #44b78b;">Back to home</p></a>
-
 </div>
 {% else %}
 
 {% include 'articles/navigation.html' %}
 <div id="scroll-course-bar" style="position:fixed; top:0; left:0; width:0%; height:4px; background:#44b78b; z-index:802;">
-
 </div>
 <div id="courseImageDiv">
   {% if course.use_image_as_background_in_course %}
   <div class="container">
-    <h1 class="courseTitle d-none d-md-block">{{course.title}}</h1>
-    <h4 class="courseTitle d-md-none">{{course.title}}</h4>
-    <h5 class="courseSubtitle d-none d-md-block">{{course.subtitle}}</h5>
-    <h6 class="courseSubtitle d-md-none">{{course.subtitle}}</h6>
-    <hr>
-    {% for module in page_obj %}
+    <h1 class="courseTitle d-none d-md-block">{{course.title}} - {{page_obj.object_list.0.title}}</h1>
+    <h2 class="courseTitle d-md-none">{{course.title}} - {{page_obj.object_list.0.title}}</h2>
 
-      <h1 style="color:white;">{{module.title}}</h1>
-
-      {% endfor %}
+    <!--PAGINATION BUTTONS-->
+    <div style="padding-top:15px;">
+      <span  class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-sm btn-light" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+            <a class="btn btn-sm btn-light" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+        {% endif %}
+    
+        {% if page_obj.has_previous or page_obj.has_next %}
+          <span class="current courseTitle">
+            Module {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+          </span>
+        {% endif %}
+    
+        {% if page_obj.has_next %}
+            <a class="btn btn-sm btn-light" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+            <a class="btn btn-sm btn-light" href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+        {% endif %}
+      </span>
+    </div>
   </div>
     {% thumbnail course.image "800x800" quality=61 as im %}
     <div class="courseImage" style="background-image:url({{im.url}}); filter:blur(10px);">
     </div>
     {% endthumbnail %}
   {% else %}
-
   <div id="courseNoBackground">
-  <div class="container">
-    <h1 class="courseTitleNoBackground d-none d-md-block">{{course.title}}</h1>
-    <h4 class="courseTitleNoBackground d-md-none">{{course.title}}</h4>
-    {% if course.subtitle %}
-    <hr>
-    {% endif %}
-    <h5 class="courseSubtitleNoBackground d-none d-md-block">{{course.subtitle}}</h5>
-    <h6 class="courseSubtitleNoBackground d-md-none">{{course.subtitle}}</h6>
-    
+    <div class="container">
+      <h1 class="courseTitleNoBackground d-none d-md-block">{{course.title}} - {{page_obj.object_list.0.title}}</h1>
+      <h2 class="courseTitleNoBackground d-md-none">{{course.title}} - {{page_obj.object_list.0.title}}</h2>
+
+      <!--PAGINATION BUTTONS-->
+      <div style="padding-top:15px;">
+        <span  class="step-links">
+          {% if page_obj.has_previous %}
+              <a class="btn btn-sm btn-light" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+              <a class="btn btn-sm btn-light" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+          {% endif %}
+      
+          {% if page_obj.has_previous or page_obj.has_next %}
+            <span class="current courseTitleNoBackground">
+              Module {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+          {% endif %}
+      
+          {% if page_obj.has_next %}
+              <a class="btn btn-sm btn-light" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+              <a class="btn btn-sm btn-light" href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+          {% endif %}
+        </span>
+      </div>
+
+    </div>
   </div>
-</div>
-</div>
-
+  </div>
   {% endif %}
-  
-  
 
 </div>
 
 
 
 
-
+<!--SOCIAL SHARE BUTTONS-->
 <div id="social-share-desktop">
   <div data-network="facebook" class="btn btn-light st-custom-button"><i class="fab fa-facebook-f"></i></div>
   <div data-network="messenger" class="btn btn-light st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
@@ -95,7 +115,6 @@
   <div data-network="linkedin" class="btn btn-light st-custom-button"><i class="fab fa-linkedin-in"></i></div>
   <div data-network="pinterest" class="btn btn-light st-custom-button"><i class="fab fa-pinterest-p"></i></div>
 </div>
-
 <div id="social-share-mobile">
   <div data-network="facebook" class="btn btn-light st-custom-button"><i class="fab fa-facebook-f"></i></div>
   <div data-network="messenger" class="btn btn-light st-custom-button"><i class="fab fa-facebook-messenger"></i></div>
@@ -104,12 +123,19 @@
   <div data-network="pinterest" class="btn btn-light st-custom-button"><i class="fab fa-pinterest-p"></i></div>
 </div>
 
+<!--COURSE BODY-->
 <div id="course1">
   <div class="container">
     <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
       <div>
-        <span>Views <i class="far fa-eye"></i> : <span style="color:#44b78b;">{% get_hit_count for course %}</span></span>
-        <span style="margin-left:12px;">Comments <i class="far fa-comments"></i> : <a style="color:#44b78b;" href="{% url 'course' course.slug %}#disqus_thread"></a></span>
+        <div class="d-none d-md-block">
+          <span>Course views <i class="far fa-eye"></i> : <span style="color:#44b78b;">{% get_hit_count for course %}</span></span>
+          <span style="margin-left:12px;">Module comments <i class="far fa-comments"></i> : <a style="color:#44b78b;" href="?page={{ page_obj.number }}#disqus_thread"></a></span>
+        </div>
+        <div class="d-md-none">
+          <span>Course views <i class="far fa-eye"></i> : <span style="color:#44b78b;">{% get_hit_count for course %}</span></span><br>
+          <span>Module comments <i class="far fa-comments"></i> : <a style="color:#44b78b;" href="?page={{ page_obj.number }}#disqus_thread"></a></span>
+        </div>
       </div>
       <div>
       <button id="text-size-increase" class="btn btn-light"><i style="font-size: 12px;" class="fas fa-font"></i><sup><i style="font-size:10px;" class="fas fa-plus"></i></sup></button>
@@ -118,40 +144,34 @@
     </div>
     <hr>
     <div id="course-div">
-
-
-
+      {{page_obj.object_list.0.module|safe}}
       
-
-
-
       <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top:15px;" class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a class="btn btn-success" href="{% my_url 1 'page' request.GET.urlencode %}"><i class="fas fa-angle-double-left"></i></a>
-                <a class="btn btn-success" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}"><i class="fas fa-angle-left"></i></a>
-            {% endif %}
-    
-            {% if page_obj.has_previous or page_obj.has_next %}
-              <span class="current">
-                Module {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-              </span>
-            {% endif %}
-    
-            {% if page_obj.has_next %}
-                <a class="btn btn-success" href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}"><i class="fas fa-angle-right"></i></a>
-                <a class="btn btn-success" href="{% my_url page_obj.paginator.num_pages 'page' request.GET.urlencode %}"><i class="fas fa-angle-double-right"></i></a>
-            {% endif %}
+        <!--PAGINATION BUTTONS-->
+        <span  class="step-links">
+          {% if page_obj.has_previous %}
+              <a class="btn btn-dark" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+              <a class="btn btn-dark" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+          {% endif %}
+      
+          {% if page_obj.has_previous or page_obj.has_next %}
+            <span class="current courseTitleNoBackground">
+              Module {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+          {% endif %}
+      
+          {% if page_obj.has_next %}
+              <a class="btn btn-dark" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+              <a class="btn btn-dark" href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+          {% endif %}
         </span>
       </div>
-
-
-
     </div>
   </div>
 </div>
 
 
+<!-- DISQUS COMMENTS -->
 <div id="comments">
   <div id="end-of-course" style="padding-top:10vh; padding-bottom:10vh; display:flex; justify-content:center;">
     <div>
@@ -181,41 +201,35 @@
 {% endif %}
 
 <!-- Button trigger modal -->
-
-<div id="all-modules" data-toggle="modal" data-target="#all-modules-modal">
-  <i class="fas fa-th"></i>
+<div id="modules-menu-trigger" data-toggle="modal" data-target="#all-modules-modal">
+  <i id="modules-menu-open" class="fas fa-th"></i>
+  <i id="modules-menu-close" class="fas fa-times" style="display:none;"></i>
 </div>
 
+<div id="modules-menu-wrapper">
+</div>
 
-<!-- Modal -->
-<div class="modal fade" id="all-modules-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="all-modules-modal-label" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="all-modules-modal-label">All modules</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="fas fa-times"></i>
-        </button>
+  <div id="modules-menu">
+    <div id="modules-menu-inner">
+      <div style="width: 100%; padding-bottom: 15px; padding-bottom: 15px;" class="text-center">
+        <span>{{course.title}}</span>
       </div>
-      <div class="modal-body">
-
-        <ul>
-          {% for module in modules %}
-
+     
+      
+      <ul style="padding:0px; list-style-type:none;">
+        {% for module in modules %}
         <a href="?page={{modules|get_index:module}}">
-          <li>
-            <h5>{{module.title}}</h5>
+          <li class="module-link">
+            <span>{{module.title}}</span>
           </li>
         </a>
-
-        {% endfor %}
-        </ul>
-
-      </div>
-
+        <hr style="margin:0;">
+      {% endfor %}
+      </ul>
     </div>
   </div>
-</div>
+
+
 
 {% if course.author == request.user.username %}
 <a href="{{course.get_admin_url}}">
@@ -225,7 +239,6 @@
 </a>
 {% endif %}
 
-
 {% endblock %}
 
 {% block scripts %}
@@ -234,7 +247,6 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $("pre code").parent().css("background-color", "#282B2E");
-
     $(window).scroll(function() {
       var course_height = $('#courseImageDiv').height() + $('.navHBlock').height() + $('#course1').height() + $('#end-of-course').outerHeight();
       var percentage_covered = ($(window).scrollTop() / (course_height-$(window).height()))*100 + '%';
@@ -244,7 +256,6 @@
 </script>
 
 <script type="text/javascript">
-
     $("#text-size-increase").click(function() {
       text_array = ['p','h1','h2','h3','h4','h5','h6']
       $.each( text_array, function( index, value ){

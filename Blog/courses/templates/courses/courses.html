@@ -20,27 +20,42 @@
 {% include 'articles/navigation.html' %}
 
 <!--CATEGORIES-->
-<div id="categories-container-wrapper" style="padding-top:15px; padding-bottom:15px; background:#f9f9f9;" class="text-center">
+  <div style="padding-top:15px; padding-bottom:15px; background:#f9f9f9;" class="categories-container-wrapper text-center">
 
-    {% for category in categories %}
-    <div class="categories-container">
-      <a href="#">
-        {% thumbnail category.image "200x200" quality=91 as im %}
-        <div style="background-image:url({{im.url}});" class="category-image-div">
-        </div>
-        {% endthumbnail %}
-      </a>
-      <a href="#">
-        <div class="category-info">
-          <span class="category-title" style="margin:0;">{{category.title}}</span>
-          <div class="category-count">
-            <span>{{category.courses_count}}</span>
+      {% for category in categories %}
+      <div class="categories-container">
+        <a href="{% url 'coursesCategory' category.slug %}">
+          {% thumbnail category.image "200x200" quality=91 as im %}
+          <div style="background-image:url({{im.url}});" class="category-image-div">
           </div>
-        </div>
-      </a>
-    </div>
-    {% endfor %}
-  
+          {% endthumbnail %}
+        </a>
+        <a href="{% url 'coursesCategory' category.slug %}">
+          <div class="category-info">
+            <span class="category-title" style="margin:0;">{{category.title}}</span>
+            <div class="category-count">
+              <span>{{category.courses_count}}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    
+  </div>
+
+  <div style="display: flex; justify-content: flex-end; align-items: center; padding-top:15px;" class="container-fluid">
+    <a href="{% url 'courses' %}">
+      <div id="restore-default-courses" style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <i style="color: #44b78b;" class="fas fa-redo"></i>
+      </div>
+    </a>
+    <form id="courses-search-form" action="{% url 'courses' %}" method="POST">
+      
+      <!--input with id = "nav-tools-searchInput" -->
+      {% csrf_token %}
+      {{courses_Filter.form.search}}
+      <button id="courses-search-submit" class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+    </form>
   </div>
 
   <!--COURSES-->
@@ -53,14 +68,14 @@
         <div class="col-12 col-xl-6 infinite-item">
           <div class="container-fluid">
   
-            <a href="{% url 'course' course.slug %}">
+            <a href="{% url 'course' course.slug %}?page=1">
               <div class="row courseRow">
                 {% thumbnail course.image "500x500" quality=91 as im %}
                 <div style="background-image:url({{im.url}});" class="col-12 col-sm-6 col-xl-5 courseImageDiv">
-                  {% if course.subtitle or course.category %}
+                  {% if course.description or course.category %}
                   <div class="courseImageDivInner">
                     <span class="course-category">{{course.category.title}}</span>
-                    <span class="course-subtitle">{{course.subtitle}}</span>
+                    <span class="course-description">{{course.description}}</span>
                   </div>
                   {% endif %}
                     
@@ -70,13 +85,13 @@
                 <div class="col-12 col-sm-6 col-xl-7">
                   <div class="courseInfo">
     
-                    <div class="title-Subtitle-Publised-Author">
+                    <div class="title-Description-Publised-Author">
                       
                         <h4 class="courseTitle">{{course.title}}</h4>
   
-                        {% if course.subtitle %}
+                        {% if course.description %}
                         <div style="margin-bottom:7.5px;" class="fade-div d-xl-none">
-                          <h6 class="courseSubtitle text-muted">{{course.subtitle}}</h6>
+                          <h6 class="courseDescription text-muted">{{course.description}}</h6>
                           <p class="fade-effect"></p>
                         </div>
                         {% endif %}

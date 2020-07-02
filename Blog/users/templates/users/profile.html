@@ -23,13 +23,7 @@
 {% include 'articles/navigation.html' %}
 
   <div id="profile">
-
-    
-
-    <div class="container" style="margin-bottom: 15px;">
-
-     
-        
+    <div class="container">
         <div id="profileImageDiv">
           <div>
             {% if user.profile.profile_image %}
@@ -46,7 +40,6 @@
             </div>
             {% endif %}
           </div>
-
           <div style="margin-left:15px;">
             <h6><i class="far fa-user"></i> {{user.username}}</h6>
             <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
@@ -59,74 +52,134 @@
             {% endif %}
           </div>
         </div>
-
-        <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;" onchange="submitOnLoad()">
+        <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" onchange="submitOnLoad()">
           {% csrf_token %}
           {{form.profile_image}}
         </form>
 
-      
-
-      
-      
-
-      
+        <div style="margin-bottom:30px;">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a style="margin-top:4px;" class="btn btn-light" href="{% url 'password_change' %}">
+             <small><i class="fas fa-key"></i> Change password</small>
+            </a>
+            <a style="margin-top:4px;" class="btn btn-light" href="{% url 'logout' %}">
+              <small><i class="fas fa-sign-out-alt"></i> Log out</small>
+            </a>
+            {% if user.is_staff %}
+            <a style="margin-top:4px;" class="btn btn-light" href="{% url 'authorsArticlesPreview' %}">
+              <small><i class="fas fa-feather"></i> Author's panel</small>
+            </a>
+            <a style="margin-top:4px;" class="btn btn-light" href="{% url 'admin:index' %}">
+              <small><i class="fa fa-cogs"></i> Admin panel</small>
+            </a>
+            {% endif %}
+          </div>
+        </div>
     </div>
-
 
     <div class="container">
-      <h5>Last read articles...</h5>
-    <div class="row">
-        {% for view in viewed_articles %} 
-          <div class="col-12 col-sm-6 col-xl-3">
-            <a href="{% url 'article' view.article.slug %}">
-              <div style="margin-top:15px;" class="card viewed-article-card">
-                {% thumbnail view.article.image "500x500" quality=91 as im %}
-                <div class="viewed-article-image-div" style="background-image: url({{im.url}});">
-                  <div class="viewed-article-image-div-inner">
-                    <span class="viewed-article-category-title">{{view.article.category.title}}</span>
-                  </div>
-                </div>
-                {% endthumbnail %}
-                <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
-                  <div class="fade-div">
-                    <small class="viewed-article-title" style="color: black;">{{view.article.title}}</small>
-                    <p class="fade-effect"></p>
-                  </div>
-                  <div class="text-muted text-right article-last-viewed-date" >
-                    <small>Last read : {{view.created}}</small>
-                  </div>
-                </div>
-                
-              </div>
-            </a>
-          </div> 
-        {% endfor %} 
-    </div>
-  </div>
+      
+      <div style="border: none !important; margin-bottom: 30px;" class="card">
+        <div class="card-header">
+          Last viewed articles
+        </div>
 
-  <div class="container">
 
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'password_change' %}">
-       <small><i class="fas fa-key"></i> Change password</small>
-      </a>
-      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'logout' %}">
-        <small><i class="fas fa-sign-out-alt"></i> Log out</small>
-      </a>
-      {% if user.is_staff %}
-  
-      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'authorsArticlesPreview' %}">
-        <small><i class="fas fa-feather"></i> Author's panel</small>
-      </a>
-  
-      <a style="margin-top:4px;" class="btn btn-light" href="{% url 'admin:index' %}">
-        <small><i class="fa fa-cogs"></i> Admin panel</small>
-      </a>
-      {% endif %}
-    </div>
+        {% if viewed_articles %}
+        <div style="padding:0;" class="card-body">
+          <div class="row">
+            {% for view in viewed_articles %} 
+              <div class="col-12 col-sm-6 col-xl-3">
+                <a href="{% url 'article' view.article.slug %}">
+                  <div style="margin-top:15px;" class="card viewed-card">
+                    {% thumbnail view.article.image "500x500" quality=91 as im %}
+                    <div class="viewed-image-div" style="background-image: url({{im.url}});">
+                      <div class="viewed-image-div-inner">
+                        <span class="viewed-category-title">{{view.article.category.title}}</span>
+                      </div>
+                    </div>
+                    {% endthumbnail %}
+                    <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
+                      <div class="fade-div">
+                        <small class="viewed-title" style="color: black;">{{view.article.title}}</small>
+                        <p class="fade-effect"></p>
+                      </div>
+                      <div class="text-muted text-right last-viewed-date" >
+                        <small>Last viewed : {{view.created}}</small>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </a>
+              </div> 
+            {% endfor %} 
+          </div>
+        </div>
+        {% else %}
+        <div class="card-body">
+          <h5 class="card-title">Nothing yet</h5>
+          <p class="card-text">Go read some articles you magnificent beast!</p>
+          <div style="width: 100%;" class="">
+            <a href="{% url 'articles' %}" class="btn btn-outline-dark browse">Browse articles</a>
+          </div>
+        </div>
+        {% endif %}
+      
+        
+      </div>
 
-    
+
+      <div style="border: none !important;" class="card">
+        <div class="card-header">
+          Last viewed courses
+        </div>
+     
+
+        {% if viewed_courses %}
+        <div style="padding:0;" class="card-body">
+          <div class="row">
+            {% for view in viewed_courses %} 
+              <div class="col-12 col-sm-6 col-xl-3">
+                <a href="{% url 'course' view.course.slug %}">
+                  <div style="margin-top:15px;" class="card viewed-card">
+                    {% thumbnail view.course.image "500x500" quality=91 as im %}
+                    <div class="viewed-image-div" style="background-image: url({{im.url}});">
+                      <div class="viewed-image-div-inner">
+                        <span class="viewed-category-title">{{view.course.category.title}}</span>
+                      </div>
+                    </div>
+                    {% endthumbnail %}
+                    <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
+                      <div class="fade-div">
+                        <small class="viewed-title" style="color: black;">{{view.course.title}}</small>
+                        <p class="fade-effect"></p>
+                      </div>
+                      <div class="text-muted text-right last-viewed-date" >
+                        <small>Last viewed : {{view.created}}</small>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </a>
+              </div> 
+            {% endfor %} 
+          </div>
+        </div>
+        {% else %}
+        <div class="card-body">
+          <h5 class="card-title">Nothing yet</h5>
+          <p class="card-text">It's time to learn something new!</p>
+          <div style="width: 100%;" class="">
+            <a href="{% url 'courses' %}" class="btn btn-outline-dark browse">Browse courses</a>
+          </div>
+        </div>
+        {% endif %}
+      
+        
+      </div>
+     
+      
+      
 
   </div>
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from . models import Articles, ArticlesCategories
+from courses.models import Courses, CoursesCategories
 from . filters import ArticlesFilter
 from django.utils.timezone import localtime, now
 from django.db.models import Q, Count
@@ -16,10 +17,13 @@ def index(request):
     current_datetime = localtime(now())
 
     current_datetime = localtime(now())
-    categories = ArticlesCategories.objects.annotate(articles_count=Count('articles', filter=Q(articles__publish_date__lte=current_datetime)))
-    recent_articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')[:4]
+    articles_categories = ArticlesCategories.objects.annotate(articles_count=Count('articles', filter=Q(articles__publish_date__lte=current_datetime)))
+    courses_categories = CoursesCategories.objects.annotate(courses_count=Count('courses', filter=Q(courses__publish_date__lte=current_datetime)))
 
-    context = {'recent_articles':recent_articles,'categories':categories}
+    recent_articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')[:4]
+    recent_courses = Courses.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')[:4]
+
+    context = {'recent_articles':recent_articles, 'recent_courses':recent_courses, 'articles_categories':articles_categories,'courses_categories':courses_categories}
     return render(request, 'articles/index.html', context)
 
 def privacy(request):
@@ -80,6 +84,12 @@ class Article(HitCountDetailView):
             user = Account.objects.get(username=username)
             profile = Profile.objects.get(user=user)
             ArticlesViews.objects.create(article=obj, profile=profile)
+
+            qu = ArticlesViews.objects.filter(article=obj,profile=profile).order_by('-created')
+            if len(qu)>1:
+                qu[1].delete()
+            
+
         return obj
             
 

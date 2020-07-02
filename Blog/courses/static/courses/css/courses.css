@@ -1,4 +1,4 @@
-#categories-container-wrapper {
+.categories-container-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -14,11 +14,11 @@
     cursor: pointer;
     margin-left: 15px;
     border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    box-shadow: 3px 3px 4px #d9d9d9;
   }
   
   .categories-container:hover {
-    box-shadow: 0px 0px 7px #d9d9d9;
+    box-shadow: 3px 3px 4px silver;
   }
   
   .category-image-div {
@@ -27,6 +27,8 @@
     background-repeat: no-repeat;
     height: 55px;
     width: 75px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
   
   .category-info {
@@ -111,7 +113,7 @@
     height: 100%;
   }
   
-  .title-Subtitle-Publised-Author {
+  .title-Description-Publised-Author {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -149,7 +151,7 @@
     align-items: flex-start;
   }
   
-  .course-category, .course-subtitle{
+  .course-category, .course-description{
     color: #fff;
   }
   
@@ -157,7 +159,7 @@
     font-size: 18px;
     font-weight: bold;
   }
-  .course-subtitle{
+  .course-description{
     color: #fff;
     font-size: 13.2px;
   }
@@ -166,7 +168,7 @@
     .course-category{
       font-size: 17px;
     }
-    .course-subtitle{
+    .course-description{
       font-size: 12.2px;
     }
   }
@@ -187,7 +189,7 @@
     }
   }
   
-  .title-Subtitle-Publised-Author .courseTitle {
+  .title-Description-Publised-Author .courseTitle {
     margin-top: 7px;
     color: black;
     font-size: 1.05rem;
@@ -206,7 +208,7 @@
     font-size: 13.2px;
   }
   
-  .courseSubtitle{
+  .courseDescription{
     font-size:13.2px;
   }
   

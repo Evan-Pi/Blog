@@ -7,8 +7,19 @@ class InLineModules(admin.StackedInline):
     extra = 1
 
 class CoursesAdmin(admin.ModelAdmin):
+
+    def get_queryset(self, request):
+        qs = super(CoursesAdmin, self).get_queryset(request)
+
+        if not request.user.is_superuser:
+            filtered_qs = qs.filter(author=request.user)
+        else:
+            filtered_qs = qs
+
+        return filtered_qs
+
     inlines = [InLineModules]
-    list_display = ('title','created','publish_date','author')
+    list_display = ('title','image_tag','created','publish_date','author')
     list_filter = ('category',)
     search_fields = ('title',)
 
@@ -18,8 +29,6 @@ class CoursesAdmin(admin.ModelAdmin):
             }
 
 
-
-
 admin.site.register(CoursesCategories)
 admin.site.register(Courses,CoursesAdmin)
-admin.site.register(Modules)
+

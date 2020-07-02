@@ -12,7 +12,10 @@ from django_currentuser.db.models import CurrentUserField
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 
+from django.utils.html import mark_safe
+
 from hitcount.models import HitCount, HitCountMixin
+
 
 class ArticlesCategories(models.Model):
     '''Articles categories creation'''
@@ -40,9 +43,9 @@ class Articles(models.Model, HitCountMixin):
         verbose_name_plural = 'Articles'
 
     category = models.ForeignKey(ArticlesCategories, on_delete=models.SET_NULL, null=True, blank=True)
-    title = models.TextField(max_length=256,unique=True)
-    search = models.CharField(default='',editable=False,max_length=512)
-    slug = models.SlugField(editable=False,max_length=256)
+    title = models.TextField(max_length=150,unique=True)
+    search = models.CharField(default='',editable=False,max_length=472)
+    slug = models.SlugField(editable=False,max_length=150)
     subtitle = models.TextField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
     use_image_as_background_in_article = models.BooleanField(default=True)
@@ -54,12 +57,17 @@ class Articles(models.Model, HitCountMixin):
     updated = models.DateTimeField(auto_now=True)
     publish_date = models.DateTimeField()
 
-    author = models.CharField(editable=False, default='', max_length=256)
+    author = models.CharField(editable=False, default='', max_length=64)
+
+    def image_tag(self):
+        return mark_safe(f'<div style="width:80px; height:50px; background-image:url({self.image.url}); background-position: center; background-size: cover;"></div>')
+
+    image_tag.short_description = 'Image preview'
 
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))
         self.author = get_current_user().username
-        self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower() + self.author.lower() ) if unicodedata.category(c) != 'Mn')
+        self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower()  + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -71,6 +79,7 @@ class Articles(models.Model, HitCountMixin):
 
     def __str__(self):
         return self.title
+
 
 class Comments(models.Model):
     '''This class creates comments for articles'''

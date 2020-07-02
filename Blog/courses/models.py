@@ -12,7 +12,11 @@ from django_currentuser.db.models import CurrentUserField
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 
+from django.utils.html import mark_safe
+from django.core.validators import MinValueValidator
+
 from hitcount.models import HitCount, HitCountMixin
+
 
 class CoursesCategories(models.Model):
     '''Courses categories creation'''
@@ -41,10 +45,10 @@ class Courses(models.Model, HitCountMixin):
         verbose_name_plural = 'Courses'
 
     category = models.ForeignKey(CoursesCategories, on_delete=models.SET_NULL, null=True, blank=True)
-    title = models.CharField(max_length=256,unique=True)
-    search = models.CharField(default='',editable=False,max_length=512)
-    slug = models.SlugField(editable=False,max_length=256)
-    subtitle = models.CharField(max_length=256, blank=True)
+    title = models.CharField(max_length=150,unique=True)
+    search = models.CharField(default='',editable=False,max_length=472)
+    slug = models.SlugField(editable=False,max_length=150)
+    description = models.TextField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Courses_Images", default='')
     use_image_as_background_in_course = models.BooleanField(default=True)
 
@@ -55,12 +59,17 @@ class Courses(models.Model, HitCountMixin):
     publish_date = models.DateTimeField()
 
 
-    author = models.CharField(editable=False, default='', max_length=256)
+    author = models.CharField(editable=False, default='', max_length=64)
+
+    def image_tag(self):
+        return mark_safe(f'<img src="{self.image.url}" width="auto" height="55" />')
+
+    image_tag.short_description = 'Image preview'
 
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))
         self.author = get_current_user().username
-        self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower() + self.author.lower() ) if unicodedata.category(c) != 'Mn')
+        self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.description.lower() + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -74,6 +83,7 @@ class Courses(models.Model, HitCountMixin):
         return f'{self.category.title} - {self.title}'
 
 
+
 class Modules(models.Model, HitCountMixin):
     '''Modules creation'''
 
@@ -83,10 +93,10 @@ class Modules(models.Model, HitCountMixin):
 
     course = models.ForeignKey(Courses, on_delete=models.CASCADE, null=True, blank=True)
 
-    title = models.CharField(max_length=256,unique=True)
-    search = models.CharField(default='',editable=False,max_length=512)
-    slug = models.SlugField(editable=False,max_length=256)
-    subtitle = models.CharField(max_length=256, blank=True)
+    title = models.CharField(max_length=150,unique=True)
+    search = models.CharField(default='',editable=False,max_length=300)
+    slug = models.SlugField(editable=False,max_length=150)
+    subtitle = models.CharField(max_length=150, blank=True)
 
     module = RichTextUploadingField(external_plugin_resources=[('exportpdf','/static/articles/js/exportpdf/','plugin.js')], default='')
     tags = TaggableManager(blank=True)
@@ -94,6 +104,9 @@ class Modules(models.Model, HitCountMixin):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     publish_date = models.DateTimeField()
+
+    order = models.IntegerField(validators=[MinValueValidator(1)], blank=True, default=1)
+
 
 
     def save(self, *args, **kwargs):
