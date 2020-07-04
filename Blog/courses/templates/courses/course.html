@@ -211,7 +211,7 @@
 
   <div id="modules-menu">
     <div id="modules-menu-inner">
-      <div style="width: 100%; padding-bottom: 15px; padding-bottom: 15px;" class="text-center">
+      <div style="width: 100%; padding-top: 15px; padding-bottom: 15px;" class="text-center">
         <span>{{course.title}}</span>
       </div>
      
@@ -219,7 +219,7 @@
       <ul style="padding:0px; list-style-type:none;">
         {% for module in modules %}
         <a href="?page={{modules|get_index:module}}">
-          <li class="module-link">
+          <li id="module-{{module.id}}" class="module-link">
             <span>{{module.title}}</span>
           </li>
         </a>
@@ -243,6 +243,11 @@
 
 {% block scripts %}
 <script src="{% static 'courses/js/course_special.js' %}"></script>
+
+<script>
+  var current_module = "#module-{{page_obj.object_list.0.id}}";
+  $(current_module).css({'background':'#fbfbfb','color':'#44b78b'});
+</script>
 
 <script type="text/javascript">
   $(document).ready(function() {

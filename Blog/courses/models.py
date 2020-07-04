@@ -16,6 +16,7 @@ from django.utils.html import mark_safe
 from django.core.validators import MinValueValidator
 
 from hitcount.models import HitCount, HitCountMixin
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class CoursesCategories(models.Model):
@@ -57,6 +58,8 @@ class Courses(models.Model, HitCountMixin):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     publish_date = models.DateTimeField()
+
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',related_query_name='hit_count_generic_relation')
 
 
     author = models.CharField(editable=False, default='', max_length=64)

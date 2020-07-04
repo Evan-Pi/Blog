@@ -4,7 +4,7 @@ from . models import CoursesCategories, Courses, Modules
 
 class InLineModules(admin.StackedInline):
     model = Modules
-    extra = 1
+    extra = 0
 
 class CoursesAdmin(admin.ModelAdmin):
 

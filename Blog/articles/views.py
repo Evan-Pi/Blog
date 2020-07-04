@@ -21,9 +21,11 @@ def index(request):
     courses_categories = CoursesCategories.objects.annotate(courses_count=Count('courses', filter=Q(courses__publish_date__lte=current_datetime)))
 
     recent_articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')[:4]
-    recent_courses = Courses.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')[:4]
+    popular_courses = Courses.objects.filter(publish_date__lte=current_datetime).order_by('-hit_count_generic__hits')[:4]
 
-    context = {'recent_articles':recent_articles, 'recent_courses':recent_courses, 'articles_categories':articles_categories,'courses_categories':courses_categories}
+    
+
+    context = {'recent_articles':recent_articles, 'popular_courses':popular_courses, 'articles_categories':articles_categories,'courses_categories':courses_categories}
     return render(request, 'articles/index.html', context)
 
 def privacy(request):

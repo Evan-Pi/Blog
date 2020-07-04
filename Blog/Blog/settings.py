@@ -159,6 +159,7 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
         'height': '100px',
         'tabSpaces': 4,
+        'extraAllowedContent': 'iframe[*]',
         'extraPlugins': ','.join([
             'uploadimage', # the upload image feature
             # your extra plugins here
