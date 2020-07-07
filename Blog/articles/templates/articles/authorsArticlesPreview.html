@@ -14,18 +14,6 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
-
-<style media="screen">
-  #navbarArticles,
-  #sidebarArticles,
-  #authors-admin {
-    display: none;
-  }
-  #no-articles-returned {
-  min-height: calc(100vh - 94px - 75px - 52px - 53px) !important;
-  margin-top: -15px;
-  }
-</style>
 {% endblock %}
 
 {% block main %}
@@ -61,11 +49,14 @@
 <div id="articles1">
   <div class="container-fluid">
     <div id="articlesContainer" class="row infinite-container">
-      {% if articles.count != 0 %}
+      {% if articles.count %}
       {% for article in page_obj %}
       <div class="col-12 col-xl-6 infinite-item">
         <div class="container-fluid">
           <a href="{% url 'article' article.slug %}">
+
+                  
+
             <div class="row articleRow">
               {% thumbnail article.image "500x500" quality=91 as im %}
               <div style="background-image:url({{im.url}});" class="col-12 col-sm-5 col-lg-4 articleImageDiv">
@@ -81,15 +72,6 @@
               {% endthumbnail %}
               <div class="col-12 col-sm-7 col-lg-8">
                 <div class="articleInfo">
-                  {% if article.publish_date > current_datetime %}
-                    <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
-                      <span>Not yet published <i style="color:#44b78b;" class="far fa-clock"></i></span>
-                    </div>
-                  {% else %}
-                  <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
-                    <span>Published <i style="color:#44b78b;" class="fas fa-check"></i></span>
-                  </div>
-                  {% endif %}
                   <div class="title-Subtitle-Publised-Author">
                       <h4 class="articleTitle">{{article.title}}</h4>
                     <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.publish_date}}</h6><br>
@@ -104,7 +86,30 @@
                       </div>
                     </div>
                   </div>
+                  
+                  {% if article.approved %}
+                  <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                    <small>Εγκρίθηκε <i style="color:#44b78b; margin-left: 2px;" class="fas fa-check"></i></small>
+                  </div>
+                  {% else %}
+                  <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                    <small>Δεν έχει εγκριθεί ακόμα<i style="color:#44b78b; margin-left: 2px;" class="far fa-clock"></i></small>
+                  </div>
+                  {% endif %}
+                  {% if article.publish_date > current_datetime %}
+                    <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                      <small>Δεν έχει παρέλθει η ημερομηνία δημοσίευσης <i style="color:#44b78b; margin-left: 2px;" class="far fa-clock"></i></small>
+                    </div>
+                  {% else %}
+                  <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                    <small>Η ημερομηνία δημοσίευσης έχει παρέλθει<i style="color:#44b78b; margin-left: 2px;" class="fas fa-check"></i></small>
+                  </div>
+                  {% endif %}
+                  
                 </div>
+
+                
+
               </div>
             </div>
           </a>
@@ -113,8 +118,8 @@
       {% endfor %}
       {% else %}
         <div class="text-center" id="no-articles-returned" style="width:100%; height:100%; min-height: calc(100vh - 52px); display:flex; flex-direction:column; justify-content:center; align-items:center;">
-          <h3 class="d-none d-md-flex">No articles for this particular search...</h3>
-          <h4 class="d-md-none">No articles for this particular search...</h4>
+          <h3 class="d-none d-md-flex">Δεν βρέθηκαν άρθρα...</h3>
+          <h4 class="d-md-none">Δεν βρέθηκαν άρθρα...</h4>
           <i style="color:#44b78b;" class="fas fa-heart-broken fa-2x"></i>
         </div>
       {% endif %}

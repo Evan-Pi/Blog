@@ -64,6 +64,8 @@ class Courses(models.Model, HitCountMixin):
 
     author = models.CharField(editable=False, default='', max_length=64)
 
+    approved = models.BooleanField(default=False)
+
     def image_tag(self):
         return mark_safe(f'<img src="{self.image.url}" width="auto" height="55" />')
 
@@ -71,7 +73,8 @@ class Courses(models.Model, HitCountMixin):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))
-        self.author = get_current_user().username
+        if not self.id:
+            self.author = get_current_user().username
         self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.description.lower() + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 

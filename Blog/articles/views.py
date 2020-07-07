@@ -23,8 +23,6 @@ def index(request):
     recent_articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')[:4]
     popular_courses = Courses.objects.filter(publish_date__lte=current_datetime).order_by('-hit_count_generic__hits')[:4]
 
-    
-
     context = {'recent_articles':recent_articles, 'popular_courses':popular_courses, 'articles_categories':articles_categories,'courses_categories':courses_categories}
     return render(request, 'articles/index.html', context)
 
@@ -37,7 +35,7 @@ def articles(request):
     current_datetime = localtime(now())
     categories = ArticlesCategories.objects.annotate(articles_count=Count('articles', filter=Q(articles__publish_date__lte=current_datetime)))
 
-    articles = Articles.objects.filter(publish_date__lte=current_datetime).order_by('-publish_date')
+    articles = Articles.objects.filter(publish_date__lte=current_datetime,approved=True).order_by('-publish_date')
 
     if request.method == 'POST':
         mut = request.POST.copy()
@@ -97,7 +95,13 @@ class Article(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        current_datetime = localtime(now())
         article = Articles.objects.get(slug=self.kwargs['slug'])
+        if (article.publish_date > current_datetime or article.approved == False) and (article.author != self.request.user.username) and not (self.request.user.is_superuser):
+            not_approved_article = True
+        else:
+            not_approved_article = False
+        context['not_approved_article'] = not_approved_article
         context['article'] = article
         return context
 
@@ -108,7 +112,7 @@ class Article(HitCountDetailView):
 def articlesCategory(request, slug):
     category = ArticlesCategories.objects.get(slug=slug)
     current_datetime = localtime(now())
-    articles = Articles.objects.filter(category=category,publish_date__lte=current_datetime).order_by('-publish_date')
+    articles = Articles.objects.filter(category=category,publish_date__lte=current_datetime,approved=True).order_by('-publish_date')
 
     if request.method == 'POST':
         mut = request.POST.copy()
@@ -131,7 +135,7 @@ def articlesCategory(request, slug):
 def authorsArticlesPreview(request):
     current_datetime = localtime(now())
     articles = Articles.objects.filter(author=request.user).order_by('-publish_date')
-
+    
     if request.method == 'POST':
         mut = request.POST.copy()
         mut['search'] = ''.join(c for c in unicodedata.normalize('NFD', mut['search'].lower()) if unicodedata.category(c) != 'Mn')

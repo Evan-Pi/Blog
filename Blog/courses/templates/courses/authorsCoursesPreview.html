@@ -19,17 +19,25 @@
 {% block main %}
 {% include 'articles/navigation.html' %}
 
-<div style="padding-top:15px; padding-bottom:15px; background:#f9f9f9; " class="container-fluid text-center">
-  <h3 data-aos='fade-right' data-aos-duration='1000'>{{category.title}}</h3>
+<div style="padding-top:15px; padding-bottom:15px; background:#f9f9f9; display:flex; justify-content: space-between; align-items:center;" class="container-fluid">
+  <div>
+    <h4>{{request.user}}</h4>
+    <h6>Author's Panel</h6>
+  </div>
+
+  <div>
+    <h5>courses : <span style="color:#44b78b; font-weight:bold;">{{number_of_courses}}</span></h5>
+  </div>
+  
 </div>
 
 <div style="display: flex; justify-content: flex-end; align-items: center; padding-top:15px;" class="container-fluid">
-  <a href="{% url 'coursesCategory' category.slug %}">
-    <div style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <a href="{% url 'authorsCoursesPreview' %}">
+    <div id="restore-default-courses" style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <i style="color: #44b78b;" class="fas fa-redo"></i>
     </div>
   </a>
-  <form id="courses-search-form" action="{% url 'coursesCategory' category.slug %}" method="POST">
+  <form id="courses-search-form" action="{% url 'authorsCoursesPreview' %}" method="POST">
     <!--input with id = "nav-tools-searchInput" -->
     {% csrf_token %}
     {{courses_Filter.form.search}}
@@ -41,25 +49,26 @@
 <div id="courses1">
   <div class="container-fluid">
     <div id="coursesContainer" class="row infinite-container">
-
-      {% if courses.count != 0 %}
+      {% if courses.count %}
       {% for course in page_obj %}
       <div class="col-12 col-xl-6 infinite-item">
         <div class="container-fluid">
-          <a href="{% url 'course' course.slug %}?page=1">
+          <a href="{% url 'course' course.slug %}">
             <div class="row courseRow">
               {% thumbnail course.image "500x500" quality=91 as im %}
-              <div style="background-image:url({{im.url}});" class="col-12 col-sm-6 col-xl-5 courseImageDiv">
-                  {% if course.description %}
+              <div style="background-image:url({{im.url}});" class="col-12 col-sm-5 col-lg-4 courseImageDiv">
+  
+                  {% if course.description or course.category %}
                   <div class="courseImageDivInner">
+                    <span class="course-category">{{course.category.title}}</span>
                     <span class="course-description">{{course.description}}</span>
                   </div>
                   {% endif %}
+  
               </div>
               {% endthumbnail %}
-              <div class="col-12 col-sm-6 col-xl-7">
+              <div class="col-12 col-sm-7 col-lg-8">
                 <div class="courseInfo">
-  
                   <div class="title-Description-Publised-Author">
                       <h4 class="courseTitle">{{course.title}}</h4>
                     <h6 class="text-muted published"><i class="far fa-calendar-alt"></i> {{course.publish_date}}</h6><br>
@@ -74,6 +83,26 @@
                       </div>
                     </div>
                   </div>
+
+                  {% if course.approved %}
+                  <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                    <small>Εγκρίθηκε <i style="color:#44b78b;" class="fas fa-check margin-left: 2px;"></i></small>
+                  </div>
+                  {% else %}
+                  <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                    <small>Δεν έχει εγκριθεί ακόμα<i style="color:#44b78b; margin-left: 2px;" class="far fa-clock"></i></small>
+                  </div>
+                  {% endif %}
+                  {% if course.publish_date > current_datetime %}
+                    <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                      <small>Δεν έχει παρέλθει η ημερομηνία δημοσίευσης <i style="color:#44b78b; margin-left: 2px;" class="far fa-clock"></i></small>
+                    </div>
+                  {% else %}
+                  <div style="width:100%; color:#44b78b;" class="text-right text-muted time-left">
+                    <small>Η ημερομηνία δημοσίευσης έχει παρέλθει<i style="color:#44b78b; margin-left: 2px;" class="fas fa-check"></i></small>
+                  </div>
+                  {% endif %}
+
                 </div>
               </div>
             </div>
@@ -81,8 +110,6 @@
         </div>
       </div>
       {% endfor %}
-
-
       {% else %}
         <div class="text-center" id="no-courses-returned" style="width:100%; height:100%; min-height: calc(100vh - 52px); display:flex; flex-direction:column; justify-content:center; align-items:center;">
           <h3 class="d-none d-md-flex">Δεν βρέθηκαν σειρές...</h3>
@@ -90,7 +117,6 @@
           <i style="color:#44b78b;" class="fas fa-heart-broken fa-2x"></i>
         </div>
       {% endif %}
-
     </div>
   </div>
 </div>
@@ -106,30 +132,9 @@
 </div>
 </div>
 
-<!--
-    <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top:15px;" class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a class="btn btn-light" href="{% my_url 1 'page' request.GET.urlencode %}"><i class="fas fa-angle-double-left"></i></a>
-            <a class="btn btn-light" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}"><i class="fas fa-angle-left"></i></a>
-        {% endif %}
 
-        {% if page_obj.has_previous or page_obj.has_next %}
-          <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-          </span>
-        {% endif %}
 
-        {% if page_obj.has_next %}
-            <a class="btn btn-light" href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}"><i class="fas fa-angle-right"></i></a>
-            <a class="btn btn-light" href="{% my_url page_obj.paginator.num_pages 'page' request.GET.urlencode %}"><i class="fas fa-angle-double-right"></i></a>
-        {% endif %}
-    </span>
-  </div>
-  -->
-  
 {% endblock %}
-
 
 {% block scripts %}
 <script src="{% static 'articles/core/infinite/jquery.waypoints.js' %}"></script>
@@ -145,7 +150,6 @@
     }
   });
 </script>
-
 {% endblock %}
 
 {% block footer %}
