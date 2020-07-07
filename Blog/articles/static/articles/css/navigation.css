@@ -28,44 +28,18 @@
   align-items: center;
 }
 
-.navbar-brand i {
-  color: #44b78b;
-}
-
-.navbar-brand span {
-  text-decoration: none !important;
-  color: #0c4b33;
-}
-
 .navbar-nav a {
-  color: #44b78b;
+  color: #4d4d4d;
   transition: 0.4s;
-  font-size: 16px;
+  font-size: 14.5px;
+}
+
+.navbar-nav a:hover {
+  color: #44b78b !important;
 }
 
 .navbar .nav-link {
   transition: all 0.3s ease-in-out;
-  font-weight: bold;
-}
-
-.navbar .nav-link:after {
-  content: '';
-  display: block;
-  margin: auto;
-  margin-top: 2px;
-  height: 2px;
-  width: 0px;
-  background: transparent;
-  transition: width .5s ease, background-color .5s ease;
-}
-
-.navbar .nav-link:hover:after {
-  width: 100%;
-  background: silver;
-}
-
-.navbar .flags:hover {
-  box-shadow: none !important;
 }
 
 .navbar .dropdown:hover .dropdown-menu {
@@ -260,7 +234,8 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: black;
+  
+
   
 }
 
@@ -288,10 +263,6 @@
 
 }
 
-.userImageDiv:hover, .firstLetterImageDiv:hover {
-  box-shadow: 0px 0px 2px silver;
-}
-
 .userImageDiv span, .firstLetterImageDiv span {
   color: white;
   font-weight: bold;
@@ -302,15 +273,15 @@
   position: relative;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
-.navbar .user-nav-link:hover:after {
-  width: 0%;
-  background: transparent;
+#sidebarLinks .nav-link{
+  font-size: 14px !important;
+  color:#4d4d4d;
 }
 
-.navbar .log-in-out-nav-link:hover:after {
-  width: 0%;
-  background: transparent !important;
+.log-in-out-nav-link{
+  font-size: 12px !important;
 }
 

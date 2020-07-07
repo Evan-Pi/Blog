@@ -37,6 +37,8 @@ $(document).ready(function(){
           $('#modules-menu-wrapper, #modules-menu').fadeOut();
           $('#modules-menu-trigger').animate({'right':'0'}).css({'background-color':'rgba(255, 255, 255, 0.9)'});
           $('#edit-course').animate({'right':'0'}).css({'background-color':'rgba(255, 255, 255, 0.9)'});
+          $('#modules-menu-close').hide();
+          $('#modules-menu-open').fadeIn();
       });
       
       $(window).scroll(function() {

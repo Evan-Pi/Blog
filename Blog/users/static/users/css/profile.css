@@ -164,5 +164,15 @@
 .card-header{
   border:none; 
   background: #f8f9fa;
-  box-shadow: 3px 3px 4px #e4e4e4;
+
+  color: #4d4d4d;
+  text-align: center;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+
 }
+
+.custom-group-btn{
+  border-radius:0px;
+}
+

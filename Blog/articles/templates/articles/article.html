@@ -30,14 +30,12 @@
 
 
 
-{% if article.publish_date > current_datetime and article.author != request.user.username %}
+{% if not_approved_article %}
 <div id="suspicious">
   <i style="color: #44b78b;" class="fas fa-question fa-4x"></i>
-  <p>Not quite sure what you are looking for...</p>
-  <a href="{% url 'index' %}"><p style="color: #44b78b;">Back to home</p></a>
-
+  <p>Δεν είμαστε σίγουροι τι ακριβώς ψάχνετε...</p>
+  <a href="{% url 'index' %}"><p style="color: #44b78b;">Πίσω στην αρχική.</p></a>
 </div>
-
 {% else %}
 
 
@@ -47,34 +45,36 @@
 
 </div>
 <div id="articleImageDiv">
-  {% if article.use_image_as_background_in_article %}
-  <div class="container">
-    <h1 class="articleTitle d-none d-md-block">{{article.title}}</h1>
-    <h4 class="articleTitle d-md-none">{{article.title}}</h4>
-    <h5 class="articleSubtitle d-none d-md-block">{{article.subtitle}}</h5>
-    <h6 class="articleSubtitle d-md-none">{{article.subtitle}}</h6>
-  </div>
-    {% thumbnail article.image "800x800" quality=61 as im %}
-    <div class="articleImage" style="background-image:url({{im.url}}); filter:blur(10px);">
+  <div id="articleImageDivInner">
+    {% if article.use_image_as_background_in_article %}
+    <div class="container">
+      <h1 class="articleTitle d-none d-md-block">{{article.title}}</h1>
+      <h4 class="articleTitle d-md-none">{{article.title}}</h4>
+      <h5 class="articleSubtitle d-none d-md-block">{{article.subtitle}}</h5>
+      <h6 class="articleSubtitle d-md-none">{{article.subtitle}}</h6>
     </div>
-    {% endthumbnail %}
-  {% else %}
+      {% thumbnail article.image "800x800" quality=61 as im %}
+      <div class="articleImage" style="background-image:url({{im.url}}); filter:blur(5px);">
+      </div>
+      {% endthumbnail %}
+    </div>
+    {% else %}
 
-  <div id="articleNoBackground">
-  <div class="container">
-    <h1 class="articleTitleNoBackground d-none d-md-block">{{article.title}}</h1>
-    <h4 class="articleTitleNoBackground d-md-none">{{article.title}}</h4>
-    {% if article.subtitle %}
-    <hr>
-    {% endif %}
-    <h5 class="articleSubtitleNoBackground d-none d-md-block">{{article.subtitle}}</h5>
-    <h6 class="articleSubtitleNoBackground d-md-none">{{article.subtitle}}</h6>
-  </div>
-</div>
-</div>
-
+    <div id="articleNoBackground">
+    <div class="container">
+      <h1 class="articleTitleNoBackground d-none d-md-block">{{article.title}}</h1>
+      <h4 class="articleTitleNoBackground d-md-none">{{article.title}}</h4>
+      {% if article.subtitle %}
+      <hr>
+      {% endif %}
+      <h5 class="articleSubtitleNoBackground d-none d-md-block">{{article.subtitle}}</h5>
+      <h6 class="articleSubtitleNoBackground d-md-none">{{article.subtitle}}</h6>
+    </div>
+    </div>
+    
   {% endif %}
-  
+  </div>
+
 </div>
 
 <div id="social-share-desktop">

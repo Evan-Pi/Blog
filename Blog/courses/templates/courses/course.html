@@ -25,10 +25,9 @@
 </script>
 {% endblock %}
 
-
-
 {% block main %}
-{% if course.publish_date > current_datetime and course.author != request.user.username %}
+
+{% if not_approved_course %}
 <div id="suspicious">
   <i style="color: #44b78b;" class="fas fa-question fa-4x"></i>
   <p>Not quite sure what you are looking for...</p>
@@ -40,7 +39,8 @@
 <div id="scroll-course-bar" style="position:fixed; top:0; left:0; width:0%; height:4px; background:#44b78b; z-index:802;">
 </div>
 <div id="courseImageDiv">
-  {% if course.use_image_as_background_in_course %}
+  <div id="courseImageDivInner">
+    {% if course.use_image_as_background_in_course %}
   <div class="container">
     <h1 class="courseTitle d-none d-md-block">{{course.title}} - {{page_obj.object_list.0.title}}</h1>
     <h2 class="courseTitle d-md-none">{{course.title}} - {{page_obj.object_list.0.title}}</h2>
@@ -70,6 +70,7 @@
     <div class="courseImage" style="background-image:url({{im.url}}); filter:blur(10px);">
     </div>
     {% endthumbnail %}
+  </div>
   {% else %}
   <div id="courseNoBackground">
     <div class="container">
@@ -99,8 +100,10 @@
 
     </div>
   </div>
-  </div>
   {% endif %}
+  
+</div>
+
 
 </div>
 
