@@ -84,6 +84,7 @@
 
 #navbarTrigger {
   color: #44b78b;
+  font-size: 20px;
 }
 
 #navbarTrigger_DIV {
@@ -144,6 +145,7 @@
 #closeSidebar {
   height: 32px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 @media (max-width:400px) {
@@ -155,16 +157,8 @@
   }
 }
 
-#sidebarInner h3 {
-  font-size: 22px;
-  cursor: pointer;
-  text-shadow: none;
-}
-
-@media (max-width:640px) {
-  #sidebarInner h3 {
-    font-size: 19px !important;
-  }
+#sidebarInner span {
+  font-size: 16px;
 }
 
 #sidebarInner ul {
@@ -234,9 +228,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
 
-  
 }
 
 .nav-tools-login i{
