@@ -14,6 +14,12 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'courses/css/courses.css' %}">
+
+<style>
+  #navbarCourses, #sidebarCourses{
+  color: #44b78b;
+}
+</style>
 {% endblock %}
 
 {% block main %}
@@ -97,7 +103,6 @@
                         {% endif %}
                       
                       <span class="text-muted published"><i class="far fa-calendar-alt"></i> {{course.publish_date}}</span><br>
-                      <span class="author">Author : {{course.author}}</span>
                     </div>
                     <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
                       <div class="tags">
@@ -155,6 +160,12 @@
     onAfterPageLoad: function($items) {
       $('.loading').hide();
     }
+  });
+</script>
+
+<script>
+  $('#navbarCourses , #sidebarCourses').click(function(e) { 
+    e.preventDefault();
   });
 </script>
 {% endblock %}

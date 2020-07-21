@@ -1,0 +1,110 @@
+{% extends 'articles/base.html' %}
+
+{% load static %}
+{% load thumbnail %}
+
+{% block meta %}
+<meta name="description" content="">
+{% endblock %}
+
+{% block title %}
+<title>Homepage</title>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'articles/css/informations.css' %}">
+
+<style>
+    #navbarFAQs, #sidebarFAQs{
+    color: #44b78b;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+{% include 'articles/navigation.html' %}
+
+<div style="background: #f8f9fa; padding-top: 15px; padding-bottom: 15px;">
+    <div class="container">
+        <blockquote class="blockquote  text-center">
+            <p style="font-size: 16px;">
+                Αχ! σπούδασα φιλοσοφία
+            και νομική και ιατρική,
+            και, αλίμονο, θεολογία
+            με κόπο και μ’ επιμονή·
+            και να ‘μαι ‘δω με τόσα φώτα,
+            εγώ μωρός, όσο και πρώτα!
+            </p>
+            <footer class="blockquote-footer"><cite title="Source Title">Faust</cite></footer>
+          </blockquote>
+    </div>
+</div>
+
+<div id="info1" style="padding-bottom: 30px;">
+
+    
+
+    <div class="container">
+
+        <br><br>
+        
+        <div style="display:flex;">
+        <img style="max-height: 14px;" src="{% static 'articles/material/logo/feather.png' %}" alt="">
+        <h6 style="font-weight:bold;"> Τι είναι το Φτερό του Φοίνικα; </h6>
+        </div >
+
+        <article>
+            Μία κοινότητα για την νοημοσύνη ό,τι κι αν αυτό σημαίνει. Ένας χώρος δημιουργίας και ανταλλαγής ιδεών για την επιστήμη, την τεχνολογία, την φύση, την κοινωνία. 
+            
+            
+
+            Προς το παρόν το Φτερό γράφει κι εσείς διαβάζετε, τόσο απλό. Ίσως στο μέλλον σας έρθει η ανάγκη να αρπάξετε το φτερό για να γράψετε κι εσείς, κι αυτό γίνεται!
+        </article>
+
+        <br><br>
+        <div style="display:flex;">
+        <img style="max-height: 14px;" src="{% static 'articles/material/logo/feather.png' %}" alt="">
+        <h6 style="font-weight:bold;"> Τι διαφορετικό έχει αυτή η κοινότητα;</h6>
+        </div>
+
+        <article>
+          - Γράφουμε κώδικα! <br>
+          - Πως είπατε; <br>
+          - Γράφουμε κώδικα! <br><br>
+          
+          Το πρώτο μέλημα του Φοίνικα είναι η εφαρμογή της γνώσης στον πραγματικό κόσμο, για την επίλυση πραγματικών προβλημάτων. 
+          Γι' αυτό το λόγο προγραμματίζουμε και σχεδιάζουμε λογισμικά ικανά να καινοτομούν αλλά και να βελτιστοποιούν ότι επιδέχεται βελτιστοποίηση. <br><br>
+        </article>
+        <div style="display:flex;">
+        <img style="max-height: 14px;" src="{% static 'articles/material/logo/feather.png' %}" alt="">
+        <h6 style="font-weight:bold;"> Τι είναι οι ΣΕΙΡΕΣ;</h6>
+        </div>
+
+        <article>
+            - Οι σειρές είναι άρθρα.<br>
+            - Και γιατί δεν τις βάλατε στα άρθρα; <br>
+            - Γιατί οι σειρές είναι μεγάλα άρθρα! <br><br>
+        </article>
+
+        Στη μπάρα πλοήγησης θα βρείτε την επιλογή ΣΕΙΡΕΣ. Μπορείτε να τις θεωρήσετε ως εκτενή άρθρα χωρισμένα σε ενότητες που λόγω του όγκου τους
+        θα ήταν ιδιαίτερα δυσανάγνωστες σε ένα και μόνο άρθρο. Μπορείτε πάλι να τις θεωρήσετε σαν μαθήματα χωρισμένα σε ενότητες και κάποιες από αυτές 
+        θα αντιπροσωπεύουν ακριβώς αυτό καθώς μέσα από αυτές θα διδαχτείτε ολόκληρα γνωστικά αντικείμενα με πιο χαρακτηριστική κατηγορία αυτή του προγραμματισμού.
+        
+    </div>
+            
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#navbarFAQs , #sidebarFAQs').click(function(e) { 
+      e.preventDefault();
+    });
+  </script>
+{% endblock %}
+
+{% block footer %}
+{% include 'articles/footer.html' %}
+{% endblock %}

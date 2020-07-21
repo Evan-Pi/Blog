@@ -30,15 +30,21 @@ class UserCreationFormExtended(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
-    def clean(self):
-       username = self.cleaned_data.get('username')
-       email = self.cleaned_data.get('email')
-       if Account.objects.filter(email=email).exists():
-            raise ValidationError("Email already exists")
-       if Account.objects.filter(username=username).exists():
-            raise ValidationError("Username already exists")
+    def __init__(self, *args, **kwargs):
+        super(UserCreationFormExtended, self).__init__(*args, **kwargs)
 
-       return self.cleaned_data
+        self.fields['username'].help_text = "150 χαρακτήρες ή λιγότεροι. Γράμματα, ψηφία και τα σύμβολα @/./+/-/_ μόνο."
+        self.fields['email'].help_text = "Με αυτό το email θα συνδέεστε στον λογαριασμό σας."
+        self.fields['password1'].help_text = "Τουλάχιστον 8 χαρακτήρες. Δεν μπορεί να περιέχει μόνο ψηφία. Αποφύγετε κοινότυπους κωδικούς και ομοιότητες με τις υπόλοιπες προσωπικές σας πληροφορίες."
+        self.fields['password2'].help_text = "Εισάγετε τον ίδιο κωδικό για επαλήθευση"
+
+        #self.fields['first_name'].help_text = "<span style='color:#44b78b;'>Προαιρετικό</span>"
+        #self.fields['last_name'].help_text = "<span style='color:#44b78b;'>Προαιρετικό</span>"
+
+        
+
+        
+
 
 class UserChangeFormExtended(UserChangeForm):
 

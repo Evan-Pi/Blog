@@ -12,7 +12,11 @@ from users.models import Account, Profile, ArticlesViews
 import unicodedata
 from django.contrib.auth.decorators import user_passes_test
 
-# Create your views here.
+
+def coming_soon(request):
+
+    return render(request, 'articles/coming_soon.html')
+
 def index(request):
     current_datetime = localtime(now())
 
@@ -29,6 +33,10 @@ def index(request):
 def privacy(request):
 
     return render(request, 'articles/privacy.html')
+
+def informations(request):
+
+    return render(request, 'articles/informations.html')
 
 
 def articles(request):

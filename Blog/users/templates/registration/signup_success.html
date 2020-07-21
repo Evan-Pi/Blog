@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-<title>Sign Up Success</title>
+<title>Επιτυχία εγγραφής</title>
 {% endblock %}
 
 {% block links %}
@@ -19,15 +19,15 @@
 <div id="signup">
 
   <a href="{% url 'index' %}">
-    <i style="color:#44b78b; margin-bottom:15px;" class="fas fa-brain fa-3x"></i>
+    <img style="max-height: 55px; margin-bottom:30px; cursor: pointer;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
   </a>
 
   <div style="max-width:590px; margin-bottom:30px;">
-    <h4 class="d-none d-md-block">Account created successfully!</h4>
-    <h5 class="d-md-none">Account created successfully!</h5>
+    <h4 class="d-none d-md-block">Ο λογαριασμός σας δημιουργήθηκε με επιτυχία!</h4>
+    <h5 class="d-md-none">Ο λογαριασμός σας δημιουργήθηκε με επιτυχία!</h5>
   </div>
 
-  <h6 class="text-center">You can now <a href="{% url 'login' %}"><span style="color:#44b78b;">login</span> </a></h6>
+  <h6 class="text-center">Μπορείτε να <a href="{% url 'login' %}"><span style="color:#44b78b;">συνδεθείτε</span></a> τώρα.</h6>
 
 </div>
 {% endblock %}

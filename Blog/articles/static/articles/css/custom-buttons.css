@@ -3,8 +3,8 @@
   border: none;
   box-shadow: 0px 0px 4px silver;
   border-radius: 0;
-  color: #44b78b;
-  background: white;
+  color:  white;
+  background: #44b78b;
   transition: 0.4s;
 }
 
@@ -13,12 +13,41 @@
 }
 
 .customButton1:hover {
-  background: #44b78b;
-  border-color: #44b78b;
+  background: #3b9975;
+  border-color: #3b9975;
   color: white;
 
 }
 
 .customButton1:focus {
+  box-shadow: 3px 3px 4px #eaeaea;
+}
+
+
+
+
+
+.customButton1-outline {
+
+  box-shadow: 0px 0px 4px silver;
+  border-radius: 0;
+  color:  #3b9975;
+  background: transparent;
+  transition: 0.4s;
+  border-color: #3b9975;
+}
+
+.customButton1-outline:active, .book:active, .book-open:active {
+  transition: 0s !important;
+}
+
+.customButton1-outline:hover {
+  background: #3b9975;
+  border-color: #3b9975;
+  color: white;
+
+}
+
+.customButton1-outline:focus {
   box-shadow: 3px 3px 4px #eaeaea;
 }

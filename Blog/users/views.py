@@ -7,15 +7,26 @@ from . models import Account, Profile, ArticlesViews, CoursesViews
 
 from django.contrib.auth.decorators import login_required
 
+
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
 # Create your views here.
 def signup(request):
+
     if request.method == 'POST':
         form = UserCreationFormExtended(request.POST)
         if form.is_valid():
             user = form.save()
             members, created = Group.objects.get_or_create(name='Members')
             members.user_set.add(user)
-            return redirect('signup_success')
+
+            
+            new_user = authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password1'])
+            login(request, new_user)
+
+
+            return redirect('profile')
     else:
         form = UserCreationFormExtended()
 

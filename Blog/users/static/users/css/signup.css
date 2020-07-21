@@ -27,6 +27,12 @@ input:focus{
   border-color: #44b78b !important;
 }
 
+#id_captcha{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:15px;
+}
 
 
 #signupImage {

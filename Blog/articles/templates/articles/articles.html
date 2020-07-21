@@ -14,6 +14,12 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
+
+<style>
+  #navbarArticles, #sidebarArticles{
+  color: #44b78b;
+}
+</style>
 {% endblock %}
 
 {% block main %}
@@ -98,7 +104,6 @@
                       {% endif %}
                     
                     <span class="text-muted published"><i class="far fa-calendar-alt"></i> {{article.publish_date}}</span><br>
-                    <span class="author">Author : {{article.author}}</span>
                   </div>
                   <div style="display:flex; flex:1; justify-content:space-between; width:100%;">
                     <div class="tags">
@@ -179,6 +184,12 @@
     onAfterPageLoad: function($items) {
       $('.loading').hide();
     }
+  });
+</script>
+
+<script>
+  $('#navbarArticles , #sidebarArticles').click(function(e) { 
+    e.preventDefault();
   });
 </script>
 {% endblock %}
