@@ -188,12 +188,12 @@
     <script>
     var disqus_config = function () {
     this.page.url = '{{request.build_absolute_uri}}';
-    this.page.identifier = '{{course.slug}}{{course.id}}';
+    this.page.identifier = 'module-{{module.id}}';
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
     var d = document, s = d.createElement('script');
-    s.src = 'https://pythonas.disqus.com/embed.js';
+    s.src = 'https://phoenixfeather-1.disqus.com/embed.js';
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
     })();

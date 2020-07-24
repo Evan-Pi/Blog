@@ -43,10 +43,7 @@
 
 #footer{
   box-shadow: none !important;
-  font-size: 14px;
 }
-
-
 
 #index1Inner {
   width: 100%;
@@ -57,10 +54,6 @@
   #index1 {
     height: calc(100vh - 52px - 52px);
     /*minus navbar & footer height*/
-  }
-
-  #footer{
-    font-size: 12px;
   }
 }
 

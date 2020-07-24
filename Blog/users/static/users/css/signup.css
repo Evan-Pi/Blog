@@ -75,3 +75,7 @@ input:focus{
 label{
   display: none;
 }
+
+.g-recaptcha {
+  transform:scale(0.77);
+}

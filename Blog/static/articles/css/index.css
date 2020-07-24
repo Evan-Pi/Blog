@@ -3,7 +3,7 @@
 }
 
 #index1 {
-  height: calc(100vh - 75px);
+  height: calc(100vh - 75px - 52px);
   /*minus navbar & footer height*/
   width: 100%;
   background-position: center;
@@ -41,9 +41,9 @@
   align-items: center;
 }
 
-
-
-
+#footer{
+  box-shadow: none !important;
+}
 
 #index1Inner {
   width: 100%;
@@ -52,7 +52,7 @@
 
 @media screen and (max-width:768px) {
   #index1 {
-    height: calc(100vh - 52px);
+    height: calc(100vh - 52px - 52px);
     /*minus navbar & footer height*/
   }
 }
@@ -67,14 +67,13 @@
   transition: 0.4s;
 
   position: absolute;
-  top: calc(100vh - 112px - 15px);
+  top: calc(100vh - 112px - 57px);
   left: 15px;
 }
 
 @media screen and (max-width:768px) {
   .pulse-wrapper{
-    top: calc(100vh - 112px - 15px);
-    left: 15px;
+    left: 7.5px;
   }
 }
 
@@ -128,4 +127,6 @@
       box-shadow: 0 0 0 0 rgba(204,169,44, 0);
   }
 }
+
+
 

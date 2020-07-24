@@ -33,6 +33,15 @@
   </div>
 </div>
 
+{% if user.is_authenticated %}
+<div class="pulse-wrapper">
+  <a href="{% url 'profile' %}">
+    <div class="pulse">
+      <span>ΠΡΟΦΙΛ</span>
+    </div>
+  </a>
+</div>
+{% else %}
 <div class="pulse-wrapper">
   <a href="{% url 'signup' %}">
     <div class="pulse">
@@ -41,6 +50,7 @@
     </div>
   </a>
 </div>
+{% endif %}
 
 
 

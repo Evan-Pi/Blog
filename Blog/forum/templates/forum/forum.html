@@ -1,0 +1,224 @@
+{% extends 'articles/base.html' %}
+
+{% load static %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+
+{% block meta %}
+<meta name="description" content="">
+{% endblock %}
+
+{% block title %}
+<title>Forum</title>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/custom-buttons.css' %}">
+
+<style>
+  #navbarForum, #sidebarForum{
+  color: #44b78b;
+}
+</style>
+{% endblock %}
+
+{% block main %}
+{% include 'articles/navigation.html' %}
+
+
+
+<div id="search-and-create-discussions" class="container-fluid">
+
+  {% if user.is_authenticated %}
+  <div class="create-discussion-wrapper"  data-toggle="modal" data-target="#createDiscusionModal">
+    <div class="create-discussion">
+      <i class="fas fa-plus"></i>
+      <small class="text-muted" style="margin-top:2px;">Νέα συζήτηση</small>
+    </div>
+  </div>
+  {% else %}
+  <div class="create-discussion-wrapper"  data-toggle="modal" data-target="#loginModal">
+    <div class="create-discussion">
+      <i class="fas fa-plus"></i>
+      <small class="text-muted" style="margin-top:2px;">Νέα συζήτηση</small>
+    </div>
+  </div>
+  {% endif %}
+  
+
+  <form id="discussions-search-form" action="{% url 'forum' %}" method="POST">
+    <a href="{% url 'forum' %}">
+      <div id="restore-default-discussions" style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <i style="color: #44b78b;" class="fas fa-redo"></i>
+      </div>
+    </a>
+    <!--input with id = "nav-tools-searchInput" -->
+    {% csrf_token %}
+    {{discussions_Filter.form.search}}
+    <button id="discussions-search-submit" class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+  </form>
+
+</div>
+
+
+<div style="padding:0;" class="container text-center">
+  {% for message in messages %}
+
+  <div style="border-radius:0;" class="alert alert-success alert-dismissible fade show" role="alert">
+    <small>{{message}}</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  {% endfor %}
+</div>
+
+
+<div id="forum1">
+  <div id="discussions-container" class="container">
+    {% if discussions.count != 0 %}
+      {% for discussion in discussions %}
+        <div class="row discussion">
+          <a href="{% url 'discussion' discussion.slug discussion.pk %}"></a>
+          <div style="margin-bottom:15px;" class="col-12 col-md-8 col-lg-9">
+            <span>{{discussion.title}}</span><br>
+            <small class="text-muted">{{discussion.created}}</small>
+          </div>
+          <div class="col-12 col-md-4 col-lg-3 text-right">
+            <div>
+              <span style="font-size:14px;">Views <i class="far fa-eye"></i> : <span style="color:#44b78b;">{{discussion.hit_count.hits}}</span> | </span>
+              <span style="font-size:14px;">Comments <i class="far fa-comments"></i> : <a style="color:#44b78b;" href="{% url 'discussion' discussion.slug discussion.pk %}#disqus_thread"></a></span>
+            </div>
+            <hr style="margin:0;">
+            <i class="far fa-user"></i>
+            <small>{{discussion.author}}</small>
+          </div>
+        </div>
+      {% endfor %}
+
+    {% else %}
+    <div class="text-center" id="no-articles-returned" style="width:100%; height: 100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+      <h3 class="d-none d-md-flex">Δεν βρέθηκαν συζητήσεις...</h3>
+      <h4 class="d-md-none">Δεν βρέθηκαν συζητήσεις...</h4>
+      <i style="color:#44b78b;" class="fas fa-heart-broken fa-2x"></i>
+    </div>
+    {% endif %}
+    
+  </div>
+
+</div>
+
+
+<!-- LOG IN MODAL -->
+<div class="modal fade forum-login-modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="padding:30px;" class="modal-body">
+          <div class="text-right" style="position: absolute; top: 7.5px; right: 15px; cursor: pointer;">
+            <i class="fas fa-times" data-dismiss="modal" aria-label="Close"></i>
+          </div>
+          <div style="width: 100%; margin-bottom:15px;" class="text-center">
+            <img style="max-height: 55px;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt=""><br>
+            <small>Για να δημιουργήσετε ένα θέμα συζήτησης θα πρέπει πρώτα να συνδεθείτε.</small>   
+          </div>
+          <form method="POST" action="{% url 'login' %}?next={{request.path}}">
+          {% csrf_token %}
+          {{login_form|crispy}}
+          <button style="box-shadow: none;" type="submit" class="btn btn-block customButton1-outline">Σύνδεση</button>
+        </form>
+
+        <div style="margin-top:7px;" class="text-center">
+          <a href="{% url 'password_reset' %}"><small style="color:#44b78b;">Ξεχάσατε τον κωδικό σας;</small></a>
+        </div>
+
+        <div style="margin-top:32px;" class="text-center">
+          <small class="text-muted">Δεν είστε μέλος ακόμα; Δημιουργήστε τώρα έναν δωρεάν λογαριασμό.</small><br>
+          <a href="{% url 'signup' %}">
+            <button style="margin-top:7px; box-shadow:none;" type="submit" class="btn btn-sm customButton1-outline">Δημιουργία λογαριασμού</button>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CREATE DISCUSSION MODAL -->
+<div class="modal fade forum-create-discussion-modal" id="createDiscusionModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="padding:15px;" class="modal-body">
+          <div class="text-right" style="position: absolute; top: 7.5px; right: 15px; cursor: pointer;">
+            <i class="fas fa-times" data-dismiss="modal" aria-label="Close"></i>
+          </div>
+          <div style="width: 100%; margin-bottom:15px;" class="text-center">
+            <img style="max-height: 55px;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt=""><br>
+            <small>Δημιουργήστε εδώ ένα νέο θέμα συζήτησης.</small>   
+          </div>
+          <form id="create-discussion-form" method="POST" action=".">
+            {% csrf_token %}
+            {{create_discussion_form.media}}
+            {{create_discussion_form.title|as_crispy_field}}
+
+            <label for="discussion">Περιεχόμενο <smal style="color: #44b78b; font-size:12px;">(Προαιρετικό)</small></label>
+            
+            {{create_discussion_form.discussion|as_crispy_field}}
+            
+            <div style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top:15px;">
+              {{create_discussion_form.captcha|as_crispy_field}}
+            </div>
+
+            
+
+            <button style="box-shadow: 3px 3px 4px #e5e5e5; border: none !important; color: #4d4d4d; font-size:18px;" type="submit" class="btn btn-block btn-light btn-sm"><i class="fas fa-paper-plane"></i></button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+  $('#navbarForum , #sidebarForum').click(function(e) { 
+    e.preventDefault();
+  });
+
+  $(".discussion").click(function () {
+    window.location = $(this).find("a").attr("href");
+    return false;
+  });
+</script>
+
+<script type="text/javascript">
+  $("#id_username").attr("placeholder", "Email");
+  $("#id_password").attr("placeholder", "Κωδικός");
+  $("#id_title").attr("placeholder", "Θέμα");
+</script>
+
+<script>
+    
+  $('#create-discussion-form').on('submit', function(e){
+    
+    var recaptcha = $("#g-recaptcha-response").val();
+    if (recaptcha === "") {
+        e.preventDefault();
+        alert("Παρακαλούμε επιβεβαιώστε ότι δεν είστε ρομπότ!");
+    }else{
+      $('#create-discussion-form').submit();
+    }
+  
+  });
+
+</script>
+{% endblock %}
+
+{% block footer %}
+{% include 'articles/footer.html' %}
+{% endblock %}

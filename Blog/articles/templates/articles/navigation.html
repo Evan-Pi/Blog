@@ -20,6 +20,9 @@
           <a class="nav-link" href="{% url 'courses' %}" id="navbarCourses"><span>ΣΕΙΡΕΣ</span></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'forum' %}" id="navbarForum"><span>FORUM</span></a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'informations' %}" id="navbarFAQs"><span>FAQ's</span></a>
         </li>
 
@@ -51,20 +54,20 @@
             <div id="user-image-dropdown-menu-inner">
               <a style="margin:0;" href="{% url 'profile' %}" class="nav-link log-in-out-nav-link">
                 <div class="nav-tools-login">
-                  <span>ΛΟΓΑΡΙΑΣΜΟΣ</span>
+                  <span>ΠΡΟΦΙΛ</span>
                 </div>
               </a>
               {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
+                <a href="{% url 'logout' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
                   <div class="nav-tools-login"> 
-                    <span>ΑΠΟΣΥΝΔΕΣΗ</span>
+                    <span style="font-size: 12.2px;">ΑΠΟΣΥΝΔΕΣΗ</span>
                     <i class="fas fa-sign-out-alt"></i>
                   </div>
                 </a>
               {% else %}
                 <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
                   <div class="nav-tools-login">
-                    <span>ΣΥΝΔΕΣΗ</span>
+                    <span style="font-size: 12.5px;">ΣΥΝΔΕΣΗ</span>
                     <i class="fas fa-sign-in-alt"></i>
                   </div>
                 </a>
@@ -77,7 +80,7 @@
         <div style="width:112px;">
           <a href="{% url 'login' %}" class="nav-link">
             <div class="nav-tools-login">
-              <span >ΣΥΝΔΕΣΗ</span>
+              <span  style="font-size: 12.5px;">ΣΥΝΔΕΣΗ</span>
               <i class="fas fa-sign-in-alt"></i>
             </div>
           </a>
@@ -122,12 +125,15 @@
             <a class="nav-link" href="{% url 'courses' %}">
               <span id="sidebarCourses"><span>ΣΕΙΡΕΣ</span></span>
             </a>
+            <a class="nav-link" href="{% url 'forum' %}">
+              <span id="sidebarForum"><span>FORUM</span></span>
+            </a>
             <a class="nav-link" href="{% url 'informations' %}">
               <span id="sidebarFAQs"><span>FAQ's</span></span>
             </a>
             {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'profile' %}">
-              <span id="sidebarProfile"><span>ΛΟΓΑΡΙΑΣΜΟΣ</span></span>
+              <span id="sidebarProfile"><span>ΠΡΟΦΙΛ</span></span>
             </a>
             {% endif %}
         </div>
@@ -139,7 +145,7 @@
         {% if user.is_authenticated %}
 
 
-          <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
+          <a href="{% url 'logout' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
 
             {% if user.profile.profile_image %}
             <div class="user-nav-link">
@@ -155,7 +161,7 @@
             {% endif %}
 
             <div style="margin-top:7.5px; color: #4d4d4d;" class="nav-tools-login">
-              <span>ΑΠΟΣΥΝΔΕΣΗ</span>
+              <span style="font-size:13.2px;">ΑΠΟΣΥΝΔΕΣΗ</span>
               <i class="fas fa-sign-out-alt"></i>
             </div>
           </a>
@@ -165,10 +171,10 @@
 
         {% else %}
        
-          <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
+          <a href="{% url 'login' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
             <div style="margin-top:30px; color: #4d4d4d;" class="nav-tools-login">
               
-              <span>ΣΥΝΔΕΣΗ</span>
+              <span style="font-size:13.2px;">ΣΥΝΔΕΣΗ</span>
               <i class="fas fa-sign-in-alt"></i>
             </div>
           </a>

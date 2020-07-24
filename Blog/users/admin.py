@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import UserCreationFormExtended, UserChangeFormExtended
-from .models import Account, Profile, ArticlesViews, CoursesViews
+from .models import Account, Profile, ArticlesViews, CoursesViews, DiscussionViews
 
 class CustomUserAdmin(UserAdmin):
     add_form = UserCreationFormExtended
@@ -30,6 +30,11 @@ class CoursesViewsAdmin(admin.ModelAdmin):
     model = CoursesViews
     list_display = [ 'profile', 'course', 'created', ]
 
+class DiscussionViewsAdmin(admin.ModelAdmin):
+
+    model = DiscussionViews
+    list_display = [ 'profile', 'discussion', 'created', ]
+
     
 
 admin.site.register(Profile)
@@ -37,5 +42,6 @@ admin.site.register(Account, CustomUserAdmin)
 
 admin.site.register(ArticlesViews,ArticlesViewsAdmin)
 admin.site.register(CoursesViews,CoursesViewsAdmin)
+admin.site.register(DiscussionViews,DiscussionViewsAdmin)
 
 

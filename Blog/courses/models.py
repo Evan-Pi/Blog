@@ -86,7 +86,7 @@ class Courses(models.Model, HitCountMixin):
         return reverse("admin:%s_%s_change" % (content_type.app_label, content_type.model), args=(self.id,))
 
     def __str__(self):
-        return f'{self.category.title} - {self.title}'
+        return f'{self.title}'
 
 
 
@@ -104,7 +104,7 @@ class Modules(models.Model, HitCountMixin):
     slug = models.SlugField(editable=False,max_length=150)
     subtitle = models.CharField(max_length=150, blank=True)
 
-    module = RichTextUploadingField(external_plugin_resources=[('exportpdf','/static/articles/js/exportpdf/','plugin.js')], default='')
+    module = RichTextUploadingField()
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

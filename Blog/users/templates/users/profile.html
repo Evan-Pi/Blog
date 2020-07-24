@@ -109,9 +109,9 @@
     <div class="container">
       
       <div style="border: none !important; margin-bottom: 30px;" class="card">
-        <div class="card-header">
-          Άρθρα που παρακολουθήσατε πρόσφατα
-        </div>
+       
+         <small> Άρθρα που παρακολουθήσατε πρόσφατα</small>
+         <hr style="margin-top: 4px;">
 
 
         {% if viewed_articles %}
@@ -146,8 +146,7 @@
         </div>
         {% else %}
         <div class="card-body">
-          <h5 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h5>
-          <p class="card-text">Ανακάλυψε τα αγαπημένα σου άρθρα!</p>
+          <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           <div style="width: 100%;" class="">
             <a href="{% url 'articles' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στα άρθρα</a>
           </div>
@@ -159,13 +158,14 @@
 
 
       <div style="border: none !important;" class="card">
-        <div class="card-header">
-          Σειρές που παρακολουθήσατε πρόσφατα
-        </div>
+        
+          <small>Σειρές που παρακολουθήσατε πρόσφατα</small>
+          <hr style="margin-top: 4px;">
+      
      
 
         {% if viewed_courses %}
-        <div style="padding:0;" class="card-body">
+        <div style="padding:0; margin-bottom:30px;" class="card-body">
           <div class="row">
             {% for view in viewed_courses %} 
               <div class="col-12 col-sm-6 col-xl-3">
@@ -196,10 +196,52 @@
         </div>
         {% else %}
         <div class="card-body">
-          <h5 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h5>
-          <p class="card-text">Ανακάλυψε τις αγαπημένες σου σειρές!</p>
+          <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           <div style="width: 100%;" class="">
             <a href="{% url 'courses' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στις σειρές</a>
+          </div>
+        </div>
+        {% endif %}
+      
+        
+      </div>
+
+      <div style="border: none !important; margin-bottom: 30px;" class="card">
+       
+          <small>Συζητήσεις που παρακολουθήσατε πρόσφατα</small>
+          <hr style="margin-top: 4px;">
+
+        {% if viewed_discussions %}
+        <div class="card-body">
+          {% for view in viewed_discussions %}
+          <div class="row discussion">
+              
+                
+                  <a href="{% url 'discussion' view.discussion.slug view.discussion.pk %}"></a>
+                  <div style="margin-bottom:15px;" class="col-12 col-md-8 col-lg-9">
+                    <span>{{view.discussion.title}}</span><br>
+                    <small class="text-muted">{{view.discussion.created}}</small>
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 text-right">
+                    <div>
+                      <span style="font-size:14px;">Views <i class="far fa-eye"></i> : <span style="color:#44b78b;">{{view.discussion.hit_count.hits}}</span> | </span>
+                      <span style="font-size:14px;">Comments <i class="far fa-comments"></i> : <a style="color:#44b78b;" href="{% url 'discussion' view.discussion.slug view.discussion.pk %}#disqus_thread"></a></span>
+                    </div>
+                    <hr style="margin:0;">
+                    <i class="far fa-user"></i>
+                    <small>{{view.discussion.author}}</small>
+                  </div>
+                
+                 
+              </div>
+              {% endfor %}
+        </div>
+        {% else %}
+        <div class="card-body">
+          <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
+          
+          <div style="width: 100%;" class="">
+            <a href="{% url 'forum' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στο Forum</a>
           </div>
         </div>
         {% endif %}
@@ -226,6 +268,11 @@
   function submitOnLoad(){
   $("#profile_image_form").submit();
   };
+
+  $(".discussion").click(function () {
+    window.location = $(this).find("a").attr("href");
+    return false;
+  });
 </script>
 {% endblock %}
 

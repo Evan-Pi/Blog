@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from . forms import UserCreationFormExtended
 from django.contrib.auth.models import Group
 from . forms import UserProfileImage
-from . models import Account, Profile, ArticlesViews, CoursesViews
+from . models import Account, Profile, ArticlesViews, CoursesViews, DiscussionViews
 
 from django.contrib.auth.decorators import login_required
 
@@ -45,6 +45,7 @@ def profile(request):
 
     viewed_articles = ArticlesViews.objects.filter(profile=profile).order_by('-created')[:4]
     viewed_courses = CoursesViews.objects.filter(profile=profile).order_by('-created')[:4]
+    viewed_discussions = DiscussionViews.objects.filter(profile=profile).order_by('-created')[:4]
 
     if request.method == "POST": 
         form = UserProfileImage(request.POST, request.FILES, instance=request.user.profile) 
@@ -54,5 +55,5 @@ def profile(request):
     else: 
         form = UserProfileImage(instance=request.user.profile)
         
-    context = {'form':form, 'profile':profile, 'viewed_articles':viewed_articles, 'viewed_courses':viewed_courses}
+    context = {'form':form, 'profile':profile, 'viewed_articles':viewed_articles, 'viewed_courses':viewed_courses , 'viewed_discussions':viewed_discussions}
     return render(request, 'users/profile.html', context)

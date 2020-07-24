@@ -7,6 +7,8 @@ from django.dispatch import receiver
 
 from articles.models import Articles
 from courses.models import Courses
+from forum.models import Discussions
+
 
 class Account(AbstractUser):
 
@@ -69,6 +71,15 @@ class CoursesViews(models.Model):
         verbose_name_plural = 'Courses views'
 
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+class DiscussionViews(models.Model):
+    class Meta:
+        verbose_name = 'Discussion view'
+        verbose_name_plural = 'Discussions views'
+
+    discussion = models.ForeignKey(Discussions, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 

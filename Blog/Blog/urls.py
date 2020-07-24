@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('', include('articles.urls')),
     path('', include('courses.urls')),
+    path('forum/', include('forum.urls')),
 
 
     path('accounts/', include('django.contrib.auth.urls')),

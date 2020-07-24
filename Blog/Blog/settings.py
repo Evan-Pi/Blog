@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     'courses.apps.CoursesConfig',
     'users.apps.UsersConfig',
+    'forum.apps.ForumConfig',
 ]
 
 AUTH_USER_MODEL = 'users.Account'
@@ -167,7 +168,34 @@ CKEDITOR_CONFIGS = {
             'autogrow',
             'codesnippet',
             'embed',
-            'exportpdf',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+        ]),
+    },
+
+    'basic': {
+        'skin': 'n1theme',
+        'toolbar': 'Basic',
+        'toolbar_Basic':[
+            ['Bold', 'Italic', 'Underline'], 
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+        ],
+        'width': '100%',
+        'height': '100px',
+        'tabSpaces': 4,
+        'extraAllowedContent': 'iframe[*]',
+        'extraPlugins': ','.join([
+            'uploadimage', # the upload image feature
+            # your extra plugins here
+            'div',
+            'autogrow',
+            'codesnippet',
+            'embed',
             # 'devtools',
             'widget',
             'lineutils',
@@ -177,6 +205,7 @@ CKEDITOR_CONFIGS = {
             'elementspath',
         ]),
     }
+
 }
 
 

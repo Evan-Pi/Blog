@@ -88,3 +88,13 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+
+#footer{
+  font-size: 14px;
+}
+
+@media screen and (max-width:768px) {
+  #footer{
+    font-size: 12px;
+  }
+}

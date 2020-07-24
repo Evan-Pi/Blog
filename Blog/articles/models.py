@@ -50,7 +50,7 @@ class Articles(models.Model, HitCountMixin):
     image = models.ImageField(upload_to = "Articles_Images", default='')
     use_image_as_background_in_article = models.BooleanField(default=True)
 
-    article = RichTextUploadingField(external_plugin_resources=[('exportpdf','/static/articles/js/exportpdf/','plugin.js')])
+    article = RichTextUploadingField()
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
