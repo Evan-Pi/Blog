@@ -184,6 +184,7 @@ CKEDITOR_CONFIGS = {
         'toolbar_Basic':[
             ['Bold', 'Italic', 'Underline'], 
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['CodeSnippet', 'Embed'], 
         ],
         'width': '100%',
         'height': '100px',
