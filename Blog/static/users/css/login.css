@@ -1,5 +1,13 @@
 #login {
-  min-height: 100vh;
+  min-height: calc(100vh - 52px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.log-in-out-nav-link{
+  display: none;
 }
 
 #nav-tools-trigger {
@@ -61,3 +69,12 @@ input:focus {
 label{
   display: none;
 }
+
+#footer{
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+body{
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%) !important;
+  }

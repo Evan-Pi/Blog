@@ -1,5 +1,5 @@
 #signup {
-  min-height:100vh;
+  min-height: calc(100vh - 52px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,4 +78,13 @@ label{
 
 .g-recaptcha {
   transform:scale(0.77);
+}
+
+#footer{
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+body{
+background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%) !important;
 }

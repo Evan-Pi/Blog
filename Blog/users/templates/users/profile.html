@@ -40,7 +40,7 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle btn-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       <small><i class="fas fa-feather"></i></small>
-      <small>Panel δημιουργού</small>
+      <small>Βιτρίνα δημιουργού</small>
     </a>
 
     <div class="dropdown-menu">
@@ -53,11 +53,24 @@
   <li class="nav-item">
     <a class="nav-link btn-light" href="{% url 'admin:index' %}">
       <small><i class="fa fa-cogs"></i></small>
-      <small> Panel Διαχειριστή</small>
+      <small> Διαχειριστικό</small>
     </a>
   </li>
   {% endif %}
 </ul>
+
+<div style="padding:0; margin-top: 15px;" class="container text-center">
+  {% for message in messages %}
+
+  <div style="border-radius:0;" class="alert alert-success alert-dismissible fade show" role="alert">
+    <small>{{message}}</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  {% endfor %}
+</div>
 
   <div id="profile">
     <div style="margin-bottom: 30px;" class="container">
@@ -241,7 +254,7 @@
           <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           
           <div style="width: 100%;" class="">
-            <a href="{% url 'forum' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στο Forum</a>
+            <a href="{% url 'forum' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στο forum</a>
           </div>
         </div>
         {% endif %}

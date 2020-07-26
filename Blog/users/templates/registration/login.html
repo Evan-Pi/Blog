@@ -17,18 +17,14 @@
 {% endblock %}
 
 {% block main %}
+
 <div id="login">
 
   <div class="container-fluid">
     <div class="row">
 
-      <div id="loginImage" style="background-image:url({% static 'articles/material/index/homepage_wallpaper.jpg' %});" class="col-12 col-lg-6">
-        <div id="loginImageInner">
 
-        </div>
-      </div>
-
-      <div id="loginFormContainer" class="col-12 col-lg-6 my-auto">
+      <div id="loginFormContainer" class="col-12 my-auto">
 
         <a href="{% url 'index' %}">
           <img style="max-height: 55px; margin-bottom:30px; cursor: pointer;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
@@ -43,13 +39,13 @@
         </form>
 
         <div style="margin-top:7px;">
-          <a href="{% url 'password_reset' %}"><span style="color:#44b78b;">Ξεχάσατε τον κωδικό σας;</span></a>
+          <a href="{% url 'password_reset' %}"><small style="color:#44b78b;">Ξεχάσατε τον κωδικό σας;</small></a>
         </div>
 
         <div style="margin-top:32px;" class="text-center">
-          <span class="text-muted">Δεν είστε μέλος ακόμα; Δημιουργήστε τώρα έναν δωρεάν λογαριασμό.</span><br>
+          <small class="text-muted">Δεν είστε μέλος ακόμα; Δημιουργήστε τώρα έναν δωρεάν λογαριασμό.</small><br>
           <a href="{% url 'signup' %}">
-            <button style="margin-top:7px; box-shadow:none;" type="submit" class="btn customButton1-outline">Δημιουργία λογαριασμού</button>
+            <button style="margin-top:7px; box-shadow:none;" type="submit" class="btn btn-sm customButton1-outline">Δημιουργία λογαριασμού</button>
           </a>
 
         </div>
@@ -71,5 +67,5 @@
 {% endblock %}
 
 {% block footer %}
-
+{% include 'articles/footer.html' %}
 {% endblock %}

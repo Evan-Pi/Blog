@@ -1,12 +1,17 @@
 #forum1{
-  min-height: calc(100vh - 75px - 52px);
+  min-height: calc(100vh - 90px - 87px - 52px);
   display: flex; 
   flex-direction: column; 
-  justify-content: flex-start; 
+  justify-content: center; 
   align-items: center;
 
   padding: 0px 15px 15px 15px;
 }
+
+body{
+  padding-right: 0 !important;
+}
+
 
 
 .discussion{
@@ -17,7 +22,8 @@
     border-bottom-right-radius: 5px;
 
     border-left: solid;
-    border-color: silver;
+    border-color: #44b78b;
+    border-width: 1px;
 
     box-shadow: 0px 0px 10px #e8e8e8;
     transition: 0.4s;
@@ -67,7 +73,7 @@
 }
 
 .g-recaptcha {
-  transform:scale(0.82);
+  transform:scale(0.77);
 }
 
 
@@ -79,6 +85,10 @@
 @media only screen and (max-width: 425px) {
   #discussions-search-form{
     width: 100%;
+  }
+
+  #forum1{
+    min-height: calc(100vh - 155px - 87px - 52px);
   }
 }
 
@@ -121,4 +131,8 @@
 #discussions-search-submit{
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+}
+
+.django-ckeditor-widget{
+width: 100% !important;
 }

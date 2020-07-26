@@ -25,7 +25,7 @@ def signup(request):
             new_user = authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password1'])
             login(request, new_user)
 
-
+            messages.success(request, 'Ο λογαριασμός σου δημιουργήθηκε με επιτυχία! Καλώς ήρθες στην κοινότητα του Φοίνικα!')
             return redirect('profile')
     else:
         form = UserCreationFormExtended()

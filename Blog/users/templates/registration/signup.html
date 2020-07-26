@@ -18,18 +18,14 @@
 {% endblock %}
 
 {% block main %}
+
 <div id="signup">
+
 
   <div class="container-fluid">
     <div class="row">
 
-      <div id="signupImage" style="background-image:url({% static 'articles/material/index/homepage_wallpaper.jpg' %});" class="col-12 col-lg-6">
-        <div id="signupImageInner">
-
-        </div>
-      </div>
-
-      <div id="signupFormContainer" class="col-12 col-lg-6 my-auto">
+      <div id="signupFormContainer" class="col-12">
         <a href="{% url 'index' %}">
           <img style="max-height: 55px; margin-bottom:30px; cursor: pointer;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
         </a>
@@ -64,5 +60,5 @@
 {% endblock %}
 
 {% block footer %}
-
+{% include 'articles/footer.html' %}
 {% endblock %}
