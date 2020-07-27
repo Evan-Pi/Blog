@@ -119,6 +119,7 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -126,18 +127,6 @@ DATABASES = {
     }
 }
 
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'evangelo912107_phoenixfeather_db',
-        'USER': 'evangelo912107_phoenixfeather_user',
-        'PASSWORD': '#ep7776PHI!',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-'''
 
 
 # Password validation
