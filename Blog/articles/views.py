@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import user_passes_test
 
 def coming_soon(request):
 
-    return render(request, 'articles/sophyCV.html')
+    return render(request, 'articles/coming_soon.html')
 
 def index(request):
     current_datetime = localtime(now())
