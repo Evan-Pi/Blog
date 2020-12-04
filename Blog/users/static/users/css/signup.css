@@ -1,26 +1,16 @@
 #signup {
-  min-height: calc(100vh - 52px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: calc(100vh - 58px);
 }
 
 #nav-tools-trigger {
   display: none;
 }
 
-@media screen and (min-width:768px) {
-  form {
-    width: 380px;
-  }
-}
 
-@media screen and (max-width:767px) {
-  form {
-    width: 320px;
-  }
-}
 
 input:focus{
   box-shadow: none !important;
@@ -76,6 +66,14 @@ label{
   display: none;
 }
 
+#id_first_name::placeholder,#id_last_name::placeholder,#id_email::placeholder,#id_password1::placeholder,#id_password2::placeholder{
+  font-size: 1rem;
+}
+
+#hint_id_first_name,#hint_id_last_name,#hint_id_email,#hint_id_password1,#hint_id_password2{
+  font-size: 11.5px;
+}
+
 .g-recaptcha {
   transform:scale(0.77);
 }
@@ -88,3 +86,33 @@ label{
 body{
 background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%) !important;
 }
+
+#id_phone_0{
+  width: 50% !important;
+  display: inline;
+}
+
+
+#id_phone_1{
+  width: calc(50% - 4px) !important;
+  display: inline;
+  margin-left:4px;
+}
+
+#div_id_first_name, #div_id_last_name{
+  display: inline-table;
+  width: 50%;
+}
+
+#id_first_name{
+  width: 100% !important;
+  display: inline;
+}
+
+
+#id_last_name{
+  width: calc(100% - 4px) !important;
+  display: inline;
+  margin-left:4px;
+}
+

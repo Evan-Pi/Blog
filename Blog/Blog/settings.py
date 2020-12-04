@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h7$8=68p^(dv#vi5*&ffb&tl@5r2v=_c4i1=y3y)tkp^(-1(%9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'colorfield',
 
     # Default apps
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,14 +47,13 @@ INSTALLED_APPS = [
 
     # My apps
     'rest_framework',
-    'ckeditor',
-    'ckeditor_uploader',
     'hitcount',
     'taggit',
     'taggit_serializer',
     'crispy_forms',
     'sorl.thumbnail',
     'captcha',
+    'django_summernote',
     'articles.apps.ArticlesConfig',
     'courses.apps.CoursesConfig',
     'users.apps.UsersConfig',
@@ -147,72 +145,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-########################################################################################
-                            ##  CKEDITOR CONFIGURATION ##
-########################################################################################
-CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
-
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/" # from another tutorial
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_IMAGE_BACKEND = "pillow"
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'skin': 'moono-lisa',
-        'toolbar': 'full',
-        'width': '100%',
-        'height': '100px',
-        'tabSpaces': 4,
-        'extraAllowedContent': 'iframe[*]',
-        'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
-            # your extra plugins here
-            'div',
-            'autogrow',
-            'codesnippet',
-            'embed',
-            # 'devtools',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath',
-        ]),
-    },
-
-    'basic': {
-        'skin': 'n1theme',
-        'toolbar': 'Basic',
-        'toolbar_Basic':[
-            ['Bold', 'Italic', 'Underline'], 
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['CodeSnippet', 'Embed'], 
-        ],
-        'width': '100%',
-        'height': '100px',
-        'tabSpaces': 4,
-        'extraAllowedContent': 'iframe[*]',
-        'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
-            # your extra plugins here
-            'div',
-            'autogrow',
-            'codesnippet',
-            'embed',
-            # 'devtools',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath',
-        ]),
-    }
-
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -247,5 +179,19 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-#LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'login_success'
+
+SUMMERNOTE_THEME = 'lite'
+SUMMERNOTE_CONFIG = {
+    
+    'iframe': True,
+    'summernote': {
+        # Change editor size
+        'width': '100%',
+        'height': '480',
+        # Explicitly set language/locale for editor
+        'lang': 'el-GR',
+    },
+'disable_attachment': True,
+}

@@ -4,8 +4,6 @@ from taggit.managers import TaggableManager
 from django.utils.text import slugify
 from unidecode import unidecode
 import unicodedata
-from ckeditor_uploader.fields import RichTextUploadingField
-from ckeditor.fields import RichTextField
 from hitcount.models import HitCount, HitCountMixin
 from django.contrib.contenttypes.fields import GenericRelation
 
@@ -16,7 +14,7 @@ class Discussions(models.Model, HitCountMixin):
 
     title = models.CharField(max_length=250,unique=True)
     created = models.DateTimeField(auto_now_add=True)
-    discussion = RichTextField(default='', config_name='basic', blank=True)
+    discussion = models.TextField()
     tags = TaggableManager(blank=True)
     search = models.CharField(default='',editable=False,max_length=472)
     slug = models.SlugField(editable=False,max_length=150)

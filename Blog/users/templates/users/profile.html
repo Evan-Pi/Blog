@@ -73,51 +73,7 @@
 </div>
 
   <div id="profile">
-    <div style="margin-bottom: 30px;" class="container">
 
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div id="profileImageDiv">
-            <div>
-              {% if user.profile.profile_image %}
-              <div id="profileImage" style="background-image: url({{profile.profile_image.url}});">
-                <div id="profileImageInner">
-                  <i class="far fa-edit"></i>
-                </div>
-              </div>
-              {% else %}
-              <div id="firstLetterImage">
-                <div id="firstLetterImageInner">
-                  <span>{{user.username|upper|first}}</span>
-                </div>
-              </div>
-              {% endif %}
-            </div>
-            <div style="margin-left:15px;">
-              <h6><i class="far fa-user"></i> {{user.username}}</h6>
-              <h6><i class="far fa-envelope"></i> {{user.email}}</h6>
-              {% if request.user.is_superuser %}
-              <h6>Status : Διαχειριστής</h6>
-              {% elif request.user.is_staff %}
-              <h6>Status : Δημιουργός</h6>
-              {% else %}
-              <h6>Status : Μέλος</h6>
-              {% endif %}
-            </div>
-          </div>
-          <form id="profile_image_form" action="." method="POST" enctype="multipart/form-data" onchange="submitOnLoad()">
-            {% csrf_token %}
-            {{form.profile_image}}
-          </form>
-        </div>
-        <div class="col-12 col-md-6">
-
-            
-      
-        </div>
-      </div>
-
-    </div>
     
 
     <div class="container">
@@ -162,7 +118,7 @@
         <div class="card-body">
           <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           <div style="width: 100%;" class="">
-            <a href="{% url 'articles' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στα άρθρα</a>
+            <a href="{% url 'articles' %}" class="btn btn-sm btn-outline-dark">Μετάβαση στα άρθρα</a>
           </div>
         </div>
         {% endif %}
@@ -212,7 +168,7 @@
         <div class="card-body">
           <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           <div style="width: 100%;" class="">
-            <a href="{% url 'courses' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στις σειρές</a>
+            <a href="{% url 'courses' %}" class="btn btn-sm btn-outline-dark">Μετάβαση στις σειρές</a>
           </div>
         </div>
         {% endif %}
@@ -255,7 +211,7 @@
           <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           
           <div style="width: 100%;" class="">
-            <a href="{% url 'forum' %}" class="btn btn-sm btn-outline-dark browse">Μετάβαση στο forum</a>
+            <a href="{% url 'forum' %}" class="btn btn-sm btn-outline-dark">Μετάβαση στο forum</a>
           </div>
         </div>
         {% endif %}

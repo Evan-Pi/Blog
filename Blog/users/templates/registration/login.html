@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-<title>Σύνδεση</title>
+<title>Log in</title>
 {% endblock %}
 
 {% block links %}
@@ -20,38 +20,28 @@
 
 <div id="login">
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
 
-
-      <div id="loginFormContainer" class="col-12 my-auto">
-
-        <a href="{% url 'index' %}">
-          <img style="max-height: 55px; margin-bottom:30px; cursor: pointer;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
-        </a>
-
-      
-
-        <form method="post">
+      <div id="loginFormContainer" class="col-12">
+        <form style="width: 100%; max-width: 550.48px;" method="post">
           {% csrf_token %}
           {{form|crispy}}
-          <button type="submit" class="btn btn-block customButton1">Σύνδεση</button>
+          <button type="submit" class="btn btn-block btn-dark">Log in</button>
         </form>
 
         <div style="margin-top:7px;">
-          <a href="{% url 'password_reset' %}"><small style="color:#44b78b;">Ξεχάσατε τον κωδικό σας;</small></a>
+          <a href="{% url 'password_reset' %}"><small style="color:#44b78b;">Forgot password;</small></a>
         </div>
 
         <div style="margin-top:32px;" class="text-center">
-          <small class="text-muted">Δεν είστε μέλος ακόμα; Δημιουργήστε τώρα έναν δωρεάν λογαριασμό.</small><br>
+          <small class="text-muted">Not a member yet? Create a free account now.</small><br>
           <a href="{% url 'signup' %}">
-            <button style="margin-top:7px; box-shadow:none;" type="submit" class="btn btn-sm customButton1-outline">Δημιουργία λογαριασμού</button>
+            <button style="margin-top:7px; box-shadow:none;" type="submit" class="btn btn-sm customButton1-outline">Create free account</button>
           </a>
 
         </div>
       </div>
-
-
 
     </div>
   </div>
@@ -60,12 +50,12 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
+<script>
   $("#id_username").attr("placeholder", "Email");
-  $("#id_password").attr("placeholder", "Κωδικός");
+  $("#id_password").attr("placeholder", "Password");
 </script>
 {% endblock %}
 
 {% block footer %}
-{% include 'articles/footer.html' %}
+
 {% endblock %}

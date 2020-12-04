@@ -2,7 +2,6 @@ from django import forms
 from . models import Discussions
 from crispy_forms.helper import FormHelper
 from captcha.fields import ReCaptchaField
-from ckeditor.widgets import CKEditorWidget
 
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
@@ -12,8 +11,6 @@ class DiscussionForm(forms.ModelForm):
     captcha = ReCaptchaField(
         widget=ReCaptchaV2Checkbox(
         attrs={
-            
-            
             'required' : 'required',
         }
     )

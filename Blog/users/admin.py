@@ -1,47 +1,43 @@
 from django.contrib import admin
-
-# Register your models here.
-from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 
 from .forms import UserCreationFormExtended, UserChangeFormExtended
-from .models import Account, Profile, ArticlesViews, CoursesViews, DiscussionViews
+from .models import Account, Profile
+
 
 class CustomUserAdmin(UserAdmin):
+
     add_form = UserCreationFormExtended
     form = UserChangeFormExtended
     model = Account
-    list_display = [ 'username', 'email', 'first_name', 'last_name', 'date_joined', 'last_login', 'is_staff']
+
+    list_display = ['email','first_name','last_name','image','is_active','is_staff']
+    search_fields = ['email',]
+    readonly_fields = ['image']
+
+    ordering = ()
+
+    fieldsets = (
+        (None, {'fields': ('password',)}),
+        ('Personal information', {'fields': ('first_name', 'last_name', 'email','profile_image','image')}),
+        ('Groups', {'fields': ('groups',)}),
+        ('Permissions', {
+            'fields': ('is_active','is_staff','is_superuser', 'user_permissions'),
+        }),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        #('Συνδρομή χρήστη', {'fields': ('end_of_subscription',)}),
+    )
 
     add_fieldsets = (
         (None, {
-            'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2', 'captcha'),
+            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
         }),
     )
 
-class ArticlesViewsAdmin(admin.ModelAdmin):
 
-    model = ArticlesViews
-    list_display = [ 'profile', 'article', 'created', ]
-
-class CoursesViewsAdmin(admin.ModelAdmin):
-
-    model = CoursesViews
-    list_display = [ 'profile', 'course', 'created', ]
-
-class DiscussionViewsAdmin(admin.ModelAdmin):
-
-    model = DiscussionViews
-    list_display = [ 'profile', 'discussion', 'created', ]
-
-    
-
-admin.site.register(Profile)
 admin.site.register(Account, CustomUserAdmin)
+admin.site.register(Profile)
 
-admin.site.register(ArticlesViews,ArticlesViewsAdmin)
-admin.site.register(CoursesViews,CoursesViewsAdmin)
-admin.site.register(DiscussionViews,DiscussionViewsAdmin)
 
 

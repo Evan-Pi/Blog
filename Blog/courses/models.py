@@ -1,5 +1,4 @@
 from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
 
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
@@ -104,7 +103,7 @@ class Modules(models.Model, HitCountMixin):
     slug = models.SlugField(editable=False,max_length=150)
     subtitle = models.CharField(max_length=150, blank=True)
 
-    module = RichTextUploadingField()
+    module = models.TextField()
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

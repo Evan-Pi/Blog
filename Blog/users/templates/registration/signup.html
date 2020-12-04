@@ -21,18 +21,20 @@
 
 <div id="signup">
 
-
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
 
       <div id="signupFormContainer" class="col-12">
-        <a href="{% url 'index' %}">
-          <img style="max-height: 55px; margin-bottom:30px; cursor: pointer;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
-        </a>
+
         <form method="post">
           {% csrf_token %}
-          {{form|crispy}}
-          <button type="submit" class="btn btn-block customButton1">Εγγραφή</button>
+
+            {{form.email|as_crispy_field}}
+          
+            {{form.password1|as_crispy_field}}
+            {{form.password2|as_crispy_field}}
+
+          <button type="submit" class="btn btn-block btn-dark">Sign up</button>
         </form>
       </div>
 
@@ -40,25 +42,19 @@
   </div>
 
 
-
-
-
-
-
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
-  $("#id_username").attr("placeholder", "Όνομα χρήστη (ψευδώνυμο)");
-  $("#id_first_name").attr("placeholder", "Όνομα");
-  $("#id_last_name").attr("placeholder", "Επώνυμο");
+  $("#id_first_name").attr("placeholder", "First name");
+  $("#id_last_name").attr("placeholder", "Last name");
+
   $("#id_email").attr("placeholder", "Email");
-  $("#id_password1").attr("placeholder", "Κωδικός");
-  $("#id_password2").attr("placeholder", "Επαλήθευση κωδικού");
+  $("#id_password1").attr("placeholder", "Password");
+  $("#id_password2").attr("placeholder", "Password confirmation");
 </script>
 {% endblock %}
 
 {% block footer %}
-{% include 'articles/footer.html' %}
 {% endblock %}

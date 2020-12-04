@@ -1,5 +1,4 @@
 from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
 
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
@@ -43,14 +42,14 @@ class Articles(models.Model, HitCountMixin):
         verbose_name_plural = 'Articles'
 
     category = models.ForeignKey(ArticlesCategories, on_delete=models.SET_NULL, null=True, blank=True)
-    title = models.TextField(max_length=150,unique=True)
+    title = models.CharField(max_length=150,unique=True)
     search = models.CharField(default='',editable=False,max_length=472)
     slug = models.SlugField(editable=False,max_length=150)
-    subtitle = models.TextField(max_length=256, blank=True)
+    subtitle = models.CharField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
     use_image_as_background_in_article = models.BooleanField(default=True)
 
-    article = RichTextUploadingField()
+    article = models.TextField()
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
@@ -69,7 +68,7 @@ class Articles(models.Model, HitCountMixin):
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))
         if not self.id:
-            self.author = get_current_user().username
+            self.author = get_current_user().email
         self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower()  + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 

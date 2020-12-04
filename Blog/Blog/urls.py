@@ -19,8 +19,8 @@ urlpatterns = [
     path('', include('courses.urls')),
     path('forum/', include('forum.urls')),
 
+    path('summernote/', include('django_summernote.urls')),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('users.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]

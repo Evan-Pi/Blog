@@ -31,25 +31,16 @@
         {% if user.is_authenticated %}
 
         <li id="user-image-menu" class="nav-item" style="margin-right:15px; margin-left:30px; position: relative;">
-          {% if user.profile.profile_image %}
+
           <a href="{% url 'profile' %}">
             <div class="user-nav-link">
-              <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
+              <span>{{user.email}}</span>
+              <div class="firstLetterImageDiv">
+                <span>{{user.email|upper|first}}</span>
               </div>
-              <span style="margin-left: 4px;">{{user.username}}</span>
-          </div>
+            </div>
           </a>
-            {% else %}
-            <a href="{% url 'profile' %}">
-              <div class="user-nav-link">
-                <div class="firstLetterImageDiv">
-                  <span>{{user.username|upper|first}}</span>
-                </div>
-                <span style="margin-left: 4px;">{{user.username}}</span>
-              </div>
-            </a>
-            
-          {% endif %}
+
           <div id="user-image-dropdown-menu">
             <div id="user-image-dropdown-menu-inner">
               <a style="margin:0;" href="{% url 'profile' %}" class="nav-link log-in-out-nav-link">
@@ -58,7 +49,7 @@
                 </div>
               </a>
               {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
+                <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
                   <div class="nav-tools-login"> 
                     <span style="font-size: 12.2px;">ΑΠΟΣΥΝΔΕΣΗ</span>
                     <i class="fas fa-sign-out-alt"></i>

@@ -62,21 +62,6 @@ def articles(request):
     context = {'categories':categories,'articles':articles,'page_obj':page_obj,'articles_Filter':articles_Filter}
     return render(request, 'articles/articles.html', context)
 
-'''
-def article(request, slug):
-    article = Articles.objects.get(slug=slug)
-    current_datetime = localtime(now())
-    
-    username = request.user.username
-    if username != 'AnonymousUser' and username != '':
-        user = Account.objects.get(username=username)
-        profile = Profile.objects.get(user=user)
-        ArticlesViews.objects.create(article=article, profile=profile)
-
-    context = {'article':article, 'current_datetime':current_datetime}
-    return render(request, 'articles/article.html', context)
-'''
-
 from hitcount.views import HitCountDetailView
 
 class Article(HitCountDetailView):
@@ -88,8 +73,7 @@ class Article(HitCountDetailView):
     def get_object(self):
         obj = super().get_object()
         if self.request.user.is_authenticated:
-            username = self.request.user.username
-            user = Account.objects.get(username=username)
+            user = Account.objects.get(email=self.request.user.email)
             profile = Profile.objects.get(user=user)
             ArticlesViews.objects.create(article=obj, profile=profile)
 

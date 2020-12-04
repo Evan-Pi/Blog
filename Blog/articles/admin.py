@@ -1,12 +1,12 @@
 from django.contrib import admin
 from . models import Articles, ArticlesCategories
-
+from django_summernote.admin import SummernoteModelAdmin
 #admin.site.site_header = 'My Site Admin Panel'
 #admin.site.site_title = 'My Site Title'
 
 
 
-class ArticlesAdmin(admin.ModelAdmin):
+class ArticlesAdmin(SummernoteModelAdmin):
     
     def get_queryset(self, request):
         qs = super(ArticlesAdmin, self).get_queryset(request)
