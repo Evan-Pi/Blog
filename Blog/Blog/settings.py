@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     'courses.apps.CoursesConfig',
     'users.apps.UsersConfig',
-    'forum.apps.ForumConfig',
 ]
 
 AUTH_USER_MODEL = 'users.Account'
@@ -182,7 +181,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'login_success'
 
-SUMMERNOTE_THEME = 'lite'
+SUMMERNOTE_THEME = 'bs3'
 SUMMERNOTE_CONFIG = {
     
     'iframe': True,
@@ -191,7 +190,13 @@ SUMMERNOTE_CONFIG = {
         'width': '100%',
         'height': '480',
         # Explicitly set language/locale for editor
-        'lang': 'el-GR',
+        'lang': 'en-US',
+
+        'codemirror': {
+        'mode': 'htmlmixed',
+        'lineNumbers': 'true',
+        }
+
     },
 'disable_attachment': True,
 }

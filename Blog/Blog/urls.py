@@ -17,7 +17,6 @@ urlpatterns = [
 
     path('', include('articles.urls')),
     path('', include('courses.urls')),
-    path('forum/', include('forum.urls')),
 
     path('summernote/', include('django_summernote.urls')),
 

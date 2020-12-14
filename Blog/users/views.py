@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . models import Account, Profile, ArticlesViews, CoursesViews, DiscussionViews
+from . models import Account, Profile, ArticlesViews, CoursesViews
 from . forms import UserCreationFormExtended
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -35,7 +35,6 @@ def profile(request):
 
     viewed_articles = ArticlesViews.objects.filter(profile=profile).order_by('-created')[:4]
     viewed_courses = CoursesViews.objects.filter(profile=profile).order_by('-created')[:4]
-    viewed_discussions = DiscussionViews.objects.filter(profile=profile).order_by('-created')[:4]
         
     context = {'profile':profile, 'viewed_articles':viewed_articles, 'viewed_courses':viewed_courses , 'viewed_discussions':viewed_discussions}
     return render(request, 'users/profile.html', context)

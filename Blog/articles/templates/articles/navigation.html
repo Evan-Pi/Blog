@@ -6,7 +6,7 @@
   <nav class="navbar navbar-expand-md">
     <a class="navbar-brand" href="{% url 'index' %}">
       <!--ENTER YOUR LOGO HERE (DESKTOP NAVBAR)-->
-      <img style="max-height: 45px;" src="{% static 'articles/material/logo/phoenix_feather_logo_2.jpg' %}" alt="">
+      <img style="max-height: 55px;" src="{% static 'articles/material/logo/pythonas.png' %}" alt="">
     </a>
     <div id="navbarLinks">
       <ul class="navbar-nav">
@@ -20,10 +20,7 @@
           <a class="nav-link" href="{% url 'courses' %}" id="navbarCourses"><span>ΣΕΙΡΕΣ</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'forum' %}" id="navbarForum"><span>FORUM</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'informations' %}" id="navbarFAQs"><span>Ο ΦΟΙΝΙΚΑΣ</span></a>
+          <a class="nav-link" href="{% url 'informations' %}" id="navbarFAQs"><span>Ο ΠΥΘΩΝΑΣ</span></a>
         </li>
 
         
@@ -89,7 +86,7 @@
     <div class="text-center" id="navbarLogo_DIV">
       <!--ENTER YOUR LOGO HERE (MOBILE NAVBAR)-->
       <a class="navbar-brand" href="{% url 'index' %}">
-        <img style="max-height: 32px;" src="{% static 'articles/material/logo/phoenix_feather_logo_2.jpg' %}" alt="">
+        <img style="max-height: 45px;" src="{% static 'articles/material/logo/pythonas.png' %}" alt="">
       </a>
     </div>
     <div id="navbarTrigger_DIV">
@@ -103,6 +100,7 @@
 
 
 <div id="sidebar">
+  <i style="color:#44b78b;" id="closeSidebar" class="fas fa-times"></i>
   <div id="sidebarInner">
     <div style="height:100%; max-width:100%;" class="row mx-auto">
       <div class="col-12 my-auto text-center">
@@ -116,11 +114,9 @@
             <a class="nav-link" href="{% url 'courses' %}">
               <span id="sidebarCourses"><span>ΣΕΙΡΕΣ</span></span>
             </a>
-            <a class="nav-link" href="{% url 'forum' %}">
-              <span id="sidebarForum"><span>FORUM</span></span>
-            </a>
+
             <a class="nav-link" href="{% url 'informations' %}">
-              <span id="sidebarFAQs"><span>Ο ΦΟΙΝΙΚΑΣ</span></span>
+              <span id="sidebarFAQs"><span>Ο ΠΥΘΩΝΑΣ</span></span>
             </a>
             {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'profile' %}">
@@ -131,37 +127,15 @@
       </div>
 
       <div class="col-12 my-auto text-center">
-        
 
         {% if user.is_authenticated %}
-
-
           <a href="{% url 'logout' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
-
-            {% if user.profile.profile_image %}
-            <div class="user-nav-link">
-                <div class="userImageDiv" style="background-image: url({{user.profile.profile_image.url}});">
-                </div>
-            </div>
-              {% else %}
-              <div class="user-nav-link">
-                <div class="firstLetterImageDiv">
-                  <span>{{user.username|upper|first}}</span>
-                </div>
-              </div>
-            {% endif %}
-
             <div style="margin-top:7.5px; color: #4d4d4d;" class="nav-tools-login">
-              <span style="font-size:13.2px;">ΑΠΟΣΥΝΔΕΣΗ</span>
+              <span style="font-size:12.5px;">ΑΠΟΣΥΝΔΕΣΗ</span>
               <i class="fas fa-sign-out-alt"></i>
             </div>
           </a>
-
-   
-        
-
         {% else %}
-       
           <a href="{% url 'login' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
             <div style="margin-top:30px; color: #4d4d4d;" class="nav-tools-login">
               
@@ -169,12 +143,8 @@
               <i class="fas fa-sign-in-alt"></i>
             </div>
           </a>
-       
-        
         {% endif %}
 
-
-        <i style="color:#44b78b; margin-top: 30px;" id="closeSidebar" class="fas fa-times"></i>
       </div>
 
       
