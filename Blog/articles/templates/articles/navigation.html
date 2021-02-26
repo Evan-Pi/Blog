@@ -6,7 +6,7 @@
   <nav class="navbar navbar-expand-md">
     <a class="navbar-brand" href="{% url 'index' %}">
       <!--ENTER YOUR LOGO HERE (DESKTOP NAVBAR)-->
-      <img style="max-height: 55px;" src="{% static 'articles/material/logo/pythonas.png' %}" alt="">
+      <img style="max-height: 55px;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
     </a>
     <div id="navbarLinks">
       <ul class="navbar-nav">
@@ -31,7 +31,6 @@
 
           <a href="{% url 'profile' %}">
             <div class="user-nav-link">
-              <span>{{user.email}}</span>
               <div class="firstLetterImageDiv">
                 <span>{{user.email|upper|first}}</span>
               </div>
@@ -39,28 +38,9 @@
           </a>
 
           <div id="user-image-dropdown-menu">
-            <div id="user-image-dropdown-menu-inner">
-              <a style="margin:0;" href="{% url 'profile' %}" class="nav-link log-in-out-nav-link">
-                <div class="nav-tools-login">
-                  <span>ΠΡΟΦΙΛ</span>
-                </div>
-              </a>
-              {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="nav-link log-in-out-nav-link">
-                  <div class="nav-tools-login"> 
-                    <span style="font-size: 12.2px;">ΑΠΟΣΥΝΔΕΣΗ</span>
-                    <i class="fas fa-sign-out-alt"></i>
-                  </div>
-                </a>
-              {% else %}
-                <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
-                  <div class="nav-tools-login">
-                    <span style="font-size: 12.5px;">ΣΥΝΔΕΣΗ</span>
-                    <i class="fas fa-sign-in-alt"></i>
-                  </div>
-                </a>
-              {% endif %}
-            </div>
+            <a style="margin:0;" href="{% url 'profile' %}" class="nav-link log-in-out-nav-link"></a>
+              <div id="user-image-dropdown-menu-inner"></div>
+            </a>
           </div>
         </li>
 
@@ -86,7 +66,7 @@
     <div class="text-center" id="navbarLogo_DIV">
       <!--ENTER YOUR LOGO HERE (MOBILE NAVBAR)-->
       <a class="navbar-brand" href="{% url 'index' %}">
-        <img style="max-height: 45px;" src="{% static 'articles/material/logo/pythonas.png' %}" alt="">
+        <img style="max-height: 45px;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
       </a>
     </div>
     <div id="navbarTrigger_DIV">

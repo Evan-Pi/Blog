@@ -24,6 +24,11 @@
     <div class="row">
 
       <div id="loginFormContainer" class="col-12">
+
+        <a href="{% url 'index' %}">
+          <img style="max-height: 55px; margin-bottom: 30px;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt="">
+        </a>
+
         <form style="width: 100%; max-width: 550.48px;" method="post">
           {% csrf_token %}
           {{form|crispy}}

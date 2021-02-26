@@ -1,7 +1,3 @@
-#index1-wrapper {
-  filter: drop-shadow(22px 4px 3px #dedede);
-}
-
 #index1 {
   height: calc(100vh - 75px - 52px);
   /*minus navbar & footer height*/
@@ -9,7 +5,8 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 70%, 100% 100%, 21% 100%, 0 78%, 0% 70%, 0% 35%, 0 0);
+  box-shadow: 0px 0px 10px silver;
+  /*clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 70%, 100% 100%, 21% 100%, 0 78%, 0% 70%, 0% 35%, 0 0);*/
 }
 
 #index2 {
@@ -41,14 +38,7 @@
   align-items: center;
 }
 
-#footer{
-  box-shadow: none !important;
-}
 
-#index1Inner {
-  width: 100%;
-  height: 100%;
-}
 
 @media screen and (max-width:768px) {
   #index1 {
@@ -58,37 +48,26 @@
 }
 
 .pulse-wrapper{
-  width: 112px; 
-  height: 112px; 
-  box-shadow: 0px 0px 10px silver; 
+  width: 100px; 
+  height: 100px; 
+  box-shadow: 0px 0px 20px silver; 
   border-radius: 100%; 
-  background: white;  
+  background: #ffffff;  
   font-size: 12px;
-  transition: 0.4s;
 
-  position: absolute;
-  top: calc(100vh - 112px - 57px);
-  left: 15px;
+  position: fixed;
+  bottom: 82px;
+  left: 30px;
+
+  transition: box-shadow 0.4s ease;
 }
 
-@media screen and (max-width:768px) {
-  .pulse-wrapper{
-    left: 7.5px;
-  }
-}
-
-
-
-.pulse-wrapper:hover{
-  box-shadow: 0px 0px 10px gray; 
-}
 
 
 .pulse {
   width: 100%;
   height: 100%;
   border-radius: 100%;
-  background: white;
   display: flex; 
   flex-direction: column; 
   justify-content: center; 
@@ -97,10 +76,18 @@
   box-shadow: 0 0 0 rgba(204,169,44, 0.4);
   animation: pulse 2s infinite;
   color: #4d4d4d;
+  font-size: 15px;
+  font-weight: bold;
+
+  transition: box-shadow 0.4s ease;
 }
-.pulse:hover {
+
+.pulse:hover{
+  box-shadow: 0px 0px 20px gray;
   animation: none;
 }
+
+
 
 @-webkit-keyframes pulse {
   0% {

@@ -21,8 +21,8 @@
 
 <div style="padding-top:15px; padding-bottom:15px; background:#f9f9f9; display:flex; justify-content: space-between; align-items:center;" class="container-fluid">
   <div>
-    <h4>{{request.user}}</h4>
     <h6>Panel δημιουργού</h6>
+    <small>{{request.user}}</small>
   </div>
 
   <div>
@@ -31,7 +31,7 @@
   
 </div>
 
-<div style="display: flex; justify-content: flex-end; align-items: center; padding-top:15px;" class="container-fluid">
+<div style="display: flex; justify-content: flex-end; align-items: center; margin-top: 15px;" class="container-fluid">
   <a href="{% url 'authorsArticlesPreview' %}">
     <div id="restore-default-articles" style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <i style="color: #44b78b;" class="fas fa-redo"></i>

@@ -181,7 +181,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'login_success'
 
-SUMMERNOTE_THEME = 'bs3'
+SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
     
     'iframe': True,

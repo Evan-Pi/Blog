@@ -40,7 +40,7 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle btn-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       <small><i class="fas fa-feather"></i></small>
-      <small>Βιτρίνα δημιουργού</small>
+      <small>Panel δημιουργού</small>
     </a>
 
     <div class="dropdown-menu">
@@ -175,53 +175,6 @@
       
         
       </div>
-
-      <div style="border: none !important; margin-bottom: 30px;" class="card">
-       
-          <small>Συζητήσεις που παρακολουθήσατε πρόσφατα</small>
-          <hr style="margin-top: 4px;">
-
-        {% if viewed_discussions %}
-        <div class="card-body">
-          {% for view in viewed_discussions %}
-          <div class="row discussion">
-              
-                
-                  <a href="{% url 'discussion' view.discussion.slug view.discussion.pk %}"></a>
-                  <div style="margin-bottom:15px;" class="col-12 col-md-8 col-lg-9">
-                    <span>{{view.discussion.title}}</span><br>
-                    <small class="text-muted">{{view.discussion.created}}</small>
-                  </div>
-                  <div class="col-12 col-md-4 col-lg-3 text-right">
-                    <div>
-                      <span style="font-size:14px;">Views <i class="far fa-eye"></i> : <span style="color:#44b78b;">{{view.discussion.hit_count.hits}}</span> | </span>
-                      <span style="font-size:14px;">Comments <i class="far fa-comments"></i> : <a style="color:#44b78b;" href="{% url 'discussion' view.discussion.slug view.discussion.pk %}#disqus_thread"></a></span>
-                    </div>
-                    <hr style="margin:0;">
-                    <i class="far fa-user"></i>
-                    <small>{{view.discussion.author}}</small>
-                  </div>
-                
-                 
-              </div>
-              {% endfor %}
-        </div>
-        {% else %}
-        <div class="card-body">
-          <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
-          
-          <div style="width: 100%;" class="">
-            <a href="{% url 'forum' %}" class="btn btn-sm btn-outline-dark">Μετάβαση στο forum</a>
-          </div>
-        </div>
-        {% endif %}
-      
-        
-      </div>
-     
-      
-      
-      
 
   </div>
 

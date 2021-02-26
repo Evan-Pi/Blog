@@ -1,8 +1,9 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 from . models import CoursesCategories, Courses, Modules
 # Register your models here.
 
-class InLineModules(admin.StackedInline):
+class InLineModules(admin.StackedInline, SummernoteInlineModelAdmin):
     model = Modules
     extra = 0
 
@@ -28,7 +29,10 @@ class CoursesAdmin(admin.ModelAdmin):
             'all': ('courses/css/admin/styles.css',)
             }
 
+class ModulesAdmin(SummernoteModelAdmin):
+    pass
 
 admin.site.register(CoursesCategories)
 admin.site.register(Courses,CoursesAdmin)
+admin.site.register(Modules, ModulesAdmin)
 

@@ -213,9 +213,9 @@
 }
 
 #modules-menu-trigger{
-    height: 75px;
-    width: 25px;
-    background-color: rgba(255, 255, 255, 0.9);
+    height: 85px;
+    width: 35px;
+    background-color: rgba(255, 255, 255, 0.92);
     position: fixed;
     bottom: calc(50vh - 75px + 37.5px);
     right: 0px;
@@ -227,7 +227,7 @@
     color: black;
     z-index: 210000;
     cursor: pointer;
-
+    font-size: 20px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }   

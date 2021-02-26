@@ -18,6 +18,8 @@ from hitcount.models import HitCount, HitCountMixin
 from django.contrib.contenttypes.fields import GenericRelation
 
 
+
+
 class CoursesCategories(models.Model):
     '''Courses categories creation'''
 
@@ -73,8 +75,12 @@ class Courses(models.Model, HitCountMixin):
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))
         if not self.id:
-            self.author = get_current_user().username
-        self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.description.lower() + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
+            self.author = get_current_user().email
+
+        if self.description:
+            self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.description.lower() + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
+        else:
+            self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

@@ -24,34 +24,31 @@
 {% block main %}
 {% include 'articles/navigation.html' %}
 
-<div id="index1-wrapper">
-  <div style="background: #eaeaea;" id="index1">
-    <div id="index1Inner">
+  <div style="background-image: url({% static 'articles/material/index/homepage_wallpaper2.jpg' %});" id="index1">
     
      
-    </div>
   </div>
-</div>
 
+
+<!--
 {% if user.is_authenticated %}
-<div class="pulse-wrapper">
-  <a href="{% url 'profile' %}">
-    <div class="pulse">
-      <span>ΠΡΟΦΙΛ</span>
-    </div>
-  </a>
-</div>
-{% else %}
-<div class="pulse-wrapper">
-  <a href="{% url 'signup' %}">
-    <div class="pulse">
-      <span>Γίνετε μέλος</span>
-    </div>
-  </a>
-</div>
+  <div class="pulse-wrapper">
+    <a href="{% url 'profile' %}">
+      <div class="pulse">
+        <i class="fas fa-chess-pawn fa-3x"></i>
+      </div>
+    </a>
+  </div>
+  {% else %}
+  <div class="pulse-wrapper">
+    <a href="{% url 'signup' %}">
+      <div class="pulse">
+        <i class="fas fa-chess-pawn fa-3x"></i>
+      </div>
+    </a>
+  </div>
 {% endif %}
-
-
+-->
 
 
 {% endblock %}

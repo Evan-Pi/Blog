@@ -248,6 +248,19 @@
 <script src="{% static 'courses/js/course_special.js' %}"></script>
 
 <script>
+  var i, frames;
+  frames = document.getElementsByTagName("iframe");
+  for (i = 0; i < frames.length; ++i)
+  {
+        // The iFrame
+
+          //frames[i].style.display = 'none';
+          //frames[i].setAttribute('allowFullScreen', '')
+      
+  }
+</script>
+
+<script>
   var current_module = "#module-{{page_obj.object_list.0.id}}";
   $(current_module).css({'background':'#fbfbfb','color':'#44b78b'});
 </script>

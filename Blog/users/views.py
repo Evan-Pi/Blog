@@ -36,5 +36,5 @@ def profile(request):
     viewed_articles = ArticlesViews.objects.filter(profile=profile).order_by('-created')[:4]
     viewed_courses = CoursesViews.objects.filter(profile=profile).order_by('-created')[:4]
         
-    context = {'profile':profile, 'viewed_articles':viewed_articles, 'viewed_courses':viewed_courses , 'viewed_discussions':viewed_discussions}
+    context = {'profile':profile, 'viewed_articles':viewed_articles, 'viewed_courses':viewed_courses}
     return render(request, 'users/profile.html', context)

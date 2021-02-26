@@ -65,8 +65,8 @@ class Course(HitCountDetailView):
     def get_object(self):
         obj = super().get_object()
         if self.request.user.is_authenticated:
-            username = self.request.user.username
-            user = Account.objects.get(username=username)
+            email = self.request.user.email
+            user = Account.objects.get(email=email)
             profile = Profile.objects.get(user=user)
             CoursesViews.objects.create(course=obj, profile=profile)
 
@@ -92,7 +92,7 @@ class Course(HitCountDetailView):
         page_obj = paginator.get_page(page_number)
         context['page_obj'] = page_obj
 
-        if (course.publish_date > current_datetime or course.approved == False) and (course.author != self.request.user.username) and not (self.request.user.is_superuser) :
+        if (course.publish_date > current_datetime or course.approved == False) and (course.author.email != self.request.user.email) and not (self.request.user.is_superuser) :
             not_approved_course = True
 
         else:
