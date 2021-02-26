@@ -15,4 +15,6 @@ django-cookie-law
 django-admin-interface
 pandas
 django-hitcount
+
 django-summernote
+django-froala-editor

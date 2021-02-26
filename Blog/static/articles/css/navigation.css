@@ -31,7 +31,7 @@
 
 .navbar-nav a {
   color: #4d4d4d;
-  transition: 0.4s;
+  transition: color 0.4s ease;
   font-size: 14.5px;
 }
 
@@ -39,9 +39,7 @@
   color: #44b78b !important;
 }
 
-.navbar .nav-link {
-  transition: all 0.3s ease-in-out;
-}
+
 
 .navbar .dropdown:hover .dropdown-menu {
   display: block;

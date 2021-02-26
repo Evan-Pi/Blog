@@ -1,0 +1,49 @@
+{% extends 'articles/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+
+{% load hitcount_tags %}
+
+{% block meta %}
+<meta property="og:image" content="{{article.image.url}}" />
+<meta name="description" content="{{article.subtitle}}">
+{% endblock %}
+
+{% block title %}
+<title>{{article.title}} - ΠΥΘΩΝΑΣ</title>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'articles/css/edit_article.css' %}">
+{% endblock %}
+
+{% block main %}
+
+{% include 'articles/navigation.html' %}
+
+<div class="container">
+    {{article.title}}
+
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{form.media}}
+        {{form.as_p}}
+        <button class="btn btn-dark" type="submit">Submit</button>
+    </form>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

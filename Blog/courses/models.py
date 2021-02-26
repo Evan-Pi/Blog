@@ -6,7 +6,6 @@ from unidecode import unidecode
 import unicodedata
 
 from django_currentuser.middleware import (get_current_user, get_current_authenticated_user)
-from django_currentuser.db.models import CurrentUserField
 
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
@@ -16,6 +15,8 @@ from django.core.validators import MinValueValidator
 
 from hitcount.models import HitCount, HitCountMixin
 from django.contrib.contenttypes.fields import GenericRelation
+
+from froala_editor.fields import FroalaField
 
 
 
@@ -109,7 +110,7 @@ class Modules(models.Model, HitCountMixin):
     slug = models.SlugField(editable=False,max_length=150)
     subtitle = models.CharField(max_length=150, blank=True)
 
-    module = models.TextField()
+    module = FroalaField()
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

@@ -189,3 +189,17 @@
     position: relative;
     background: white;
 }
+
+.responsive-media {
+    position: relative;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+}
+
+.responsive-media iframe, .responsive-media video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

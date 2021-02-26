@@ -15,7 +15,8 @@ from django.utils.html import mark_safe
 
 from hitcount.models import HitCount, HitCountMixin
 
-from ckeditor.fields import RichTextField
+from froala_editor.fields import FroalaField
+
 
 class ArticlesCategories(models.Model):
     '''Articles categories creation'''
@@ -50,7 +51,7 @@ class Articles(models.Model, HitCountMixin):
     image = models.ImageField(upload_to = "Articles_Images", default='')
     use_image_as_background_in_article = models.BooleanField(default=True)
 
-    article = RichTextField()
+    article = FroalaField()
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

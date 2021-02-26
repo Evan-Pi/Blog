@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h7$8=68p^(dv#vi5*&ffb&tl@5r2v=_c4i1=y3y)tkp^(-1(%9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -53,7 +53,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sorl.thumbnail',
     'captcha',
+
     'django_summernote',
+    'froala_editor',
+
     'articles.apps.ArticlesConfig',
     'courses.apps.CoursesConfig',
     'users.apps.UsersConfig',
@@ -180,23 +183,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'login_success'
-
-SUMMERNOTE_THEME = 'bs4'
-SUMMERNOTE_CONFIG = {
-    
-    'iframe': True,
-    'summernote': {
-        # Change editor size
-        'width': '100%',
-        'height': '480',
-        # Explicitly set language/locale for editor
-        'lang': 'en-US',
-
-        'codemirror': {
-        'mode': 'htmlmixed',
-        'lineNumbers': 'true',
-        }
-
-    },
-'disable_attachment': True,
-}

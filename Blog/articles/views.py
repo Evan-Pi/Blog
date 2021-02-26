@@ -12,6 +12,8 @@ from users.models import Account, Profile, ArticlesViews
 import unicodedata
 from django.contrib.auth.decorators import user_passes_test
 
+from . forms import EditArticleForm
+
 
 def coming_soon(request):
 
@@ -98,7 +100,11 @@ class Article(HitCountDetailView):
         return context
 
     
-
+def edit_article(request, slug):
+    article = Articles.objects.get(slug=slug)
+    form = EditArticleForm(instance=article)
+    context={'article':article, 'form':form}
+    return render(request, 'articles/edit_article.html', context)
            
 
 def articlesCategory(request, slug):

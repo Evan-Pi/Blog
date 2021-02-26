@@ -18,10 +18,9 @@ urlpatterns = [
     path('', include('articles.urls')),
     path('', include('courses.urls')),
 
-    path('summernote/', include('django_summernote.urls')),
+    path('froala_editor/',include('froala_editor.urls')),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('users.urls')),
 
-    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]

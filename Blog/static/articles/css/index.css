@@ -38,10 +38,7 @@
   align-items: center;
 }
 
-#footer{
 
-  background: #ebedec !important;
-}
 
 @media screen and (max-width:768px) {
   #index1 {
@@ -51,11 +48,11 @@
 }
 
 .pulse-wrapper{
-  width: 112px; 
-  height: 112px; 
+  width: 100px; 
+  height: 100px; 
   box-shadow: 0px 0px 20px silver; 
   border-radius: 100%; 
-  background: #ebedec;  
+  background: #ffffff;  
   font-size: 12px;
 
   position: fixed;
@@ -65,9 +62,6 @@
   transition: box-shadow 0.4s ease;
 }
 
-.pulse-wrapper:hover {
-  box-shadow: 0px 0px 30px gray;
-}
 
 
 .pulse {
@@ -84,7 +78,15 @@
   color: #4d4d4d;
   font-size: 15px;
   font-weight: bold;
+
+  transition: box-shadow 0.4s ease;
 }
+
+.pulse:hover{
+  box-shadow: 0px 0px 20px gray;
+  animation: none;
+}
+
 
 
 @-webkit-keyframes pulse {

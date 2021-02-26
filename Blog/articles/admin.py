@@ -1,12 +1,13 @@
 from django.contrib import admin
 from . models import Articles, ArticlesCategories
 from django_summernote.admin import SummernoteModelAdmin
+from taggit.admin import Tag
 #admin.site.site_header = 'My Site Admin Panel'
 #admin.site.site_title = 'My Site Title'
 
 
 
-class ArticlesAdmin(SummernoteModelAdmin):
+class ArticlesAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         qs = super(ArticlesAdmin, self).get_queryset(request)
@@ -30,8 +31,8 @@ admin.site.register(Articles,ArticlesAdmin)
 admin.site.register(ArticlesCategories,ArticlesCategoriesAdmin)
 
 
-from taggit.admin import Tag
-admin.site.unregister(Tag)
+
+
 
 
 from django.contrib.admin.models import LogEntry

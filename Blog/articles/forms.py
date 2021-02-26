@@ -1,6 +1,15 @@
 from django import forms
-from . models import Comments, SubComments
+from . models import Articles, Comments, SubComments
 from crispy_forms.helper import FormHelper
+from froala_editor.widgets import FroalaEditor
+
+class EditArticleForm(forms.ModelForm):
+    article = forms.CharField(widget=FroalaEditor)
+    class Meta:
+        model = Articles
+        fields = '__all__'
+
+
 
 class CommentsForm(forms.ModelForm):
     text = forms.CharField(label='text', widget=forms.Textarea(attrs={'placeholder': 'Type your comment here...'}))
