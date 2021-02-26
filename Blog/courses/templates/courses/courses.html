@@ -50,11 +50,7 @@
   </div>
 
   <div style="display: flex; justify-content: flex-end; align-items: center; padding-top:15px;" class="container-fluid">
-    <a href="{% url 'courses' %}">
-      <div id="restore-default-courses" style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <i style="color: #44b78b;" class="fas fa-redo"></i>
-      </div>
-    </a>
+    
     <form id="courses-search-form" action="{% url 'courses' %}" method="POST">
       
       <!--input with id = "nav-tools-searchInput" -->
@@ -125,9 +121,13 @@
   
         {% else %}
           <div class="text-center" id="no-courses-returned" style="width:100%; height:100%; min-height: calc(100vh - 52px); display:flex; flex-direction:column; justify-content:center; align-items:center;">
-            <h3 class="d-none d-md-flex">Δεν βρέθηκαν σειρές...</h3>
-            <h4 class="d-md-none">Δεν βρέθηκαν σειρές...</h4>
+            <h3 class="d-none d-md-flex">No series found...</h3>
+            <h4 class="d-md-none">No series found...</h4>
             <i style="color:#44b78b;" class="fas fa-heart-broken fa-2x"></i>
+
+            <a href="{% url 'courses' %}" style="margin-top: 15px;">
+              <button class="btn btn-light btn-sm">Show all series...</i></button>
+            </a>
           </div>
         {% endif %}
   

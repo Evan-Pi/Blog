@@ -26,13 +26,13 @@
   <li class="nav-item">
     <a class="nav-link btn-light" href="{% url 'password_change' %}">
       <small><i class="fas fa-key"></i></small>
-      <small>Αλλαγή κωδικού</small>
+      <small>Change password</small>
      </a>
   </li>
   <li class="nav-item">
     <a class="nav-link btn-light" href="{% url 'logout' %}">
       <small><i class="fas fa-sign-out-alt"></i></small>
-      <small>Αποσύνδεση</small>
+      <small>Log out</small>
     </a>
   </li>
   {% if user.is_staff %}
@@ -40,12 +40,12 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle btn-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       <small><i class="fas fa-feather"></i></small>
-      <small>Panel δημιουργού</small>
+      <small>Creator's panel</small>
     </a>
 
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="{% url 'authorsArticlesPreview' %}"><small>Άρθρα</small></a>
-      <a class="dropdown-item" href="{% url 'authorsCoursesPreview' %}"><small>Σειρές</small></a>
+      <a class="dropdown-item" href="{% url 'authorsArticlesPreview' %}"><small>Articles</small></a>
+      <a class="dropdown-item" href="{% url 'authorsCoursesPreview' %}"><small>Series</small></a>
     </div>
   </li>
 
@@ -53,7 +53,7 @@
   <li class="nav-item">
     <a class="nav-link btn-light" href="{% url 'admin:index' %}">
       <small><i class="fa fa-cogs"></i></small>
-      <small> Διαχειριστικό</small>
+      <small> Control panel</small>
     </a>
   </li>
   {% endif %}
@@ -80,7 +80,7 @@
       
       <div style="border: none !important; margin-bottom: 30px;" class="card">
        
-         <small> Άρθρα που παρακολουθήσατε πρόσφατα</small>
+         <small> Recently read articles...</small>
          <hr style="margin-top: 4px;">
 
 
@@ -116,9 +116,9 @@
         </div>
         {% else %}
         <div class="card-body">
-          <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
+          <h6 class="card-title">Nothing yet... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           <div style="width: 100%;" class="">
-            <a href="{% url 'articles' %}" class="btn btn-sm btn-outline-dark">Μετάβαση στα άρθρα</a>
+            <a href="{% url 'articles' %}" class="btn btn-sm btn-outline-dark">Go to articles</a>
           </div>
         </div>
         {% endif %}
@@ -129,7 +129,7 @@
 
       <div style="border: none !important;" class="card">
         
-          <small>Σειρές που παρακολουθήσατε πρόσφατα</small>
+          <small>Recently read series...</small>
           <hr style="margin-top: 4px;">
       
      
@@ -166,9 +166,9 @@
         </div>
         {% else %}
         <div class="card-body">
-          <h6 class="card-title">Τίποτα ακόμα... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
+          <h6 class="card-title">Nothing yet... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           <div style="width: 100%;" class="">
-            <a href="{% url 'courses' %}" class="btn btn-sm btn-outline-dark">Μετάβαση στις σειρές</a>
+            <a href="{% url 'courses' %}" class="btn btn-sm btn-outline-dark">Go to series</a>
           </div>
         </div>
         {% endif %}

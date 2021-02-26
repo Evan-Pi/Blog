@@ -11,16 +11,16 @@
     <div id="navbarLinks">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}" id="navbarHome"><span>ΑΡΧΙΚΗ</span></a>
+          <a class="nav-link" href="{% url 'index' %}" id="navbarHome"><span>Homepage</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'articles' %}" id="navbarArticles"><span>ΑΡΘΡΑ</span></a>
+          <a class="nav-link" href="{% url 'articles' %}" id="navbarArticles"><span>Articles</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'courses' %}" id="navbarCourses"><span>ΣΕΙΡΕΣ</span></a>
+          <a class="nav-link" href="{% url 'courses' %}" id="navbarCourses"><span>Series</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'informations' %}" id="navbarFAQs"><span>Ο ΠΥΘΩΝΑΣ</span></a>
+          <a class="nav-link" href="{% url 'informations' %}" id="navbarFAQs"><span>About</span></a>
         </li>
 
         
@@ -48,7 +48,7 @@
         <div style="width:112px;">
           <a href="{% url 'login' %}" class="nav-link log-in-out-nav-link">
             <div class="nav-tools-login">
-              <span  style="font-size: 12.5px;">ΣΥΝΔΕΣΗ</span>
+              <span  style="font-size: 14.5px;">Log in</span>
               <i class="fas fa-sign-in-alt"></i>
             </div>
           </a>
@@ -86,21 +86,21 @@
       <div class="col-12 my-auto text-center">
         <div id="sidebarLinks">
             <a class="nav-link" href="{% url 'index' %}">
-              <span id="sidebarHome"><span>ΑΡΧΙΚΗ</span></span>
+              <span id="sidebarHome"><span>Homepage</span></span>
             </a>
             <a class="nav-link" href="{% url 'articles' %}">
-              <span id="sidebarArticles"><span>ΑΡΘΡΑ</span></span>
+              <span id="sidebarArticles"><span>Articles</span></span>
             </a>
             <a class="nav-link" href="{% url 'courses' %}">
-              <span id="sidebarCourses"><span>ΣΕΙΡΕΣ</span></span>
+              <span id="sidebarCourses"><span>Series</span></span>
             </a>
 
             <a class="nav-link" href="{% url 'informations' %}">
-              <span id="sidebarFAQs"><span>Ο ΠΥΘΩΝΑΣ</span></span>
+              <span id="sidebarFAQs"><span>About</span></span>
             </a>
             {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'profile' %}">
-              <span id="sidebarProfile"><span>ΠΡΟΦΙΛ</span></span>
+              <span id="sidebarProfile"><span>Profile</span></span>
             </a>
             {% endif %}
         </div>
@@ -111,7 +111,7 @@
         {% if user.is_authenticated %}
           <a href="{% url 'logout' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
             <div style="margin-top:7.5px; color: #4d4d4d;" class="nav-tools-login">
-              <span style="font-size:12.5px;">ΑΠΟΣΥΝΔΕΣΗ</span>
+              <span style="font-size:12.5px;">Log out</span>
               <i class="fas fa-sign-out-alt"></i>
             </div>
           </a>
@@ -119,7 +119,7 @@
           <a href="{% url 'login' %}?next={{request.path}}" class="nav-link log-in-out-nav-link">
             <div style="margin-top:30px; color: #4d4d4d;" class="nav-tools-login">
               
-              <span style="font-size:13.2px;">ΣΥΝΔΕΣΗ</span>
+              <span style="font-size:13.2px;">Log in</span>
               <i class="fas fa-sign-in-alt"></i>
             </div>
           </a>

@@ -50,7 +50,7 @@
     
         {% if page_obj.has_previous or page_obj.has_next %}
           <span class="current courseTitle">
-            Ενότητα {{ page_obj.number }} από {{ page_obj.paginator.num_pages }}
+            Module {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
           </span>
         {% endif %}
     
@@ -82,7 +82,7 @@
       
           {% if page_obj.has_previous or page_obj.has_next %}
             <span class="current courseTitleNoBackground">
-              Ενότητα {{ page_obj.number }} από {{ page_obj.paginator.num_pages }}
+              Module {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
             </span>
           {% endif %}
       
@@ -154,7 +154,7 @@
       
           {% if page_obj.has_previous or page_obj.has_next %}
             <span class="current courseTitleNoBackground">
-              Ενότητα {{ page_obj.number }} από {{ page_obj.paginator.num_pages }}
+              Module {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
             </span>
           {% endif %}
       

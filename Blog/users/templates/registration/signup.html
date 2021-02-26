@@ -19,6 +19,8 @@
 
 {% block main %}
 
+{% include 'articles/navigation.html' %}
+
 <div id="signup">
 
   <div class="container">
@@ -36,6 +38,13 @@
 
           <button type="submit" class="btn btn-block btn-dark">Sign up</button>
         </form>
+        <div style="margin-top:32px;" class="text-center">
+          <small class="text-muted">Already a member?</small><br>
+          <a href="{% url 'login' %}">
+            <button style="margin-top:7px; box-shadow:none; min-width: 100px;" type="submit" class="btn btn-sm customButton1-outline">Log in</button>
+          </a>
+
+        </div>
       </div>
 
     </div>

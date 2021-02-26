@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h7$8=68p^(dv#vi5*&ffb&tl@5r2v=_c4i1=y3y)tkp^(-1(%9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -183,3 +183,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'login_success'
+
+FRAOLA_EDITOR_THIRD_PARTY = ('image_aviary', 'spell_checker')
