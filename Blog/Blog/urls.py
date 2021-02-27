@@ -5,6 +5,8 @@ from rest_framework import routers
 from articles.serializers import ArticlesCategoriesViewSet, ArticlesViewSet
 
 
+
+
 router = routers.DefaultRouter()
 router.register('articles-categories', ArticlesCategoriesViewSet)
 router.register('articles', ArticlesViewSet)
@@ -24,3 +26,5 @@ urlpatterns = [
     path('accounts/', include('users.urls')),
 
 ]
+
+

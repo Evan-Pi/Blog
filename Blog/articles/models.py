@@ -16,6 +16,7 @@ from django.utils.html import mark_safe
 from hitcount.models import HitCount, HitCountMixin
 
 from froala_editor.fields import FroalaField
+from tinymce.models import HTMLField
 
 
 class ArticlesCategories(models.Model):
@@ -51,7 +52,7 @@ class Articles(models.Model, HitCountMixin):
     image = models.ImageField(upload_to = "Articles_Images", default='')
     use_image_as_background_in_article = models.BooleanField(default=True)
 
-    article = FroalaField()
+    article = HTMLField()
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

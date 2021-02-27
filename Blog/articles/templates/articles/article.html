@@ -164,8 +164,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $("pre code").parent().css("background-color", "#282B2E");
-
     $(window).scroll(function() {
       var article_height = $('#articleImageDiv').height() + $('.navHBlock').height() + $('#article1').height() + $('#end-of-article').outerHeight();
       var percentage_covered = ($(window).scrollTop() / (article_height-$(window).height()))*100 + '%';
