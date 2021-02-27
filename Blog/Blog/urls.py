@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('froala_editor/',include('froala_editor.urls')),
 
+
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('users.urls')),
 

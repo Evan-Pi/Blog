@@ -1,25 +1,16 @@
 from django.db import models
-
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
 from unidecode import unidecode
 import unicodedata
-
 from django_currentuser.middleware import (get_current_user, get_current_authenticated_user)
-
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
-
 from django.utils.html import mark_safe
 from django.core.validators import MinValueValidator
-
 from hitcount.models import HitCount, HitCountMixin
 from django.contrib.contenttypes.fields import GenericRelation
-
 from froala_editor.fields import FroalaField
-
-
-
 
 class CoursesCategories(models.Model):
     '''Courses categories creation'''

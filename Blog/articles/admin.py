@@ -21,6 +21,11 @@ class ArticlesAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_display = ['title','image_tag','author','created','updated','publish_date']
 
+    class Media: 
+        css = {
+             'all': ('articles/admin/froala_css_bug_fix.css',)
+        }
+
 class ArticlesCategoriesAdmin(admin.ModelAdmin):
     search_fields = ['title']
 

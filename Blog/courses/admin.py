@@ -23,6 +23,11 @@ class CoursesAdmin(admin.ModelAdmin):
     list_filter = ('category',)
     search_fields = ('title',)
 
+    class Media: 
+        css = {
+             'all': ('articles/admin/froala_css_bug_fix.css',)
+        }
+
 admin.site.register(CoursesCategories)
 admin.site.register(Courses,CoursesAdmin)
 

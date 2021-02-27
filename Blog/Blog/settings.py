@@ -32,15 +32,14 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-
-    
-
     # Need to be before django.contrib.admin
     'colorfield',
     'admin_interface',
 
+    'django_quill',
     # Default apps
     'django.contrib.admin',
+    
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -54,18 +53,11 @@ INSTALLED_APPS = [
     'taggit_serializer',
     'crispy_forms',
     'sorl.thumbnail',
-    'captcha',
-
     'froala_editor',
-    'tinymce',
-
-    
 
     'articles.apps.ArticlesConfig',
     'courses.apps.CoursesConfig',
     'users.apps.UsersConfig',
-
-    
 ]
 
 AUTH_USER_MODEL = 'users.Account'
@@ -77,10 +69,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-RECAPTCHA_PUBLIC_KEY = '6LfmIuwUAAAAADyG3u6nKWlnaNw2xGUFbVx_sXFQ'
-RECAPTCHA_PRIVATE_KEY = '6LfmIuwUAAAAAArBOj5KZj_vRvJ_3muPP_luMp41'
-
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -105,7 +93,7 @@ ROOT_URLCONF = 'Blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'users/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'users/templates',)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -193,30 +181,17 @@ LOGIN_REDIRECT_URL = 'login_success'
 
 
 TINYMCE_DEFAULT_CONFIG = {
-    'height': '540px',
-    'width': '100%',
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 20,
-    'selector': 'textarea',
-    'theme': 'silver',
-    'plugins': '''
-            textcolor save link image media preview codesample contextmenu
-            table code lists fullscreen  insertdatetime  nonbreaking
-            contextmenu directionality searchreplace wordcount visualblocks
-            visualchars code fullscreen autolink lists  charmap print  hr
-            anchor pagebreak
-            ''',
-    'toolbar1': '''
-            fullscreen preview bold italic underline | fontselect,
-            fontsizeselect  | forecolor backcolor | alignleft alignright |
-            aligncenter alignjustify | indent outdent | bullist numlist table |
-            | link image media | codesample |
-            ''',
-    'toolbar2': '''
-            visualblocks visualchars |
-            charmap hr pagebreak nonbreaking anchor |  code |
-            ''',
-    'contextmenu': 'formats | link image',
-    'menubar': True,
-    'statusbar': True,
+    "height": "520px",
+    "width": "100%",
+    "menubar": "file edit view insert format tools table help",
+    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
+    "fullscreen insertdatetime media table paste code help wordcount spellchecker",
+    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+    "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    "a11ycheck ltr rtl | showcomments addcomment code",
+    "custom_undo_redo_levels": 10,
+    "language": "en_US",  # To force a specific language instead of the Django current language.
 }
+

@@ -16,4 +16,5 @@ django-admin-interface
 pandas
 django-hitcount
 django-froala-editor
-django-tinymce
+
+
