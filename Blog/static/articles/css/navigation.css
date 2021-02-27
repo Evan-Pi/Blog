@@ -233,24 +233,27 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-left: 4px;
-}
-
-
-.userImageDiv, .firstLetterImageDiv {
+  margin-right: 15px;
   height: 32px;
   width: 32px;
   border-radius: 8px;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
 }
 
-.userImageDiv span, .firstLetterImageDiv span {
+.firstLetterImageDiv span {
   color: white;
   font-weight: bold;
 }
+
+
+#userProfileImageDiv{
+  height: 32px;
+  width: 32px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
 
 .user-nav-link{
   display: flex;

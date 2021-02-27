@@ -34,8 +34,9 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
 
     # Need to be before django.contrib.admin
-    'admin_interface',
     'colorfield',
+    'admin_interface',
+
 
     # Default apps
     'django.contrib.admin',
@@ -54,7 +55,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'captcha',
 
-    'django_summernote',
     'froala_editor',
 
     'articles.apps.ArticlesConfig',

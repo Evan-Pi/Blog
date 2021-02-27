@@ -143,6 +143,7 @@
     <hr>
     <div id="course-div">
       {{page_obj.object_list.0.module|safe}}
+    </div>
       
       <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top:15px;" class="pagination">
         <!--PAGINATION BUTTONS-->
@@ -163,7 +164,7 @@
               <a class="btn btn-dark" href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
           {% endif %}
         </span>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -263,23 +264,23 @@
 </script>
 
 <script type="text/javascript">
-    $("#text-size-increase").click(function() {
-      text_array = ['p','h1','h2','h3','h4','h5','h6']
-      $.each( text_array, function( index, value ){
-        var fontSize = parseFloat($('#course-div ' + value).css("font-size"));
-        fontSize = fontSize + 1 + "px";
-        $('#course-div ' + value).css({'font-size':fontSize});
-      });
+  $("#text-size-increase").click(function() {
+    text_array = ['p','small','span','article','h1','h2','h3','h4','h5','h6']
+    $.each( text_array, function( index, value ){
+      var fontSize = parseFloat($('#course-div ' + value).css("font-size"));
+      fontSize = fontSize + 1 + "px";
+      $('#course-div ' + value).css({'font-size':fontSize});
     });
+  });
 
-    $("#text-size-decrease").click(function() {
-      text_array = ['p','h1','h2','h3','h4','h5','h6']
-      $.each( text_array, function( index, value ){
-        var fontSize = parseFloat($('#course-div ' + value).css("font-size"));
-        fontSize = fontSize - 1 + "px";
-        $('#course-div ' + value).css({'font-size':fontSize});
-      });
+  $("#text-size-decrease").click(function() {
+    text_array = ['p','small','span','article','h1','h2','h3','h4','h5','h6']
+    $.each( text_array, function( index, value ){
+      var fontSize = parseFloat($('#course-div ' + value).css("font-size"));
+      fontSize = fontSize - 1 + "px";
+      $('#course-div ' + value).css({'font-size':fontSize});
     });
+  });
 </script>
 
 {% endblock %}
