@@ -24,12 +24,12 @@
 </div>
 
 <div style="display: flex; justify-content: flex-end; align-items: center; padding-top:15px;" class="container-fluid">
-  <a href="{% url 'articlesCategory' category.slug %}">
+  <a href="{% url 'articles:articlesCategory' category.slug %}">
     <div style="height: 100%; width:32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <i style="color: #44b78b;" class="fas fa-redo"></i>
     </div>
   </a>
-  <form id="articles-search-form" action="{% url 'articlesCategory' category.slug %}" method="POST">
+  <form id="articles-search-form" action="{% url 'articles:articlesCategory' category.slug %}" method="POST">
     <!--input with id = "nav-tools-searchInput" -->
     {% csrf_token %}
     {{articles_Filter.form.search}}
@@ -46,7 +46,7 @@
       {% for article in page_obj %}
       <div class="col-12 col-xl-6 infinite-item">
         <div class="container-fluid">
-          <a href="{% url 'article' article.slug %}">
+          <a href="{% url 'articles:article' article.slug %}">
             <div class="row articleRow">
               {% thumbnail article.image "500x500" quality=91 as im %}
               <div style="background-image:url({{im.url}});" class="col-12 col-sm-6 col-xl-5 articleImageDiv">

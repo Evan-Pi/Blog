@@ -22,3 +22,10 @@ def my_url(value, field_name, urlencode=None):
         url = '{}&{}'.format(url, encoded_querystring)
 
     return url
+
+import random
+
+@register.simple_tag
+def random_background_color():
+    colors = ['#49443d','#c1a188','#f9e3d7','#8ca18e','#7d9396','#38483e','#61846f','#4d6858','#786147','#9e9580']
+    return random.choice(colors)

@@ -27,12 +27,12 @@
     <div class="row">
 
       <div id="signupFormContainer" class="col-12">
-        <a href="{% url 'index' %}"><img style="max-height: 55px; margin-bottom: 30px;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt=""></a>
+        <a href="{% url 'articles:index' %}"><img style="max-height: 55px; margin-bottom: 30px;" src="{% static 'articles/material/logo/phoenix_feather_logo_3.png' %}" alt=""></a>
         <form method="post">
           {% csrf_token %}
 
             {{form.email|as_crispy_field}}
-          
+            {{form.username|as_crispy_field}}
             {{form.password1|as_crispy_field}}
             {{form.password2|as_crispy_field}}
 
@@ -59,6 +59,7 @@
   $("#id_first_name").attr("placeholder", "First name");
   $("#id_last_name").attr("placeholder", "Last name");
 
+  $("#id_username").attr("placeholder", "Username");
   $("#id_email").attr("placeholder", "Email");
   $("#id_password1").attr("placeholder", "Password");
   $("#id_password2").attr("placeholder", "Password confirmation");

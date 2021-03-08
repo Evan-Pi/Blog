@@ -20,7 +20,7 @@ class CoursesCategories(models.Model):
         verbose_name_plural = 'Courses Categories'
 
     title = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(editable=False,max_length=100,default='')
+    slug = models.SlugField(max_length=100,default='')
     image = models.ImageField(upload_to = "Courses_Categories_Images", default='', blank=True)
 
     def save(self, *args, **kwargs):
@@ -41,7 +41,7 @@ class Courses(models.Model, HitCountMixin):
     category = models.ForeignKey(CoursesCategories, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=150,unique=True)
     search = models.CharField(default='',editable=False,max_length=472)
-    slug = models.SlugField(editable=False,max_length=150)
+    slug = models.SlugField(max_length=150)
     description = models.TextField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Courses_Images", default='')
     use_image_as_background_in_course = models.BooleanField(default=True)
@@ -65,7 +65,6 @@ class Courses(models.Model, HitCountMixin):
     image_tag.short_description = 'Image preview'
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(unidecode(self.title))
         if not self.id:
             self.author = get_current_user().email
 
@@ -113,7 +112,7 @@ class Modules(models.Model, HitCountMixin):
 
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(unidecode(self.title))
+        self.slug = slugify(self.title)
         self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 

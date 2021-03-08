@@ -2,6 +2,14 @@ from django.contrib import admin
 from . models import CoursesCategories, Courses, Modules
 # Register your models here.
 
+class ModulesAdmin(admin.ModelAdmin):
+    model = Modules
+
+    class Media: 
+        css = {
+             'all': ('articles/admin/froala_css_bug_fix.css',)
+        }
+
 class InLineModules(admin.StackedInline):
     model = Modules
     extra = 0
@@ -22,6 +30,7 @@ class CoursesAdmin(admin.ModelAdmin):
     list_display = ('title','image_tag','created','publish_date','author')
     list_filter = ('category',)
     search_fields = ('title',)
+    prepopulated_fields = {'slug':('title',),}
 
     class Media: 
         css = {

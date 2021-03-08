@@ -5,7 +5,7 @@ from .models import Account
 class UserCreationFormExtended(UserCreationForm):
     class Meta:
         model = Account
-        fields = ('email', 'password1', 'password2')
+        fields = ('email', 'username', 'password1', 'password2')
         
     email = forms.EmailField(max_length=200)
 

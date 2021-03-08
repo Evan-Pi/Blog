@@ -4,12 +4,12 @@ from django.utils.text import slugify
 from unidecode import unidecode
 import unicodedata
 from django_currentuser.middleware import (get_current_user, get_current_authenticated_user)
-from django_currentuser.db.models import CurrentUserField
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from django.utils.html import mark_safe
 from hitcount.models import HitCount, HitCountMixin
 from froala_editor.fields import FroalaField
+
 
 class ArticlesCategories(models.Model):
     '''Articles categories creation'''
@@ -39,7 +39,7 @@ class Articles(models.Model, HitCountMixin):
     category = models.ForeignKey(ArticlesCategories, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=150,unique=True)
     search = models.CharField(default='',editable=False,max_length=472)
-    slug = models.SlugField(editable=False,max_length=150)
+    slug = models.SlugField(max_length=150)
     subtitle = models.CharField(max_length=256, blank=True)
     image = models.ImageField(upload_to = "Articles_Images", default='')
     use_image_as_background_in_article = models.BooleanField(default=True)
@@ -61,14 +61,13 @@ class Articles(models.Model, HitCountMixin):
     image_tag.short_description = 'Image preview'
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(unidecode(self.title))
         if not self.id:
             self.author = get_current_user().email
         self.search = ''.join(c for c in unicodedata.normalize('NFD', self.title.lower() + ' ' + self.subtitle.lower()  + ' ' + self.author.lower() ) if unicodedata.category(c) != 'Mn')
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('article', args=[self.slug])
+        return reverse('articles:article', args=[self.slug])
 
     def get_admin_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
@@ -85,15 +84,14 @@ class Comments(models.Model):
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
 
-    article = models.ForeignKey(Articles, on_delete=models.CASCADE)
-    author = models.CharField(max_length=256)
-    author_image = models.ImageField(upload_to = "Comments_Author_Images", default='',blank=True)
-    text = models.TextField()
+    article = models.ForeignKey(Articles, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey('users.Account', null=True, blank=True, on_delete=models.SET_NULL)
+    text = FroalaField(plugins=('fullscreen','align','emoticons','link','char_counter','table',))
     created_date = models.DateTimeField(auto_now_add=True)
-    approved_comment = models.BooleanField(default=False)
+    approved_comment = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.author} | {self.text[:60]}" + "..."
+        return f"Comment - {self.id}"
 
 class SubComments(models.Model):
     '''This class creates subcomments for comments'''
@@ -102,12 +100,11 @@ class SubComments(models.Model):
         verbose_name = 'Subcomment'
         verbose_name_plural = 'Subcomments'
 
-    comment = models.ForeignKey(Comments, on_delete=models.CASCADE)
-    author = models.CharField(max_length=256)
-    author_image = models.ImageField(upload_to = "Comments_Author_Images", default='',blank=True)
-    text = models.TextField()
+    comment = models.ForeignKey(Comments, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey('users.Account', null=True, blank=True, on_delete=models.SET_NULL) 
+    text = FroalaField(plugins=('fullscreen','align','emoticons','link','char_counter','table',))
     created_date = models.DateTimeField(auto_now_add=True)
-    approved_comment = models.BooleanField(default=False)
+    approved_comment = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.author} | {self.text[:60]}" + "..."
+        return f"Subcomment - {self.id}"

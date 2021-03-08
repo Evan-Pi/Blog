@@ -17,7 +17,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    path('', include('articles.urls')),
+    path('', include('articles.urls', namespace='articles')),
     path('', include('courses.urls')),
 
     path('froala_editor/',include('froala_editor.urls')),

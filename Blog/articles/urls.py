@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
+app_name = 'articles'
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -11,7 +12,10 @@ urlpatterns = [
     path('informations', views.informations, name='informations'),
     path('articles/', views.articles, name='articles'),
     path('articles/category/<str:slug>/', views.articlesCategory, name='articlesCategory'),
+
+
     path('articles/<str:slug>/', views.Article.as_view(), name='article'),
+    path('ajax_comments/<str:slug>/', views.ajax_comments, name='ajax_comments'),
 
     path('articles/edit/<str:slug>/', views.edit_article, name='edit_article'),
 

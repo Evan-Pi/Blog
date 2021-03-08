@@ -1,8 +1,4 @@
 
-#comments {
-  margin-top: 30px;
-  padding-bottom: 15px;
-}
 
 .media {
   margin-bottom: 15px;
@@ -24,57 +20,42 @@
   font-weight: bold;
 }
 
-.customButton1 {
+.reply {
   border: none;
-  box-shadow: 3px 3px 4px #eaeaea;
-  border-radius: 0;
-  color: #44b78b;
   background: white;
-  transition: 0.8s, background 0s;
+  padding: 0;
+  font-size: 12.5px;
 }
 
-.customButton1:active, .book:active, .book-open:active {
-  transition: 0s !important;
+.reply:focus {
+  outline: none;
 }
 
-.customButton1:hover {
-  background: #44b78b;
-  border-color: #44b78b;
-  color: white;
-  box-shadow: 3px 3px 4px #2e7b5e inset;
-}
-
-.customButton1:focus {
-  box-shadow: 3px 3px 4px #eaeaea;
-}
-
-.modal{
+.modal {
   background: rgba(0, 0, 0, 0.5) !important;
 }
 
-.modal-content{
+.modal-content {
   background: white !important;
   border: none;
-
 }
 
-.modal-content input, .modal-content textarea{
+.modal-content input, .modal-content textarea {
   background: transparent !important;
-  border:none;
+  border: none;
   box-shadow: 0px 0px 10px #e1e1e1;
 }
 
-.modal-content input,.modal-content textarea{
-  border:none;
+.modal-content input, .modal-content textarea {
+  border: none;
   box-shadow: 0px 0px 10px #e1e1e1;
 }
 
-.modal-content input:focus, .modal-content textarea:focus{
+.modal-content input:focus, .modal-content textarea:focus {
   box-shadow: 0px 0px 4px #44b78b;
   border-color: #44b78b;
 }
 
-
-.modal-body, .modal-header, .modal-footer{
-  border:none;
+.modal-body, .modal-header, .modal-footer {
+  border: none;
 }

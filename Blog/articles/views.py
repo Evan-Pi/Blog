@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from . models import Articles, ArticlesCategories
+from . models import Articles, ArticlesCategories, Comments, SubComments
 from courses.models import Courses, CoursesCategories
 from . filters import ArticlesFilter
 from django.utils.timezone import localtime, now
@@ -12,7 +12,8 @@ from users.models import Account, Profile, ArticlesViews
 import unicodedata
 from django.contrib.auth.decorators import user_passes_test
 
-from . forms import EditArticleForm
+from . forms import EditArticleForm, CommentsForm, SubCommentsForm
+from django.http import HttpResponseRedirect
 
 
 def coming_soon(request):
@@ -71,33 +72,56 @@ class Article(HitCountDetailView):
     count_hit = True # set to True if you want it to try and count the hit
     template_name = 'articles/article.html'
 
-    
     def get_object(self):
         obj = super().get_object()
         if self.request.user.is_authenticated:
-            user = Account.objects.get(email=self.request.user.email)
-            profile = Profile.objects.get(user=user)
+            profile = Profile.objects.get(user=self.request.user)
             ArticlesViews.objects.create(article=obj, profile=profile)
-
             qu = ArticlesViews.objects.filter(article=obj,profile=profile).order_by('-created')
             if len(qu)>1:
                 qu[1].delete()
-            
-
         return obj
-            
-
+    
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(Article, self).get_context_data(**kwargs)
+        article = kwargs['object']        
         current_datetime = localtime(now())
-        article = Articles.objects.get(slug=self.kwargs['slug'])
         if (article.publish_date > current_datetime or article.approved == False) and (article.author != self.request.user.username) and not (self.request.user.is_superuser):
             not_approved_article = True
         else:
             not_approved_article = False
-        context['not_approved_article'] = not_approved_article
         context['article'] = article
+        context['not_approved_article'] = not_approved_article
         return context
+
+    
+
+
+        
+
+def ajax_comments(request, slug):
+
+    article = Articles.objects.get(slug=slug)
+
+    comments_form = CommentsForm(request.POST)
+    if comments_form.is_valid():
+        comments_form.save()
+
+    subcomments_form = SubCommentsForm(request.POST)
+    if subcomments_form.is_valid():
+        subcomments_form.save()
+
+    comments = Comments.objects.filter(article=article).order_by('-created_date')
+    subcomments = SubComments.objects.filter(comment__article=article).order_by('-created_date')
+    comments_form =  CommentsForm(initial={'article':article, 'author':request.user})
+    subcomments_form = SubCommentsForm(initial={'author':request.user})
+
+
+    context = {'comments':comments, 'subcomments':subcomments,'comments_form':comments_form, 'subcomments_form':subcomments_form}    
+
+    return render(request, 'articles/comments/ajaxComments.html', context)
+
+
 
     
 def edit_article(request, slug):

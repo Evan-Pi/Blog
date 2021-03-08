@@ -12,15 +12,15 @@ class CustomUserAdmin(UserAdmin):
     form = UserChangeFormExtended
     model = Account
 
-    list_display = ['email','first_name','last_name','image','is_active','is_staff']
-    search_fields = ['email',]
+    list_display = ['email','username','first_name','last_name','image','is_active','is_staff']
+    search_fields = ['email','username',]
     readonly_fields = ['image']
 
     ordering = ()
 
     fieldsets = (
         (None, {'fields': ('password',)}),
-        ('Personal information', {'fields': ('first_name', 'last_name', 'email','profile_image','image')}),
+        ('Personal information', {'fields': ('first_name', 'last_name', 'email', 'username', 'profile_image','image')}),
         ('Groups', {'fields': ('groups',)}),
         ('Permissions', {
             'fields': ('is_active','is_staff','is_superuser', 'user_permissions'),
@@ -31,13 +31,18 @@ class CustomUserAdmin(UserAdmin):
 
     add_fieldsets = (
         (None, {
-            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
+            'fields': ('email', 'username', 'first_name', 'last_name', 'password1', 'password2'),
         }),
     )
 
 
 admin.site.register(Account, CustomUserAdmin)
 admin.site.register(Profile)
+
+from . models import ArticlesViews, CoursesViews
+
+admin.site.register(ArticlesViews)
+admin.site.register(CoursesViews)
 
 
 

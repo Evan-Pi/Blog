@@ -18,6 +18,12 @@
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'courses/css/course.css' %}">
+
+<style>
+#navbarCourses, #sidebarCourses{
+  color: #44b78b;
+}
+</style>
 {% endblock %}
 
 {% block main %}
@@ -26,7 +32,7 @@
 <div id="suspicious">
   <i style="color: #44b78b;" class="fas fa-question fa-4x"></i>
   <p>Not quite sure what you are looking for...</p>
-  <a href="{% url 'index' %}"><p style="color: #44b78b;">Back to home</p></a>
+  <a href="{% url 'articles:index' %}"><p style="color: #44b78b;">Back to home</p></a>
 </div>
 {% else %}
 
@@ -244,7 +250,7 @@
 <script src="{% static 'courses/js/course_special.js' %}"></script>
 
 <script>
-  $( "iframe" ).wrap( "<div class='responsive-media'></div>" );
+  $( "#course-div iframe" ).wrap( "<div class='responsive-media'></div>" );
 </script>
 
 <script>

@@ -44,7 +44,7 @@
     </a>
 
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="{% url 'authorsArticlesPreview' %}"><small>Articles</small></a>
+      <a class="dropdown-item" href="{% url 'articles:authorsArticlesPreview' %}"><small>Articles</small></a>
       <a class="dropdown-item" href="{% url 'authorsCoursesPreview' %}"><small>Series</small></a>
     </div>
   </li>
@@ -80,7 +80,7 @@
       
       <div style="border: none !important; margin-bottom: 30px;" class="card">
        
-         <small> Recently read articles...</small>
+         <h5> Recently read articles...</h5>
          <hr style="margin-top: 4px;">
 
 
@@ -89,7 +89,7 @@
           <div class="row">
             {% for view in viewed_articles %} 
               <div class="col-12 col-sm-6 col-xl-3">
-                <a href="{% url 'article' view.article.slug %}">
+                <a href="{% url 'articles:article' view.article.slug %}">
                   <div style="margin-top:15px;" class="card viewed-card">
                     {% thumbnail view.article.image "500x500" quality=91 as im %}
                     <div class="viewed-image-div" style="background-image: url({{im.url}});">
@@ -118,7 +118,7 @@
         <div class="card-body">
           <h6 class="card-title">Nothing yet... <span style="color: #44b78b;"><i class="fas fa-heart-broken"></i></span></h6>
           <div style="width: 100%;" class="">
-            <a href="{% url 'articles' %}" class="btn btn-sm btn-outline-dark">Go to articles</a>
+            <a href="{% url 'articles:articles' %}" class="btn btn-sm btn-outline-dark">Go to articles</a>
           </div>
         </div>
         {% endif %}
@@ -129,7 +129,7 @@
 
       <div style="border: none !important;" class="card">
         
-          <small>Recently read series...</small>
+          <h5>Recently read series...</h5>
           <hr style="margin-top: 4px;">
       
      

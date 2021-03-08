@@ -12,25 +12,34 @@ class EditArticleForm(forms.ModelForm):
 
 
 class CommentsForm(forms.ModelForm):
-    text = forms.CharField(label='text', widget=forms.Textarea(attrs={'placeholder': 'Type your comment here...'}))
+
+    text = forms.CharField(label='text', widget=FroalaEditor(plugins=('fullscreen','align','emoticons','link','char_counter','table',)))
     class Meta:
         model = Comments
         fields = ['article','author','text']
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(CommentsForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_show_labels = False
+        self.fields['article'].label = False
+        self.fields['author'].label = False
+        self.fields['text'].label = False
+
+
+        
+
 
 
 class SubCommentsForm(forms.ModelForm):
-    text = forms.CharField(label='text', widget=forms.Textarea(attrs={'placeholder': 'Type your respond here...'}))
+    text = forms.CharField(label='text', widget=FroalaEditor(plugins=('fullscreen','align','emoticons','link','char_counter','table',)))
     class Meta:
         model = SubComments
         fields = ['comment','author','text']
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(SubCommentsForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_show_labels = False
+        self.fields['comment'].label = False
+        self.fields['author'].label = False
+        self.fields['text'].label = False
 

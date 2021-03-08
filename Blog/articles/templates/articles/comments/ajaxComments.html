@@ -1,4 +1,74 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% load articles %}
 
-{% include 'articles/commentsSection.html' %}
+
+
+
+{% for comment in comments %}
+<div class="media">
+
+  {% if comment.author %}
+  <div class="mr-3 visitorCommentImageDiv" style="background: {% random_background_color %};">
+    <span>{{comment.author.username|first|capfirst}}</span>
+  </div>
+  {% else %}
+  <div class="mr-3 visitorCommentImageDiv" style="background: {% random_background_color %};">
+    <span><i class="fas fa-mask"></i></span>
+  </div>
+  {% endif %}
+
+  <div class="media-body" id="comment-{{comment.id}}">
+
+    <div style="display: flex; flex-direction: column;">
+      {% if comment.author %}
+      <small style="font-size: 14px;">{{comment.author.username}}</small>
+      {% else %}
+      <small style="font-size: 14px;">Anonymous</small>
+      {% endif %}
+      <small class="text-muted">{{comment.created_date}}</small>
+    </div>
+
+    <div style="margin-top: 5px;">
+      <span>{{comment.text|safe}}</span>
+    </div>
+
+
+    <!--
+      {% for subcomment in subcomments %}
+    {% if subcomment.comment == comment %}
+    <div class="media mt-3">
+      {% if subcomment.author %}
+      <div class="mr-3 visitorCommentImageDiv" style="background: {% random_background_color %};">
+        <span>{{subcomment.author.username|first|capfirst}}</span>
+      </div>
+      {% else %}
+      <div class="mr-3 visitorCommentImageDiv" style="background: {% random_background_color %};">
+        <span><i class="fas fa-mask"></i></span>
+      </div>
+      {% endif %}
+      <div class="media-body">
+        <div style="display: flex; flex-direction: column;">
+          {% if subcomment.author %}
+          <small style="font-size: 14px;">{{subcomment.author.username}}</small>
+          {% else %}
+          <small style="font-size: 14px;">Anonymous</small>
+          {% endif %}
+          <small class="text-muted">{{subcomment.created_date}}</small>
+        </div>
+        <div style="margin-top: 5px;">
+          <span>{{subcomment.text|safe}}</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    
+    <button id="{{comment.id}}" class="reply text-muted" data-toggle="modal" data-target="#subcommentsModal">
+      REPLY
+    </button>
+    -->
+
+  </div>
+</div>
+{% endfor %}

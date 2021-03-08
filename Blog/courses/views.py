@@ -65,40 +65,34 @@ class Course(HitCountDetailView):
     def get_object(self):
         obj = super().get_object()
         if self.request.user.is_authenticated:
-            email = self.request.user.email
-            user = Account.objects.get(email=email)
-            profile = Profile.objects.get(user=user)
+            profile = Profile.objects.get(user=self.request.user)
             CoursesViews.objects.create(course=obj, profile=profile)
-
             qu = CoursesViews.objects.filter(course=obj,profile=profile).order_by('-created')
             if len(qu)>1:
                 qu[1].delete()
-                
-
         return obj
             
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(Course, self).get_context_data(**kwargs)
         current_datetime = localtime(now())
-        course = Courses.objects.get(slug=self.kwargs['slug'])
+        course = kwargs['object']
         modules = Modules.objects.filter(course=course).order_by('order')
-        context['course'] = course
-        context['modules'] = modules
 
         #Pagination of modules
         paginator = Paginator(modules, 1)
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        context['page_obj'] = page_obj
 
         if (course.publish_date > current_datetime or course.approved == False) and (course.author.email != self.request.user.email) and not (self.request.user.is_superuser) :
             not_approved_course = True
-
         else:
             not_approved_course = False
-        context['not_approved_course'] = not_approved_course
 
+        context['course'] = course
+        context['modules'] = modules
+        context['page_obj'] = page_obj
+        context['not_approved_course'] = not_approved_course
 
         return context
 

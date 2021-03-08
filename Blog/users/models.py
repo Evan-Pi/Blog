@@ -13,7 +13,6 @@ class Account(AbstractUser):
         verbose_name = 'Account'
         verbose_name_plural = 'Accounts'
 
-    username = None
     email = models.EmailField(unique=True, blank=False)
     profile_image = models.ImageField(upload_to = "Users_Profile_Images", blank=True, default='', verbose_name = "Profile Photo")
 
@@ -23,7 +22,7 @@ class Account(AbstractUser):
 
     objects = AccountManager()
 
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
     USERNAME_FIELD = 'email'
 
     def __str__(self):
@@ -83,6 +82,9 @@ class ArticlesViews(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.profile.user} - {self.article.title}"
+
 class CoursesViews(models.Model):
     class Meta:
         verbose_name = 'Course view'
@@ -91,6 +93,9 @@ class CoursesViews(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.profile.user} - {self.course.title}"
 
 
 
